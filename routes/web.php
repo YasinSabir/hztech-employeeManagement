@@ -22,6 +22,9 @@ Route::get('/', function () {
 
 
 /*
+ *
+ *
+ *
 Route::group(['prefix' => 'Pages' , 'as' => 'pages.'],function(){
 
     Route::get('Widgets' , function (){
