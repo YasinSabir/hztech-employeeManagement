@@ -22,6 +22,8 @@
         Route::get('Edit/{id}','RoleController@edit')->name('Edit');
         Route::post('Edit/{id}','RoleController@update')->name('Edit');
 
+        Route::delete('delete/{id}','RoleController@destroy')->name('delete');
+
     });
 
 ?>

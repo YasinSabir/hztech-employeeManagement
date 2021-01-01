@@ -1,9 +1,102 @@
 @extends('layouts.backend.app')
 @section('section')
 
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Edit Users</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Edit Users</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        @if(session()->has('status'))
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-8 ">
+                        <div class="alert alert-success" role="alert">
+                            {{ session()->get('status') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
 
-    <div>Edit</div>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-8">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Add User</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form role="form" method="post" action="{{route('users.Edit',['id' => $user->id])}}">
+                                @csrf
 
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>Full Name</label>
+                                        <input type="text" value="{{$user->fullname}}" class="form-control" name="user_fullname" placeholder="Enter Full Name."/>
+                                    </div>
+                                    @error('user_fullname')
+                                    {{$message}}
+                                    @enderror
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" value="{{$user->email}}" class="form-control" name="user_email" placeholder="Enter User Email."/>
+                                    </div>
+                                    @error('user_email')
+                                    {{$message}}
+                                    @enderror
+                                    <div class="form-group">
+                                        <label>Role Title</label>
+                                        <select name="role_title" class="form-control select2" style="width: 100%;">
+                                            @foreach($role as $r)
+                                                <option value="{{$r->id}}">{{$r->title}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select class="form-control select2" name="user_status" style="width: 100%;">
+                                            <option value="Active" selected="selected">Active</option>
+                                            <option value="Pending">Pending</option>
+                                            <option value="Block">Block</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input type="password" value="{{$user->string_password}}" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    </div>
+                                    @error('password')
+                                    {{$message}}
+                                    @enderror
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
 @endsection
 

@@ -11,6 +11,12 @@
         Route::get('Edit' , function (){
             return view('users.Edit');
         })->name('Edit');
+
+
+        Route::get('Edit/{id}','UserController@edit')->name('Edit');
+        Route::post('Edit/{id}','UserController@update')->name('Edit');
+
+        Route::delete('delete/{id}','UserController@destroy')->name('delete');
     });
 
 ?>

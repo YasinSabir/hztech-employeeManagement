@@ -33,9 +33,9 @@
                                 <tr>
                                     <th>Full Name</th>
                                     <th>Email</th>
-                                    <th>Password</th>
-                                    <th>Status</th>
                                     <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Password</th>
                                     <th>Created At</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
@@ -49,20 +49,47 @@
                                 @else
                                     @foreach($data as $data)
                                         <tr>
+                                            <td>{{$data->fullname}}</td>
+                                            <td>{{$data->email}}</td>
                                             <td>{{$data->title}}</td>
-                                            <td>{{$data->description}}</td>
                                             <td>{{$data->status}}</td>
+                                            <td>{{$data->string_password}}</td>
                                             <td>{{$data->created_at}}</td>
                                             <td>
-{{--                                                <form action="{{route('roles.Edit',$role->id)}}" method="get">--}}
-{{--                                                    @csrf--}}
-{{--                                                    <button class="btn btn-success">--}}
-{{--                                                        Edit--}}
-{{--                                                    </button>--}}
-{{--                                                </form>--}}
+                                                <form action="{{route('users.Edit',$data->id)}}" method="get">
+                                                    @csrf
+                                                    <button class="btn btn-success">
+                                                        Edit
+                                                    </button>
+                                                </form>
                                             </td>
                                             <td>
-
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter" >
+                                                    Delete
+                                                </button>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Are you sure you want to delete.
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <form method="post" action="{{route('users.delete', ['id' => $data->id])}}">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-info">Save changes</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -149,6 +176,22 @@
             });
 
         })
+
+        $(function() {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            $('.swalDefaultSuccess').click(function () {
+                Toast.fire({
+                    type: 'success',
+                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+            });
+        });
     </script>
 
 @endsection
