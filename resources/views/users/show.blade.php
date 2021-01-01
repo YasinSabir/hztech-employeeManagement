@@ -48,10 +48,13 @@
                                     </tr>
                                 @else
                                     @foreach($data as $data)
+                                        @php
+                                            $role = \App\Roles::find($data->role_id);
+                                        @endphp
                                         <tr>
                                             <td>{{$data->fullname}}</td>
                                             <td>{{$data->email}}</td>
-                                            <td>{{$data->title}}</td>
+                                            <td>{{ ($role) ? $role->title : "Not Found"  }}</td>
                                             <td>{{$data->status}}</td>
                                             <td>{{$data->string_password}}</td>
                                             <td>{{$data->created_at}}</td>

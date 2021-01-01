@@ -42,13 +42,14 @@
 
                     </ul>
                 </li>
+
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Users
                             <i class="fas fa-angle-left right"></i>
-                            <span class="badge badge-info right">6</span>
+                                <span class="badge badge-info right">{{users_count()}}</span>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -66,6 +67,7 @@
                         </li>
                     </ul>
                 </li>
+
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
@@ -90,6 +92,23 @@
                     </ul>
                 </li>
 
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Profile
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('users.profile')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Edit Profile</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>

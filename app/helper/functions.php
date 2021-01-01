@@ -22,3 +22,8 @@ function custom_varDump($arr){
     echo "<pre>";
     var_dump($arr);
 }
+
+function users_count(){
+    $rr = \App\User::all();
+    return count($rr);
+}
