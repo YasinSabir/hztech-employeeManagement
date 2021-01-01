@@ -19,7 +19,17 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
+        @if(session()->has('status'))
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-8 ">
+                        <div class="alert alert-success" role="alert">
+                            {{ session()->get('status') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
         <section class="content">
             <div class="container-fluid">
                 <div class="row">

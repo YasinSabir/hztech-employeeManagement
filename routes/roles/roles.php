@@ -7,6 +7,7 @@
         })->name('add');
 
         Route::post('add','RoleController@store')->name('add');
+//        Route::post('add', ['as' => '.add' , 'uses' => 'RoleController@store' ]);
 
         /*Route::get('show' , function (){
             return view('roles.show');

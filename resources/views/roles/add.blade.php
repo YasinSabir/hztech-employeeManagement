@@ -48,11 +48,11 @@
                                     <div class="form-group">
                                         <label>Role Title</label>
                                         <select name="role_title" class="form-control select2" style="width: 100%;">
-                                            <option value="Admin">Admin</option>
-                                            <option value="Heads">Heads</option>
-                                            <option value="HR">HR</option>
-                                            <option value="Leads">Leads</option>
-                                            <option value="Employee">Employee</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="head">Heads</option>
+                                            <option value="hr">HR</option>
+                                            <option value="lead">Leads</option>
+                                            <option value="employee">Employee</option>
                                         </select>
                                     </div>
 
