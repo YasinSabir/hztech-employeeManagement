@@ -133,6 +133,7 @@ return [
         ],
     ],
 
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -144,6 +145,12 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'email' => 'email address',
+        'phonenumber' => 'mobile number',
+        'firstname' =>'first name',
+        'lastname' =>'last name',
+        'fullname' =>'full name',
+    ],
 
 ];

@@ -18,6 +18,7 @@
         Route::delete('delete/{id}','UserController@destroy')->name('delete');
 
         Route::get('profile','UserController@profile')->name('profile');
+        Route::post('profile','UserController@editprofile')->name('profile');
     });
 
 ?>

@@ -1,20 +1,29 @@
 <?php
 
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 function get_role($id){
 
     $data = DB::table('users')
         ->join('roles', 'users.role_id', '=', 'roles.id')
-        ->select('roles.title')->where(['users.user_id' => $id])->first();
+        ->select('roles.title')->where(['users.id' => $id])->first();
 
-    return $data->title;
+    return ( !empty($data->title) ? $data->title : "Not Found!"  );
 }
 
 function custom_varDump_die($arr){
     echo "<pre>";
     var_dump($arr);
     die;
+}
+
+
+function getUser_image($id){
+
+    $data = \App\User::find($id);
+    return ( !empty($data->profile_pic) ? "storage/".$data->profile_pic : "images/download.png");
+
 }
 
 
