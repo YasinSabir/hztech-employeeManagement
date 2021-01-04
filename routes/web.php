@@ -1,5 +1,6 @@
 <?php
-
+use App\Http\Controllers\RoleController;
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

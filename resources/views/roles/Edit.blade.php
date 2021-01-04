@@ -1,9 +1,85 @@
 @extends('layouts.backend.app')
 @section('section')
 
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Edit Users Roles</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Edit Users Roles</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        @if(session()->has('status'))
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-8 ">
+                        <div class="alert alert-success" role="alert">
+                            {{ session()->get('status') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-8">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Edit Role</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form role="form" method="post" action="{{route('roles.Edit',['id' => $role->id])}}">
+                                @csrf
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>Role Title</label>
+                                        <select  name="role_title" class="form-control select2" style="width: 100%;">
+                                            <option value="Admin">Admin</option>
+                                            <option value="Heads">Heads</option>
+                                            <option value="HR">HR</option>
+                                            <option value="Leads">Leads</option>
+                                            <option value="Employee">Employee</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Role Description</label>
+                                        <textarea  class="form-control" name="role_description" rows="4" placeholder="Enter Role Description.">{{$role->description}}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select class="form-control select2" name="role_status" style="width: 100%;">
+                                            <option value="Active" selected="selected">Active</option>
+                                            <option value="Pending">Pending</option>
+                                            <option value="Block">Block</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
 
-    <div>Edit</div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+    </div>
 
 @endsection
 
