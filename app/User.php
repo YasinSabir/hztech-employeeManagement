@@ -69,7 +69,7 @@ class User extends Authenticatable
     }
     public function SuggestionRelation()
     {
-        return $this->belongsToMany('App\Suggestions','UsersSuggestions', 'user_id', 'suggestions_id');
+        return $this->hasMany('App\Suggestions','suggestion_user', 'user_id', 'suggestions_id');
     }
     public function PreviligesRelation()
     {
