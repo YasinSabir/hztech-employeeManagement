@@ -61,9 +61,9 @@
                                     <div class="form-group">
                                         <label>Status</label>
                                         <select class="form-control select2" name="role_status" style="width: 100%;">
-                                            <option value="Active" selected="selected">Active</option>
-                                            <option value="Pending">Pending</option>
-                                            <option value="Block">Block</option>
+                                            <option value="Active" {{ ( !empty($role->status) && $role->status == "Active"  ) ? "selected" : '' }} >Active</option>
+                                            <option value="Pending" {{ ( !empty($role->status) && $role->status == "Pending"  ) ? "selected" : '' }} >Pending</option>
+                                            <option value="Block" {{ ( !empty($role->status) && $role->status == "Block"  ) ? "selected" : '' }} >Block</option>
                                         </select>
                                     </div>
                                 </div>

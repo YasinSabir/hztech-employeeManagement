@@ -71,9 +71,9 @@
                                     <div class="form-group">
                                         <label>Status</label>
                                         <select class="form-control select2" name="user_status" style="width: 100%;">
-                                            <option value="Active" selected="selected">Active</option>
-                                            <option value="Pending">Pending</option>
-                                            <option value="Block">Block</option>
+                                            <option value="Active" {{ ( !empty($user->status) && $user->status == "Active"  ) ? "selected" : '' }} >Active</option>
+                                            <option value="Pending" {{ ( !empty($user->status) && $user->status == "Pending"  ) ? "selected" : '' }} >Pending</option>
+                                            <option value="Block" {{ ( !empty($user->status) && $user->status == "Block"  ) ? "selected" : '' }} >Block</option>
                                         </select>
                                     </div>
 

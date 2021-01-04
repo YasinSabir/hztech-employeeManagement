@@ -2,16 +2,16 @@
     // Roles Section.... Child funtion called Suggestions of Parent function Pages
     Route::group(['prefix' => 'Suggestions' , 'as' => 'suggestions.'],function(){
 
-        Route::get('add' , function (){
-            return view('suggestions.add');
-        })->name('add');
 
-        Route::get('show' , function (){
-            return view('suggestions.show');
-        })->name('show');
-        Route::get('Edit' , function (){
-            return view('suggestions.Edit');
-        })->name('Edit');
+        Route::get('add','SuggestionController@create')->name('add');
+        Route::post('store','SuggestionController@store')->name('store');
+
+        Route::get('show','SuggestionController@show')->name('show');
+
+        Route::get('Edit/{id}','SuggestionController@edit')->name('Edit');
+        Route::post('Edit/{id}','SuggestionController@update')->name('Edit');
+
+        Route::delete('delete/{id}','SuggestionController@destroy')->name('delete');
     });
 
 ?>
