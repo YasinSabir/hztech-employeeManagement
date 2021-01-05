@@ -1,6 +1,6 @@
 <?php
     // Roles Section.... Child funtion called Suggestions of Parent function Pages
-    Route::group(['prefix' => 'Suggestions' , 'as' => 'suggestions.'],function(){
+    Route::group(['prefix' => 'Suggestions' , 'as' => 'suggestions.','middleware' => ['auth:web']],function(){
 
 
         Route::get('add','SuggestionController@create')->name('add');

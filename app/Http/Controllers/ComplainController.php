@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Complains;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ComplainController extends Controller
 {
@@ -43,7 +44,7 @@ class ComplainController extends Controller
         $complain->title = $request->complain_title;
         $complain->description = $request->complain_description;
         $complain->status= "Pending";
-        $complain->user_id = "19";
+        $complain->user_id =auth()->id();
         $complain->save();
         $noti = array("message" => "Complain Added Successfully!", "alert-type" => "success");
         return redirect()->back()->with($noti);
@@ -91,7 +92,7 @@ class ComplainController extends Controller
         $complain->title = $request->complain_title;
         $complain->description = $request->complain_description;
         $complain->status= $request->complain_status;
-        $complain->user_id = "19";
+        $complain->user_id = auth()->id();
         $complain->update();
         $noti = array("message" => "Complain Updated Successfully!", "alert-type" => "success");
         return redirect()->route('complains.show')->with($noti);
