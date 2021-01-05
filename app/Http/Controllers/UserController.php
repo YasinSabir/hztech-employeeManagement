@@ -24,7 +24,7 @@ class UserController extends Controller
 //                ->select('roles.*','users.*')
 //                ->get();
 
-        return view('users.show',compact('data'));
+        return view('users.show', compact('data'));
     }
 
     /**
@@ -85,8 +85,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $role = Roles::all();
-        $user=User::find($id);
-        return view('users.Edit',compact('user','role'));
+        $user = User::find($id);
+        return view('users.Edit', compact('user', 'role'));
     }
 
     /**
@@ -103,8 +103,8 @@ class UserController extends Controller
             'user_email' => 'required|email',
             'password' => 'required|min:6|max:40',
         ]);
-        $user=new User();
-        $user=User::find($id);
+        $user = new User();
+        $user = User::find($id);
         $user->fullname = $request->user_fullname;
         $user->email = $request->user_email;
         $user->role_id = $request->role_title;
@@ -125,7 +125,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user=User::find($id);
+        $user = User::find($id);
         $user->delete();
         $noti = array("message" => "User Deleted Successfully!", "alert-type" => "success");
         return redirect()->back()->with($noti);
@@ -133,8 +133,51 @@ class UserController extends Controller
 
     public function profile()
     {
-        return view('users.profile');
+        $user = User::find(18);
+        return view('users.profile', compact('user'));
     }
 
+    public function editprofile(Request $request)
+    {
+
+        //custom_varDump_die($request->all());
+        $messages = [
+            'email.required' => 'please enter a valid e-mail address!',
+            'firstname.required' => 'please enter a first name!',
+            'lastname.required' => 'please enter a last name!',
+            'fullname.required' => 'please enter a full name!',
+            'address.required' => 'please enter a address!',
+            'phonenumber.required' => 'please enter a valid phone number!',
+            'phonenumber.max' => ':attribute may not be greater than 12 digits!',
+            'picture.required' => 'please enter a picture!',
+        ];
+        $this->validate($request, [
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'fullname' => 'required',
+            'address' => 'required|max:500',
+            'phonenumber' => 'required|min:11|max:12',
+
+        ], $messages);
+        $user = new User();
+        $user = User::find(18);
+        $user->first_name = $request->firstname;
+        $user->last_name = $request->lastname;
+        $user->fullname = $request->fullname;
+        //$user->email = $request->email;
+        $user->address = $request->address;
+        $user->phone_number = $request->phonenumber;
+        $user->update();
+        if ($request->hasFile('picture')) {
+            $profile = $request->file('picture') ? $request->file('picture')->store('upload/user/' . $user->id, 'public') : null;
+            User::where(['id' => '18'])->update(['profile_pic' => $profile]);
+        } else {
+            User::where(['id' => '18'])->update(['profile_pic' => '']);
+        }
+
+        $noti = array("message" => "Profile Edit Successfully!", "alert-type" => "success");
+        return redirect()->back()->with($noti);
+
+    }
 
 }
