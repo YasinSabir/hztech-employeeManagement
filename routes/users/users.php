@@ -1,6 +1,6 @@
 <?php
     // Roles Section.... Child funtion called Users of Parent function Pages
-    Route::group(['prefix' => 'Users' , 'as' => 'users.'],function(){
+    Route::group(['prefix' => 'Users' , 'as' => 'users.','middleware' => ['auth:web']],function(){
 
 
         Route::get('add','UserController@create')->name('add');

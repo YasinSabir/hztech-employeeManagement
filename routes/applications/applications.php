@@ -1,6 +1,6 @@
 <?php
     // Roles Section.... Child funtion called Applications of Parent function Pages
-    Route::group(['prefix' => 'Applications' , 'as' => 'applications.'],function(){
+    Route::group(['prefix' => 'Applications' , 'as' => 'applications.','middleware' => ['auth:web']],function(){
 
         Route::get('add' , function (){
             return view('applications.add');

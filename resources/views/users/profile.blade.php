@@ -12,7 +12,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">User Profile</li>
+                            <li class="breadcrumb-item active">User Personal Information</li>
                         </ol>
                     </div>
                 </div>
@@ -24,14 +24,6 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-3">
-
-                        <!-- Profile Image -->
-
-                        <!-- /.card -->
-
-                        <!-- About Me Box -->
-
-                        <!-- /.card -->
                     </div>
                     <!-- /.col -->
                     <div class="col-md-12">
@@ -39,18 +31,18 @@
                             <div class="card-body box-profile">
                                 <div class="text-center">
                                     <img class="profile-user-img img-fluid img-circle"
-                                         src="{{asset(getUser_image(18))}}"
-                                         alt="User profile picture">
+                                         src="{{asset(getUser_image(auth()->id()))}}"
+                                         alt="User profile picture" id="profile-img">
                                 </div>
                                 <h3 class="profile-username text-center">{{$user->fullname}}</h3>
-                                <p class="text-muted text-center">Software Engineer</p>
+                                <p class="text-muted text-center">{{$user->designation}}</p>
                             </div>
                             <!-- /.card-body -->
                         </div>
                         <div class="card">
                             <div class="card-header p-2">
                                 <ul class="nav nav-pills">
-                                    <h3>User Profile</h3>
+                                    <h3>User Personal Information</h3>
                                 </ul>
                             </div><!-- /.card-header -->
                             <div class="card-body">
@@ -92,15 +84,69 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                         @enderror()
+                                                        <label for="inputName" class="col-sm-6 col-form-label">City</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control" id="inputName"
+                                                                       value="{{$user->city}}"
+                                                                       placeholder=" City" name="city">
+                                                            </div>
+                                                        </div>
+                                                        @error('city')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
                                                         <label for="inputExperience" class="col-sm-6 col-form-label">Address</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <textarea class="form-control" id="inputExperience"
                                                                           placeholder="Address"
-                                                                          name="address">{{$user->address}}</textarea>
+                                                                          name="address">{{$user->address}}
+                                                                </textarea>
                                                             </div>
                                                         </div>
                                                         @error('address')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
+                                                        <label for="inputExperience" class="col-sm-6 col-form-label">Marital Status</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <select class="form-control select2" name="marital_status" style="width: 100%;">
+                                                                    <option value="Married" {{ ( !empty($user->status) && $user->status == "Active"  ) ? "selected" : '' }} >Married</option>
+                                                                    <option value="Single" {{ ( !empty($user->status) && $user->status == "Pending"  ) ? "selected" : '' }} >Single</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        @error('marital_status')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
+                                                        <label for="inputName" class="col-sm-6 col-form-label">Alternate Phone number</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control" id="inputName"
+                                                                       value="{{$user->alphone}}"
+                                                                       placeholder="Alternate phone" name="alphone">
+                                                            </div>
+                                                        </div>
+                                                        @error('alphone')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
+                                                        <label for="inputName2" class="col-sm-6 col-form-label">Zip Code</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <input type="tel" class="form-control" id="inputName2"
+                                                                       value="{{$user->zipcode}}"
+                                                                       placeholder="Zip Code" name="userzipcode">
+                                                            </div>
+                                                        </div>
+                                                        @error('zipcode')
                                                         <span class="invalid-feedback d-block" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -140,6 +186,47 @@
                                                         </span>
                                                         @enderror()
                                                         <label for="inputEmail"
+                                                               class="col-sm-6 col-form-label">Designation</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control" id="inputEmail"
+                                                                       value="{{$user->designation}}"
+                                                                       placeholder="Designation"
+                                                                       name="designation">
+                                                            </div>
+                                                        </div>
+                                                        @error('designation')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
+                                                        <label for="inputName" class="col-sm-6 col-form-label">State</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control" id="inputName"
+                                                                       value="{{$user->state}}"
+                                                                       placeholder=" State" name="state">
+                                                            </div>
+                                                        </div>
+                                                        @error('state')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
+                                                        <label for="inputName" class="col-sm-6 col-form-label">Nic</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control" id="inputName"
+                                                                       value="{{$user->nic}}"
+                                                                       placeholder="NIC" name="nic">
+                                                            </div>
+                                                        </div>
+                                                        @error('nic')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
+                                                        <label for="inputEmail"
                                                                class="col-sm-6 col-form-label">Email</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
@@ -167,6 +254,13 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                         @enderror()
+                                                        <label for="inputName2" class="col-sm-6 col-form-label">Date of birth</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend" >
+                                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                                            </div>
+                                                            <input type="text" class="form-control col-md-9" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                                        </div>
                                                         <label for="inputName2" class="col-sm-6 col-form-label">User
                                                             Role</label>
                                                         <div class="form-group row ">
@@ -176,6 +270,158 @@
                                                                        placeholder="" disabled>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-header p-2">
+                                                    <ul class="nav nav-pills">
+                                                        <h3>Emergency Contact Information</h3>
+                                                    </ul>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label for="inputName" class="col-sm-6 col-form-label">First
+                                                            Name</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <input type="text"
+                                                                       class="form-control  "
+                                                                       id="inputName"
+                                                                       value=""
+                                                                       placeholder="First Name" name="emerfirstname">
+                                                            </div>
+                                                        </div>
+                                                        @error('firstname')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
+                                                        <label for="inputName" class="col-sm-6 col-form-label">Full
+                                                            Name</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control" id="inputName"
+                                                                       value=""
+                                                                       placeholder=" FullName" name="emerfullname">
+                                                            </div>
+                                                        </div>
+                                                        @error('emerfullname')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
+                                                        <label for="inputName" class="col-sm-6 col-form-label">City</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control" id="inputName"
+                                                                       value=""
+                                                                       placeholder=" City" name="emercity">
+                                                            </div>
+                                                        </div>
+                                                        @error('emercity')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
+                                                        <label for="inputExperience" class="col-sm-6 col-form-label">Address</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <textarea class="form-control" id="inputExperience"
+                                                                          placeholder="Address"
+                                                                          name="emeraddress">
+                                                                </textarea>
+                                                            </div>
+                                                        </div>
+                                                        @error('emeraddress')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
+                                                        <label for="inputName" class="col-sm-6 col-form-label">Alternate Phone number</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control" id="inputName"
+                                                                       value=""
+                                                                       placeholder="Alternate phone" name="emeralphone">
+                                                            </div>
+                                                        </div>
+                                                        @error('emeralphone')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="inputName" class="col-sm-6 col-form-label">Last
+                                                            Name</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control" id="inputName"
+                                                                       value=""
+                                                                       placeholder="Last Name" name="emerlastname">
+                                                            </div>
+                                                        </div>
+                                                        @error('emerlastname')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
+                                                        <label for="inputEmail"
+                                                               class="col-sm-6 col-form-label">Relationship</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control" id="inputEmail"
+                                                                       value=""
+                                                                       placeholder="Relationship"
+                                                                       name="emerrelationship">
+                                                            </div>
+                                                        </div>
+                                                        @error('emerrelationship')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
+                                                        <label for="inputName" class="col-sm-6 col-form-label">State</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <input type="text" class="form-control" id="inputName"
+                                                                       value=""
+                                                                       placeholder=" State" name="emerstate">
+                                                            </div>
+                                                        </div>
+                                                        @error('emerstate')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
+
+                                                        <label for="inputName2" class="col-sm-6 col-form-label">Phone
+                                                            number</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <input type="tel" class="form-control" id="inputName2"
+                                                                       value=""
+                                                                       placeholder="Phone Number" name="emerphonenumber">
+                                                            </div>
+                                                        </div>
+                                                        @error('emerphonenumber')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
+                                                        <label for="inputName2" class="col-sm-6 col-form-label">Zip Code</label>
+                                                        <div class="form-group row mb-0">
+                                                            <div class="col-sm-10">
+                                                                <input type="tel" class="form-control" id="inputName2"
+                                                                       value=""
+                                                                       placeholder="Zip Code" name="emerzipcode">
+                                                            </div>
+                                                        </div>
+                                                        @error('emerzipcode')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -277,6 +523,22 @@
                 $(this).bootstrapSwitch('state', $(this).prop('checked'));
             });
             bsCustomFileInput.init();
+
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#profile-img').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#exampleInputFile").change(function () {
+                readURL(this);
+                console.log(readURL(this));
+            });
         })
     </script>
 

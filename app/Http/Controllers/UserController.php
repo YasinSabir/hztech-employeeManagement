@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Roles;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -133,7 +136,7 @@ class UserController extends Controller
 
     public function profile()
     {
-        $user = User::find(18);
+        $user = User::find(auth()->id());
         return view('users.profile', compact('user'));
     }
 
@@ -142,37 +145,43 @@ class UserController extends Controller
 
         //custom_varDump_die($request->all());
         $messages = [
-            'email.required' => 'please enter a valid e-mail address!',
-            'firstname.required' => 'please enter a first name!',
-            'lastname.required' => 'please enter a last name!',
-            'fullname.required' => 'please enter a full name!',
-            'address.required' => 'please enter a address!',
-            'phonenumber.required' => 'please enter a valid phone number!',
-            'phonenumber.max' => ':attribute may not be greater than 12 digits!',
-            'picture.required' => 'please enter a picture!',
+            'email.required'            => 'please enter a valid e-mail address!',
+            'firstname.required'        => 'please enter a first name!',
+            'lastname.required'         => 'please enter a last name!',
+            'fullname.required'         => 'please enter a full name!',
+            'address.required'          => 'please enter a address!',
+            'designation.required'      => 'please enter a designation!',
+            'phonenumber.required'      => 'please enter a valid phone number!',
+            'phonenumber.max'           => ':attribute may not be greater than 12 digits!',
+            'picture.required'          => 'please enter a picture!',
         ];
         $this->validate($request, [
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'fullname' => 'required',
-            'address' => 'required|max:500',
-            'phonenumber' => 'required|min:11|max:12',
+            'firstname'         => 'required',
+            'lastname'          => 'required',
+            'fullname'          => 'required',
+            'address'           => 'required|max:500',
+            'designation'       => 'required',
+            'phonenumber'       => 'required|min:11|max:12',
 
         ], $messages);
         $user = new User();
-        $user = User::find(18);
+        $user = User::find(auth()->id());
+        $pre_img = $user->profile_pic;
+
         $user->first_name = $request->firstname;
         $user->last_name = $request->lastname;
         $user->fullname = $request->fullname;
-        //$user->email = $request->email;
+        $user->designation = $request->designation;
         $user->address = $request->address;
         $user->phone_number = $request->phonenumber;
         $user->update();
+        $filename = $request->picture;
+
         if ($request->hasFile('picture')) {
             $profile = $request->file('picture') ? $request->file('picture')->store('upload/user/' . $user->id, 'public') : null;
-            User::where(['id' => '18'])->update(['profile_pic' => $profile]);
+            User::where(['id' => auth()->id()])->update(['profile_pic' => $profile]);
         } else {
-            User::where(['id' => '18'])->update(['profile_pic' => '']);
+            User::where(['id' => auth()->id()])->update(['profile_pic' => $pre_img]);
         }
 
         $noti = array("message" => "Profile Edit Successfully!", "alert-type" => "success");

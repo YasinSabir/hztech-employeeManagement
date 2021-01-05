@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Suggestions;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SuggestionController extends Controller
 {
@@ -44,7 +45,7 @@ class SuggestionController extends Controller
         $suggestion->title = $request->suggestion_title;
         $suggestion->description = $request->suggestion_description;
         $suggestion->status= "Pending";
-        $suggestion->user_id = "18";
+        $suggestion->user_id = auth()->id();
         $suggestion->save();
         $noti = array("message" => "Suggestion Added Successfully!", "alert-type" => "success");
         return redirect()->back()->with($noti);
@@ -92,7 +93,7 @@ class SuggestionController extends Controller
         $suggestion->title = $request->suggestion_title;
         $suggestion->description = $request->suggestion_description;
         $suggestion->status= $request->suggestion_status;
-        $suggestion->user_id = "18";
+        $suggestion->user_id = auth()->id();
         $suggestion->update();
         $noti = array("message" => "Suggestion Updated Successfully!", "alert-type" => "success");
         return redirect()->route('suggestions.show')->with($noti);

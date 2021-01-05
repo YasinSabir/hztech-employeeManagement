@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\User;
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,7 @@ include_once('users/users.php');
 
 
 
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/logouts','Auth\LogoutController@store')->name('logouts');

@@ -1,6 +1,6 @@
 <?php
     // Roles Section.... Child funtion called Complains of Parent function Pages
-    Route::group(['prefix' => 'Complains' , 'as' => 'complains.'],function(){
+    Route::group(['prefix' => 'Complains' , 'as' => 'complains.','middleware' => ['auth:web']],function(){
 
         Route::get('add','ComplainController@create')->name('add');
         Route::post('store','ComplainController@store')->name('store');
