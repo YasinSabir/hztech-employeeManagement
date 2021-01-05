@@ -89,7 +89,7 @@
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control" id="inputName"
-                                                                       value="{{$user->city}}"
+                                                                       value="{{get_user_meta(auth()->id(),'city')}}"
                                                                        placeholder=" City" name="city">
                                                             </div>
                                                         </div>
@@ -139,8 +139,8 @@
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control" id="inputName"
-                                                                       value="{{$user->alphone}}"
-                                                                       placeholder="Alternate phone" name="alphone">
+                                                                       value="{{get_user_meta(auth()->id(),'alt_phone')}}"
+                                                                       placeholder="Alternate phone" name="alt_phone">
                                                             </div>
                                                         </div>
                                                         @error('alphone')
@@ -152,9 +152,9 @@
                                                             Code</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
-                                                                <input type="tel" class="form-control" id="inputName2"
-                                                                       value="{{$user->zipcode}}"
-                                                                       placeholder="Zip Code" name="userzipcode">
+                                                                <input type="number" class="form-control" id="inputName2"
+                                                                       value="{{get_user_meta(auth()->id(),'zipcode')}}"
+                                                                       placeholder="Zip Code" name="zipcode">
                                                             </div>
                                                         </div>
                                                         @error('zipcode')
@@ -196,11 +196,11 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                         @enderror()
-                                                        <label for="inputEmail"
+                                                        <label for="inputName"
                                                                class="col-sm-6 col-form-label">Designation</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
-                                                                <input type="text" class="form-control" id="inputEmail"
+                                                                <input type="text" class="form-control" id="inputName"
                                                                        value="{{$user->designation}}"
                                                                        placeholder="Designation"
                                                                        name="designation">
@@ -216,7 +216,7 @@
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control" id="inputName"
-                                                                       value="{{$user->state}}"
+                                                                       value="{{get_user_meta(auth()->id(),'state')}}"
                                                                        placeholder=" State" name="state">
                                                             </div>
                                                         </div>
@@ -230,8 +230,8 @@
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control" id="inputName"
-                                                                       value="{{$user->nic}}"
-                                                                       placeholder="NIC" name="nic">
+                                                                       value="{{get_user_meta(auth()->id(),'cnic')}}"
+                                                                       placeholder="NIC" name="cnic">
                                                             </div>
                                                         </div>
                                                         @error('nic')
@@ -276,7 +276,7 @@
                                                             </div>
                                                             <input type="text" name="dob" class="form-control col-md-9"
                                                                    data-inputmask-alias="datetime"
-                                                                   data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                                                   data-inputmask-inputformat="dd/mm/yyyy" data-mask value="{{get_user_meta(auth()->id(),'dob')}}">
                                                         </div>
                                                         <label for="inputName2" class="col-sm-6 col-form-label">User
                                                             Role</label>
@@ -304,7 +304,7 @@
                                                                 <input type="text"
                                                                        class="form-control"
                                                                        id="em_first_name"
-                                                                       value=""
+                                                                       value="{{get_user_meta(auth()->id(),'em_first_name')}}"
                                                                        placeholder="First Name" name="em_first_name">
                                                             </div>
                                                         </div>
@@ -319,7 +319,7 @@
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control" id="em_full_name"
-                                                                       value=""
+                                                                       value="{{get_user_meta(auth()->id(),'em_full_name')}}"
                                                                        placeholder=" FullName" name="em_full_name">
                                                             </div>
                                                         </div>
@@ -334,7 +334,7 @@
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control" id="em_city"
-                                                                       value=""
+                                                                       value="{{get_user_meta(auth()->id(),'em_city')}}"
                                                                        placeholder="City" name="em_city">
                                                             </div>
                                                         </div>
@@ -350,7 +350,7 @@
                                                             <div class="col-sm-10">
                                                                 <textarea class="form-control" id="inputExperience"
                                                                           placeholder="Address"
-                                                                          name="em_address">
+                                                                          name="em_address">{{get_user_meta(auth()->id(),'em_address')}}
                                                                 </textarea>
                                                             </div>
                                                         </div>
@@ -365,7 +365,7 @@
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control" id="em_al_phone"
-                                                                       value=""
+                                                                       value="{{get_user_meta(auth()->id(),'em_al_phone')}}"
                                                                        placeholder="Alternate phone" name="em_al_phone">
                                                             </div>
                                                         </div>
@@ -382,7 +382,7 @@
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control" id="em_last_name"
-                                                                       value=""
+                                                                       value="{{get_user_meta(auth()->id(),'em_last_name')}}"
                                                                        placeholder="Last Name" name="em_last_name">
                                                             </div>
                                                         </div>
@@ -392,12 +392,12 @@
                                                             </span>
                                                         @enderror
 
-                                                        <label for="inputEmail"
+                                                        <label for="inputName"
                                                                class="col-sm-6 col-form-label">Relationship</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control" id="em_relationship"
-                                                                       value=""
+                                                                       value="{{get_user_meta(auth()->id(),'em_relationship')}}"
                                                                        placeholder="Relationship"
                                                                        name="em_relationship">
                                                             </div>
@@ -413,7 +413,7 @@
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control" id="em_state"
-                                                                       value=""
+                                                                       value="{{get_user_meta(auth()->id(),'em_state')}}"
                                                                        placeholder=" State" name="em_state">
                                                             </div>
                                                         </div>
@@ -428,9 +428,9 @@
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="tel" class="form-control" id="em_phone_number"
-                                                                       value=""
+                                                                       value="{{get_user_meta(auth()->id(),'em_phone_number')}}"
                                                                        placeholder="Phone Number"
-                                                                       name="em_phone_number">
+                                                                       name="em_phone_number" >
                                                             </div>
                                                         </div>
                                                         @error('em_phone_number')
@@ -443,7 +443,7 @@
                                                             Code</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
-                                                                <input type="tel" class="form-control" id="em_zipcode" value="{{$user->getMeta('em_zipcode')}}" placeholder="Zip Code" name="em_zipcode">
+                                                                <input type="number" class="form-control" id="em_zipcode" value="{{get_user_meta(auth()->id(),'em_zipcode')}}" placeholder="Zip Code" name="em_zipcode">
                                                             </div>
                                                         </div>
                                                         @error('em_zipcode')

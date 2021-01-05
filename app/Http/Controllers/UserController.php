@@ -155,10 +155,7 @@ class UserController extends Controller
 
     public function editprofile(Request $request)
     {
-        //custom_varDump_die($request->all());
-
         $userID = Auth::user()->id;
-
         $messages = [
             'email.required'            => 'please enter a valid e-mail address!',
             'firstname.required'        => 'please enter a first name!',
@@ -170,7 +167,6 @@ class UserController extends Controller
 //            'phonenumber.max'           => ':attribute may not be greater than 12 digits!',
             'picture.required'          => 'please enter a picture!',
         ];
-
         $this->validate($request, [
             'firstname'         => 'required',
             'lastname'          => 'required',
@@ -180,12 +176,9 @@ class UserController extends Controller
 //            'phonenumber'       => 'required|min:11|max:12',
 
         ], $messages);
-
         $user                   = new User();
         $user                   = User::find(auth()->id());
-
         $pre_img                = $user->profile_pic;
-
         $user->first_name       = $request->firstname;
         $user->last_name        = $request->lastname;
         $user->fullname         = $request->fullname;
@@ -194,14 +187,13 @@ class UserController extends Controller
         $user->phone_number     = $request->phonenumber;
         $user->update();
 
-
         $user_meta = [
           ['user_id' => $userID , 'meta_key' => 'city'            , 'meta_value' => $request->city],
           ['user_id' => $userID , 'meta_key' => 'state'           , 'meta_value' => $request->state],
           ['user_id' => $userID , 'meta_key' => 'martial_status'  , 'meta_value' => $request->marital_status],
-          ['user_id' => $userID , 'meta_key' => 'cnic'            , 'meta_value' => $request->nic],
+          ['user_id' => $userID , 'meta_key' => 'cnic'            , 'meta_value' => $request->cnic],
           ['user_id' => $userID , 'meta_key' => 'dob'             , 'meta_value' => $request->dob],
-          ['user_id' => $userID , 'meta_key' => 'zipcode'         , 'meta_value' => $request->userzipcode],
+          ['user_id' => $userID , 'meta_key' => 'zipcode'         , 'meta_value' => $request->zipcode],
           ['user_id' => $userID , 'meta_key' => 'alt_phone'       , 'meta_value' => $request->phonenumber],
           ['user_id' => $userID , 'meta_key' => 'em_first_name'   , 'meta_value' => $request->em_first_name],
           ['user_id' => $userID , 'meta_key' => 'em_last_name'    , 'meta_value' => $request->em_last_name],
@@ -214,25 +206,16 @@ class UserController extends Controller
           ['user_id' => $userID , 'meta_key' => 'em_al_phone'     , 'meta_value' => $request->em_al_phone],
           ['user_id' => $userID , 'meta_key' => 'em_zipcode'      , 'meta_value' => $request->em_zipcode],
         ];
-
-
-
-     //   custom_varDump_die($user_meta);
-
         foreach ($user_meta as $key => $val) {
             UserMeta::updateOrInsert(['user_id' => $val['user_id'], 'meta_key' => $val['meta_key']], $val);
         }
-
         if ($request->hasFile('picture')) {
             $profile = $request->file('picture') ? $request->file('picture')->store('upload/user/' . $user->id, 'public') : null;
             User::where(['id' => auth()->id()])->update(['profile_pic' => $profile]);
         } else {
             User::where(['id' => auth()->id()])->update(['profile_pic' => $pre_img]);
         }
-
         $noti = array("message" => "Profile Edit Successfully!", "alert-type" => "success");
         return redirect()->back()->with($noti);
-
     }
-
 }
