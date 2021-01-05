@@ -75,4 +75,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Previliges','UsersPrivileges', 'user_id', 'privilege_id');
     }
+    public function getMeta($key){
+        $dd = UserMeta::where(['user_id' => $this->id])->where(['meta_key' => $key])->first();
+        return $dd->meta_value;
+    }
+    public function setMeta($key , $value){
+        UserMeta::where(['user_id' => $this->id])->where(['meta_key' => $key])->update(['meta_value' => $value]);
+    }
+
+
 }

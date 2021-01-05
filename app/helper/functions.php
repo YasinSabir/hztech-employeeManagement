@@ -26,6 +26,13 @@ function getUser_image($id){
 
 }
 
+function get_user_meta($user_id , $key){
+
+    $data = \App\UserMeta::where(['user_id' => $user_id])->where(['meta_key' => $key])->first();
+    return $data->meta_value;
+
+}
+
 
 function custom_varDump($arr){
     echo "<pre>";

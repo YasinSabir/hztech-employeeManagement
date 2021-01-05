@@ -41,8 +41,8 @@
                         </div>
                         <div class="card">
                             <div class="card-header p-2">
-                                <ul class="nav nav-pills">
-                                    <h3>User Personal Information</h3>
+                                <ul class="nav nav-pills pl-2 pt-2">
+                                    <h4>User Personal Information</h4>
                                 </ul>
                             </div><!-- /.card-header -->
                             <div class="card-body">
@@ -59,7 +59,7 @@
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="text"
-                                                                       class="form-control  "
+                                                                       class="form-control"
                                                                        id="inputName"
                                                                        value="{{$user->first_name}}"
                                                                        placeholder="First Name" name="firstname">
@@ -84,7 +84,8 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                         @enderror()
-                                                        <label for="inputName" class="col-sm-6 col-form-label">City</label>
+                                                        <label for="inputName"
+                                                               class="col-sm-6 col-form-label">City</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control" id="inputName"
@@ -111,12 +112,20 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                         @enderror()
-                                                        <label for="inputExperience" class="col-sm-6 col-form-label">Marital Status</label>
+                                                        <label for="inputExperience" class="col-sm-6 col-form-label">Marital
+                                                            Status</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
-                                                                <select class="form-control select2" name="marital_status" style="width: 100%;">
-                                                                    <option value="Married" {{ ( !empty($user->status) && $user->status == "Active"  ) ? "selected" : '' }} >Married</option>
-                                                                    <option value="Single" {{ ( !empty($user->status) && $user->status == "Pending"  ) ? "selected" : '' }} >Single</option>
+                                                                <select class="form-control select2"
+                                                                        name="marital_status" style="width: 100%;">
+                                                                    <option
+                                                                        value="Married" {{ ( !empty($user->status) && $user->status == "Active"  ) ? "selected" : '' }} >
+                                                                        Married
+                                                                    </option>
+                                                                    <option
+                                                                        value="Single" {{ ( !empty($user->status) && $user->status == "Pending"  ) ? "selected" : '' }} >
+                                                                        Single
+                                                                    </option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -125,7 +134,8 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                         @enderror()
-                                                        <label for="inputName" class="col-sm-6 col-form-label">Alternate Phone number</label>
+                                                        <label for="inputName" class="col-sm-6 col-form-label">Alternate
+                                                            Phone number</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control" id="inputName"
@@ -138,7 +148,8 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                         @enderror()
-                                                        <label for="inputName2" class="col-sm-6 col-form-label">Zip Code</label>
+                                                        <label for="inputName2" class="col-sm-6 col-form-label">Zip
+                                                            Code</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="tel" class="form-control" id="inputName2"
@@ -200,7 +211,8 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                         @enderror()
-                                                        <label for="inputName" class="col-sm-6 col-form-label">State</label>
+                                                        <label for="inputName"
+                                                               class="col-sm-6 col-form-label">State</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control" id="inputName"
@@ -213,7 +225,8 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                         @enderror()
-                                                        <label for="inputName" class="col-sm-6 col-form-label">Nic</label>
+                                                        <label for="inputName"
+                                                               class="col-sm-6 col-form-label">Nic</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control" id="inputName"
@@ -254,27 +267,32 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                         @enderror()
-                                                        <label for="inputName2" class="col-sm-6 col-form-label">Date of birth</label>
+                                                        <label for="inputName2" class="col-sm-6 col-form-label">Date of
+                                                            birth</label>
                                                         <div class="input-group">
-                                                            <div class="input-group-prepend" >
-                                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i
+                                                                        class="far fa-calendar-alt"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control col-md-9" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                                            <input type="text" name="dob" class="form-control col-md-9"
+                                                                   data-inputmask-alias="datetime"
+                                                                   data-inputmask-inputformat="dd/mm/yyyy" data-mask>
                                                         </div>
                                                         <label for="inputName2" class="col-sm-6 col-form-label">User
                                                             Role</label>
                                                         <div class="form-group row ">
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control" id="inputName2"
-                                                                       value="{{get_role(18)}}"
+                                                                       value="{{get_role(auth()->id())}}"
                                                                        placeholder="" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="card-header p-2">
-                                                    <ul class="nav nav-pills">
-                                                        <h3>Emergency Contact Information</h3>
+
+                                                <div class="card-header p-2 mb-4">
+                                                    <ul class="nav nav-pills pl-1 pt-5">
+                                                        <h4>Emergency Contact Information</h4>
                                                     </ul>
                                                 </div>
                                                 <div class="row">
@@ -284,71 +302,78 @@
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <input type="text"
-                                                                       class="form-control  "
-                                                                       id="inputName"
+                                                                       class="form-control"
+                                                                       id="em_first_name"
                                                                        value=""
-                                                                       placeholder="First Name" name="emerfirstname">
+                                                                       placeholder="First Name" name="em_first_name">
                                                             </div>
                                                         </div>
-                                                        @error('firstname')
-                                                        <span class="invalid-feedback d-block" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror()
+                                                        @error('em_first_name')
+                                                            <span class="invalid-feedback d-block" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+
                                                         <label for="inputName" class="col-sm-6 col-form-label">Full
                                                             Name</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
-                                                                <input type="text" class="form-control" id="inputName"
+                                                                <input type="text" class="form-control" id="em_full_name"
                                                                        value=""
-                                                                       placeholder=" FullName" name="emerfullname">
+                                                                       placeholder=" FullName" name="em_full_name">
                                                             </div>
                                                         </div>
-                                                        @error('emerfullname')
-                                                        <span class="invalid-feedback d-block" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror()
-                                                        <label for="inputName" class="col-sm-6 col-form-label">City</label>
+                                                        @error('em_full_name')
+                                                            <span class="invalid-feedback d-block" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+
+                                                        <label for="inputName"
+                                                               class="col-sm-6 col-form-label">City</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
-                                                                <input type="text" class="form-control" id="inputName"
+                                                                <input type="text" class="form-control" id="em_city"
                                                                        value=""
-                                                                       placeholder=" City" name="emercity">
+                                                                       placeholder="City" name="em_city">
                                                             </div>
                                                         </div>
-                                                        @error('emercity')
-                                                        <span class="invalid-feedback d-block" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror()
+                                                        @error('em_city')
+                                                            <span class="invalid-feedback d-block" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+
+
                                                         <label for="inputExperience" class="col-sm-6 col-form-label">Address</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
                                                                 <textarea class="form-control" id="inputExperience"
                                                                           placeholder="Address"
-                                                                          name="emeraddress">
+                                                                          name="em_address">
                                                                 </textarea>
                                                             </div>
                                                         </div>
                                                         @error('emeraddress')
-                                                        <span class="invalid-feedback d-block" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror()
-                                                        <label for="inputName" class="col-sm-6 col-form-label">Alternate Phone number</label>
+                                                            <span class="invalid-feedback d-block" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+
+                                                        <label for="inputName" class="col-sm-6 col-form-label">Alternate
+                                                            Phone number</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
-                                                                <input type="text" class="form-control" id="inputName"
+                                                                <input type="text" class="form-control" id="em_al_phone"
                                                                        value=""
-                                                                       placeholder="Alternate phone" name="emeralphone">
+                                                                       placeholder="Alternate phone" name="em_al_phone">
                                                             </div>
                                                         </div>
-                                                        @error('emeralphone')
-                                                        <span class="invalid-feedback d-block" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror()
+                                                        @error('em_al_phone')
+                                                            <span class="invalid-feedback d-block" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
 
                                                     </div>
                                                     <div class="col-md-6">
@@ -356,81 +381,83 @@
                                                             Name</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
-                                                                <input type="text" class="form-control" id="inputName"
+                                                                <input type="text" class="form-control" id="em_last_name"
                                                                        value=""
-                                                                       placeholder="Last Name" name="emerlastname">
+                                                                       placeholder="Last Name" name="em_last_name">
                                                             </div>
                                                         </div>
-                                                        @error('emerlastname')
-                                                        <span class="invalid-feedback d-block" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror()
+                                                        @error('em_last_name')
+                                                            <span class="invalid-feedback d-block" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+
                                                         <label for="inputEmail"
                                                                class="col-sm-6 col-form-label">Relationship</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
-                                                                <input type="text" class="form-control" id="inputEmail"
+                                                                <input type="text" class="form-control" id="em_relationship"
                                                                        value=""
                                                                        placeholder="Relationship"
-                                                                       name="emerrelationship">
+                                                                       name="em_relationship">
                                                             </div>
                                                         </div>
-                                                        @error('emerrelationship')
-                                                        <span class="invalid-feedback d-block" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror()
-                                                        <label for="inputName" class="col-sm-6 col-form-label">State</label>
+                                                        @error('em_relationship')
+                                                            <span class="invalid-feedback d-block" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+
+                                                        <label for="inputName"
+                                                               class="col-sm-6 col-form-label">State</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
-                                                                <input type="text" class="form-control" id="inputName"
+                                                                <input type="text" class="form-control" id="em_state"
                                                                        value=""
-                                                                       placeholder=" State" name="emerstate">
+                                                                       placeholder=" State" name="em_state">
                                                             </div>
                                                         </div>
-                                                        @error('emerstate')
-                                                        <span class="invalid-feedback d-block" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror()
+                                                        @error('em_state')
+                                                            <span class="invalid-feedback d-block" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
 
                                                         <label for="inputName2" class="col-sm-6 col-form-label">Phone
                                                             number</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
-                                                                <input type="tel" class="form-control" id="inputName2"
+                                                                <input type="tel" class="form-control" id="em_phone_number"
                                                                        value=""
-                                                                       placeholder="Phone Number" name="emerphonenumber">
+                                                                       placeholder="Phone Number"
+                                                                       name="em_phone_number">
                                                             </div>
                                                         </div>
-                                                        @error('emerphonenumber')
-                                                        <span class="invalid-feedback d-block" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror()
-                                                        <label for="inputName2" class="col-sm-6 col-form-label">Zip Code</label>
+                                                        @error('em_phone_number')
+                                                            <span class="invalid-feedback d-block" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+
+                                                        <label for="inputName2" class="col-sm-6 col-form-label">Zip
+                                                            Code</label>
                                                         <div class="form-group row mb-0">
                                                             <div class="col-sm-10">
-                                                                <input type="tel" class="form-control" id="inputName2"
-                                                                       value=""
-                                                                       placeholder="Zip Code" name="emerzipcode">
+                                                                <input type="tel" class="form-control" id="em_zipcode" value="{{$user->getMeta('em_zipcode')}}" placeholder="Zip Code" name="em_zipcode">
                                                             </div>
                                                         </div>
-                                                        @error('emerzipcode')
-                                                        <span class="invalid-feedback d-block" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                        @enderror()
+                                                        @error('em_zipcode')
+                                                            <span class="invalid-feedback d-block" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <div class="form-group row">
-                                                            <div class="offset-sm-2 col-sm-10 mt-4">
-                                                                <button type="submit" class="btn btn-danger">Submit
-                                                                </button>
-                                                            </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" class="btn btn-danger mt-3">Submit</button>
                                                         </div>
                                                     </div>
                                                 </div>

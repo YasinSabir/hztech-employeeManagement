@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Roles;
 use App\User;
+use App\UserMeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -64,6 +65,18 @@ class UserController extends Controller
             'password' => Hash::make($request['password']),
             'string_password' => $request->password,
         ]);
+
+
+//        $user_meta = [
+//          ['user_id' => '1' , 'meta_key'=> 'address' , 'meta_value' => '312332'],
+//          ['user_id' => '1' , 'meta_key'=> 'cnic' , 'meta_value' => '2222-33232-2232'],
+//        ];
+//
+//        foreach ($user_meta as $key => $val){
+//            //userMeta = user_meta::updateOrInsert(['user_id' => $val['user_id'] , 'meta_key' => $val['meta_key'] ] , $val);
+//        }
+
+
         $noti = array("message" => "User Add Successfully!", "alert-type" => "success");
         return redirect()->back()->with($noti);
     }
@@ -142,8 +155,10 @@ class UserController extends Controller
 
     public function editprofile(Request $request)
     {
-
         //custom_varDump_die($request->all());
+
+        $userID = Auth::user()->id;
+
         $messages = [
             'email.required'            => 'please enter a valid e-mail address!',
             'firstname.required'        => 'please enter a first name!',
@@ -151,31 +166,62 @@ class UserController extends Controller
             'fullname.required'         => 'please enter a full name!',
             'address.required'          => 'please enter a address!',
             'designation.required'      => 'please enter a designation!',
-            'phonenumber.required'      => 'please enter a valid phone number!',
-            'phonenumber.max'           => ':attribute may not be greater than 12 digits!',
+//            'phonenumber.required'      => 'please enter a valid phone number!',
+//            'phonenumber.max'           => ':attribute may not be greater than 12 digits!',
             'picture.required'          => 'please enter a picture!',
         ];
+
         $this->validate($request, [
             'firstname'         => 'required',
             'lastname'          => 'required',
             'fullname'          => 'required',
             'address'           => 'required|max:500',
             'designation'       => 'required',
-            'phonenumber'       => 'required|min:11|max:12',
+//            'phonenumber'       => 'required|min:11|max:12',
 
         ], $messages);
-        $user = new User();
-        $user = User::find(auth()->id());
-        $pre_img = $user->profile_pic;
 
-        $user->first_name = $request->firstname;
-        $user->last_name = $request->lastname;
-        $user->fullname = $request->fullname;
-        $user->designation = $request->designation;
-        $user->address = $request->address;
-        $user->phone_number = $request->phonenumber;
+        $user                   = new User();
+        $user                   = User::find(auth()->id());
+
+        $pre_img                = $user->profile_pic;
+
+        $user->first_name       = $request->firstname;
+        $user->last_name        = $request->lastname;
+        $user->fullname         = $request->fullname;
+        $user->designation      = $request->designation;
+        $user->address          = $request->address;
+        $user->phone_number     = $request->phonenumber;
         $user->update();
-        $filename = $request->picture;
+
+
+        $user_meta = [
+          ['user_id' => $userID , 'meta_key' => 'city'            , 'meta_value' => $request->city],
+          ['user_id' => $userID , 'meta_key' => 'state'           , 'meta_value' => $request->state],
+          ['user_id' => $userID , 'meta_key' => 'martial_status'  , 'meta_value' => $request->marital_status],
+          ['user_id' => $userID , 'meta_key' => 'cnic'            , 'meta_value' => $request->nic],
+          ['user_id' => $userID , 'meta_key' => 'dob'             , 'meta_value' => $request->dob],
+          ['user_id' => $userID , 'meta_key' => 'zipcode'         , 'meta_value' => $request->userzipcode],
+          ['user_id' => $userID , 'meta_key' => 'alt_phone'       , 'meta_value' => $request->phonenumber],
+          ['user_id' => $userID , 'meta_key' => 'em_first_name'   , 'meta_value' => $request->em_first_name],
+          ['user_id' => $userID , 'meta_key' => 'em_last_name'    , 'meta_value' => $request->em_last_name],
+          ['user_id' => $userID , 'meta_key' => 'em_full_name'    , 'meta_value' => $request->em_full_name],
+          ['user_id' => $userID , 'meta_key' => 'em_relationship' , 'meta_value' => $request->em_relationship],
+          ['user_id' => $userID , 'meta_key' => 'em_city'         , 'meta_value' => $request->em_city],
+          ['user_id' => $userID , 'meta_key' => 'em_state'        , 'meta_value' => $request->em_state],
+          ['user_id' => $userID , 'meta_key' => 'em_address'      , 'meta_value' => $request->em_address],
+          ['user_id' => $userID , 'meta_key' => 'em_phone_number' , 'meta_value' => $request->em_phone_number],
+          ['user_id' => $userID , 'meta_key' => 'em_al_phone'     , 'meta_value' => $request->em_al_phone],
+          ['user_id' => $userID , 'meta_key' => 'em_zipcode'      , 'meta_value' => $request->em_zipcode],
+        ];
+
+
+
+     //   custom_varDump_die($user_meta);
+
+        foreach ($user_meta as $key => $val) {
+            UserMeta::updateOrInsert(['user_id' => $val['user_id'], 'meta_key' => $val['meta_key']], $val);
+        }
 
         if ($request->hasFile('picture')) {
             $profile = $request->file('picture') ? $request->file('picture')->store('upload/user/' . $user->id, 'public') : null;
