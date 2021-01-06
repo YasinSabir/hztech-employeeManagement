@@ -43,3 +43,18 @@ function users_count(){
     $rr = \App\User::all();
     return count($rr);
 }
+
+function get_user_status()
+{
+    $user = DB::table('users')->where('status', '=','Block')->get();
+    //$user=User::where('status' ,'=', 'Block')->get();
+    return $user;
+}
+
+function get_lead_hr_role($id)
+{
+    $data = DB::table('users')
+        ->join('roles', 'users.role_id', '=', 'roles.id')
+        ->select('roles.title','roles.id')->where(['roles.title' => ['lead'],'roles.title' => 'hr'])->first();
+    return $data;
+}

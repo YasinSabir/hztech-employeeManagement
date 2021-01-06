@@ -61,13 +61,20 @@
                                     @enderror
                                     <div class="form-group">
                                         <label>Role Title</label>
-                                        <select name="role_title" class="form-control select2" style="width: 100%;">
+                                        <select name="role_title" id="role_title" class="form-control"
+                                                style="width: 100%;">
                                             @foreach($role as $r)
                                                 <option value="{{$r->id}}">{{$r->title}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label>Employee Name</label>
+                                        <select name="sel_emp" id="sel_emp" class="form-control"
+                                                style="width: 100%;">
+                                            <option value="0">Select Employee</option>
+                                        </select>
+                                    </div>
                                     <div class="form-group">
                                         <label>Status</label>
                                         <select class="form-control select2" name="user_status" style="width: 100%;">
@@ -170,6 +177,43 @@
             });
 
         })
+        /*Ajax Employee Dropdownfill*/
+        $(document).ready(function () {
+            $("#role_title").change(function () {
+                var selectedRole = $(this).children("option:selected").text();
+                if(selectedRole == "employee") {
+                    alert("You have selected the - " + selectedRole);
+                    // Empty the dropdown
+                    $('#sel_emp').find('#sel_emp').not(':first').remove();
+
+                    // AJAX request
+                    $.ajax({
+                        url : '{{route('users.getEmployees')}}',
+                        type: 'get',
+                        dataType: 'json',
+                        success: function (response) {
+                            var len = 0;
+                            if (response['data'] != null) {
+                                len = response['data'].length;
+                            }
+                            if (len > 0) {
+                                // Read data and create <option >
+                                for (var i = 0; i < len; i++) {
+
+                                    var fullname = response['data'][i].fullname;
+
+                                    var option = "<option value='"+response['data'][i].id+"'>" + fullname + "</option>";
+
+                                    $("#sel_emp").append(option);
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        //Ajax Dropdwon fill end
+
     </script>
 
 @endsection

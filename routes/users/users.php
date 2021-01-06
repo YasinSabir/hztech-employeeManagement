@@ -19,6 +19,13 @@
 
         Route::get('profile','UserController@profile')->name('profile');
         Route::post('profile','UserController@editprofile')->name('profile');
+
+        Route::get('/getEmployees', 'UserController@getEmployees')->name('getEmployees');
+
+        Route::get('/UserLog', 'UserController@UserLogView')->name('UserLog');
+        Route::post('/TimeLog', 'UserController@TimeLog')->name('time_log');
+
+
     });
 
 ?>

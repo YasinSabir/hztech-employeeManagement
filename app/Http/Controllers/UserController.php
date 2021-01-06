@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Roles;
+use App\TimeLogs;
 use App\User;
 use App\UserMeta;
 use Illuminate\Http\Request;
@@ -10,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use DateTime;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -22,12 +25,6 @@ class UserController extends Controller
     public function index()
     {
         $data = User::all();
-
-//            DB::table('users')
-//                ->join('roles', 'users.role_id', '=', 'roles.id')
-//                ->select('roles.*','users.*')
-//                ->get();
-
         return view('users.show', compact('data'));
     }
 
@@ -36,9 +33,23 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function getEmployees()
+    {
+        $empData['data'] = DB::table('users')
+            ->join('roles', 'users.role_id', '=', 'roles.id')
+            ->select('users.fullname','users.id')
+            ->where('roles.title', '=', 'lead')
+            ->orWhere('roles.title', '=', 'hr')
+            ->get();
+        return response()->json($empData);
+    }
+
     public function create()
     {
         $role = Roles::all();
+//        SELECT users.id,roles.id,users.fullname,roles.title,roles.status FROM `users`
+//        INNER JOIN `roles` ON users.role_id=roles.id where roles.title='lead' or roles.title='hr'
+
         return view('users.add', compact('role'));
     }
 
@@ -61,6 +72,7 @@ class UserController extends Controller
             'fullname' => $request->user_fullname,
             'email' => $request->user_email,
             'role_id' => $request->role_title,
+            'employee_id' => $request->sel_emp,
             'status' => $request->user_status,
             'password' => Hash::make($request['password']),
             'string_password' => $request->password,
@@ -124,6 +136,7 @@ class UserController extends Controller
         $user->fullname = $request->user_fullname;
         $user->email = $request->user_email;
         $user->role_id = $request->role_title;
+        $user->employee_id = $request->sel_emp;
         $user->status = $request->user_status;
         $user->password = Hash::make($request['password']);
         $user->string_password = $request->password;
@@ -155,56 +168,57 @@ class UserController extends Controller
 
     public function editprofile(Request $request)
     {
+        // custom_varDump_die(get_user_status(auth()->id())->toArray());
         $userID = Auth::user()->id;
         $messages = [
-            'email.required'            => 'please enter a valid e-mail address!',
-            'firstname.required'        => 'please enter a first name!',
-            'lastname.required'         => 'please enter a last name!',
-            'fullname.required'         => 'please enter a full name!',
-            'address.required'          => 'please enter a address!',
-            'designation.required'      => 'please enter a designation!',
+            'email.required' => 'please enter a valid e-mail address!',
+            'firstname.required' => 'please enter a first name!',
+            'lastname.required' => 'please enter a last name!',
+            'fullname.required' => 'please enter a full name!',
+            'address.required' => 'please enter a address!',
+            'designation.required' => 'please enter a designation!',
 //            'phonenumber.required'      => 'please enter a valid phone number!',
 //            'phonenumber.max'           => ':attribute may not be greater than 12 digits!',
-            'picture.required'          => 'please enter a picture!',
+            'picture.required' => 'please enter a picture!',
         ];
         $this->validate($request, [
-            'firstname'         => 'required',
-            'lastname'          => 'required',
-            'fullname'          => 'required',
-            'address'           => 'required|max:500',
-            'designation'       => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'fullname' => 'required',
+            'address' => 'required|max:500',
+            'designation' => 'required',
 //            'phonenumber'       => 'required|min:11|max:12',
 
         ], $messages);
-        $user                   = new User();
-        $user                   = User::find(auth()->id());
-        $pre_img                = $user->profile_pic;
-        $user->first_name       = $request->firstname;
-        $user->last_name        = $request->lastname;
-        $user->fullname         = $request->fullname;
-        $user->designation      = $request->designation;
-        $user->address          = $request->address;
-        $user->phone_number     = $request->phonenumber;
+        $user = new User();
+        $user = User::find(auth()->id());
+        $pre_img = $user->profile_pic;
+        $user->first_name = $request->firstname;
+        $user->last_name = $request->lastname;
+        $user->fullname = $request->fullname;
+        $user->designation = $request->designation;
+        $user->address = $request->address;
+        $user->phone_number = $request->phonenumber;
         $user->update();
 
         $user_meta = [
-          ['user_id' => $userID , 'meta_key' => 'city'            , 'meta_value' => $request->city],
-          ['user_id' => $userID , 'meta_key' => 'state'           , 'meta_value' => $request->state],
-          ['user_id' => $userID , 'meta_key' => 'martial_status'  , 'meta_value' => $request->marital_status],
-          ['user_id' => $userID , 'meta_key' => 'cnic'            , 'meta_value' => $request->cnic],
-          ['user_id' => $userID , 'meta_key' => 'dob'             , 'meta_value' => $request->dob],
-          ['user_id' => $userID , 'meta_key' => 'zipcode'         , 'meta_value' => $request->zipcode],
-          ['user_id' => $userID , 'meta_key' => 'alt_phone'       , 'meta_value' => $request->phonenumber],
-          ['user_id' => $userID , 'meta_key' => 'em_first_name'   , 'meta_value' => $request->em_first_name],
-          ['user_id' => $userID , 'meta_key' => 'em_last_name'    , 'meta_value' => $request->em_last_name],
-          ['user_id' => $userID , 'meta_key' => 'em_full_name'    , 'meta_value' => $request->em_full_name],
-          ['user_id' => $userID , 'meta_key' => 'em_relationship' , 'meta_value' => $request->em_relationship],
-          ['user_id' => $userID , 'meta_key' => 'em_city'         , 'meta_value' => $request->em_city],
-          ['user_id' => $userID , 'meta_key' => 'em_state'        , 'meta_value' => $request->em_state],
-          ['user_id' => $userID , 'meta_key' => 'em_address'      , 'meta_value' => $request->em_address],
-          ['user_id' => $userID , 'meta_key' => 'em_phone_number' , 'meta_value' => $request->em_phone_number],
-          ['user_id' => $userID , 'meta_key' => 'em_al_phone'     , 'meta_value' => $request->em_al_phone],
-          ['user_id' => $userID , 'meta_key' => 'em_zipcode'      , 'meta_value' => $request->em_zipcode],
+            ['user_id' => $userID, 'meta_key' => 'city', 'meta_value' => $request->city],
+            ['user_id' => $userID, 'meta_key' => 'state', 'meta_value' => $request->state],
+            ['user_id' => $userID, 'meta_key' => 'martial_status', 'meta_value' => $request->marital_status],
+            ['user_id' => $userID, 'meta_key' => 'cnic', 'meta_value' => $request->cnic],
+            ['user_id' => $userID, 'meta_key' => 'dob', 'meta_value' => $request->dob],
+            ['user_id' => $userID, 'meta_key' => 'zipcode', 'meta_value' => $request->zipcode],
+            ['user_id' => $userID, 'meta_key' => 'alt_phone', 'meta_value' => $request->phonenumber],
+            ['user_id' => $userID, 'meta_key' => 'em_first_name', 'meta_value' => $request->em_first_name],
+            ['user_id' => $userID, 'meta_key' => 'em_last_name', 'meta_value' => $request->em_last_name],
+            ['user_id' => $userID, 'meta_key' => 'em_full_name', 'meta_value' => $request->em_full_name],
+            ['user_id' => $userID, 'meta_key' => 'em_relationship', 'meta_value' => $request->em_relationship],
+            ['user_id' => $userID, 'meta_key' => 'em_city', 'meta_value' => $request->em_city],
+            ['user_id' => $userID, 'meta_key' => 'em_state', 'meta_value' => $request->em_state],
+            ['user_id' => $userID, 'meta_key' => 'em_address', 'meta_value' => $request->em_address],
+            ['user_id' => $userID, 'meta_key' => 'em_phone_number', 'meta_value' => $request->em_phone_number],
+            ['user_id' => $userID, 'meta_key' => 'em_al_phone', 'meta_value' => $request->em_al_phone],
+            ['user_id' => $userID, 'meta_key' => 'em_zipcode', 'meta_value' => $request->em_zipcode],
         ];
         foreach ($user_meta as $key => $val) {
             UserMeta::updateOrInsert(['user_id' => $val['user_id'], 'meta_key' => $val['meta_key']], $val);
@@ -218,4 +232,49 @@ class UserController extends Controller
         $noti = array("message" => "Profile Edit Successfully!", "alert-type" => "success");
         return redirect()->back()->with($noti);
     }
+
+    public function UserLogView()
+    {
+        $status = TimeLogs::where(['user_id'=> Auth::user()->id ])->first();
+        //custom_varDump_die($status);
+        return view('users.userlog',compact('status'));
+    }
+
+    public function TimeLog(Request $request)
+    {
+        $user = auth()->id();
+        $my_time = new TimeLogs();
+        $timeZone = date_default_timezone_set("Asia/Karachi");
+        //status = TimeLogs::where(['user_id'=> Auth::user()->id ])->last();
+        //custom_varDump_die($request->all());
+
+        if($request->data == "time_in"){
+
+            TimeLogs::create([
+                'user_id'            => $user,
+                'time_in'            => date('Y-m-d H:i:s A'),
+                'time_out'           => "",
+                'time_difference'    => "",
+                'attendance'         => 1,
+            ]);
+            return response()->json(array(['msg' => 'Time In' , 'status' => 'done']),200);
+
+        }elseif($request->data == "time_out"){
+          $startTime = Carbon::parse($my_time->time_in);
+          $endTime = Carbon::parse($my_time->time_out);
+          TimeLogs::where(['user_id' => $user])->update([
+                'time_out' => date('Y-m-d H:i:s A'),
+            ]);
+          TimeLogs::where(['user_id' => $user])->update([
+                'time_difference' => $startTime->diffForHumans($endTime),
+            ]);
+            return response()->json(array(['msg' => 'Time Out' , 'status' => 'done']),200);
+
+        }else{
+            return response()->json(array(['msg' => 'Something went wrong!' , 'status' => 'done']),422);
+        }
+
+    }
+
+
 }
