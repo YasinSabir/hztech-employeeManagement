@@ -17,30 +17,63 @@
                         </ol>
                     </div>
                 </div>
-            </div><!-- /.container-fluid -->
-        </section>
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Time In and Out</h3>
 
-            </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="card-body">
-                        @if($status->entry_type == 1)
-                            <button class="btn btn-app" name="time_out" id="time_out" type="button">
-                                <i class="fas fa-stopwatch"></i> Time Out
-                            </button>
-                        @else
-                            <button class="btn btn-app like" name="time_in" id="time_in" type="button">
-                                <i class="fas fa-clock"></i> Time In
-                            </button>
-                        @endif
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                @if( isset($status->entry_type) && $status->entry_type == 1)
+                                    <button class="btn btn-app" name="time_out" id="time_out" type="button">
+                                        <i class="fas fa-stopwatch"></i> Time Out
+                                    </button>
+                                @else
+                                    <button class="btn btn-app like" name="time_in" id="time_in" type="button">
+                                        <i class="fas fa-clock"></i> Time In
+                                    </button>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">User Logs Data</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Type</th>
+                                <th>Day</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($data as $key => $val)
+
+                                <tr>
+                                    @if($val->entry_type == 1)
+                                        <td>{{$val->time}}</td>
+                                        <td>Time In</td>
+                                        <td>{{$today}}</td>
+                                    @else
+                                        <td>{{$val->time}}</td>
+                                        <td>Time Out</td>
+                                        <td>{{$today}}</td>
+                                    @endif
+                                </tr>
+                            @empty
+
+                            @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div><!-- /.container-fluid -->
+        </section>
     </div>
 
 
@@ -118,7 +151,17 @@
 
         })
 
-        // $('#time_out').hide();
+        $("#example1").DataTable();
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+        });
+
+        //$('#time_out').css("display", "none");
 
         $('#time_in').click(function () {
             var status = "time_in";
@@ -133,8 +176,9 @@
                 success: function (res) {
                     console.log(res);
                     toastr.success("Successfully time in.", "Time Log!");
-                    $('#time_out').show();
-                    $('#time_in').hide();
+                    $('#time_in').css("display", "none");
+                    $('#time_out').css("display", "inline-block");
+
                 }
             });
 
@@ -154,9 +198,8 @@
                 success: function (res) {
                     console.log(res);
                     toastr.error("Successfully time out.", "Time Log!");
-                    $('#time_in').show();
-                    $('#time_out').hide();
-
+                    $('#time_out').css("display", "none");
+                    $('#time_in').css("display", "inline-block");
                 }
             });
             // $('#time_in').show();

@@ -23,8 +23,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public const const_timeIn=1;
-    public const const_timeOut=2;
+    public const const_timeIn = 1;
+    public const const_timeOut = 2;
 
     public function index()
     {
@@ -41,7 +41,7 @@ class UserController extends Controller
     {
         $empData['data'] = DB::table('users')
             ->join('roles', 'users.role_id', '=', 'roles.id')
-            ->select('users.fullname','users.id')
+            ->select('users.fullname', 'users.id')
             ->where('roles.title', '=', 'lead')
             ->orWhere('roles.title', '=', 'hr')
             ->get();
@@ -239,33 +239,48 @@ class UserController extends Controller
 
     public function UserLogView()
     {
-        $status = UserTime::where(['user_id'=> Auth::user()->id ])->orderBy('id','DESC')->first();
+        $timeZone = date_default_timezone_set("Asia/Karachi");
+        $user_id = auth()->id();
+        $status = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
+        $my_time = new UserTime();
+        $data = UserTime::where(['user_id' => $user_id])->get();
+        if (!empty($status)) {
+            //custom_varDump('Not Empty');
+            //$TimeIn=UserTime::where(['user_id' => Auth::user()->id])->where('')
+            $strtime = strtotime($status->time);
+            $today = date('l-d-M', $strtime);
+        }else{
+            //custom_varDump("Empty");
+            $today = "";
+            $status = [];
+        }
 
-        return view('users.userlog',compact('status'));
+        return view('users.userlog')->with([
+            'data' => $data ,
+            'status'=> $status,
+            'today' => $today,
+        ]);
     }
 
     public function TimeLog(Request $request)
     {
         $timeZone = date_default_timezone_set("Asia/Karachi");
-        $user_id=auth()->id();
-        $usertime=new UserTime();
-        if($request->data == "time_in" && self::const_timeIn){
-            $usertime->user_id= $user_id;
-            $usertime->time= date('Y-m-d H:i:s');
+        $user_id = auth()->id();
+        $usertime = new UserTime();
+        if ($request->data == "time_in" && self::const_timeIn) {
+            $usertime->user_id = $user_id;
+            $usertime->time = date('Y-m-d H:i:s');
             $usertime->entry_type = self::const_timeIn;
             $usertime->save();
-            return response()->json(array(['msg' => 'Time In' , 'status' => 'done']),200);
-        }
-        elseif ($request->data == "time_out" && self::const_timeOut)
-        {
-            $usertime->user_id= $user_id;
-            $usertime->time= date('Y-m-d H:i:s');
+            return response()->json(array(['msg' => 'Time In', 'status' => 'done']), 200);
+        } elseif ($request->data == "time_out" && self::const_timeOut) {
+            $usertime->user_id = $user_id;
+            $usertime->time = date('Y-m-d H:i:s');
             $usertime->entry_type = self::const_timeOut;
             $usertime->save();
-            return response()->json(array(['msg' => 'Time Out' , 'status' => 'done']),200);
-        }
-        else{
-            return response()->json(array(['msg' => 'Something went wrong!' , 'status' => 'done']),422);
+            return response()->json(array(['msg' => 'Time Out', 'status' => 'done']), 200);
+        } else {
+            return response()->json(array(['msg' => 'Something went wrong!', 'status' => 'done']), 422);
         }
     }
 
