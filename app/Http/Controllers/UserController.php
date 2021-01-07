@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Complains;
 use App\Roles;
 use App\TimeLogs;
 use App\User;
@@ -241,12 +242,30 @@ class UserController extends Controller
     {
         $timeZone = date_default_timezone_set("Asia/Karachi");
         $user_id = auth()->id();
+        $records = [];
         $status = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
         $my_time = new UserTime();
-        $data = UserTime::where(['user_id' => $user_id])->get();
+        $entries = UserTime::where(['user_id' => $user_id])->get();
+        $record = [];
+        foreach ($entries as $entry )
+        {
+            $datetime = new DateTime($entry->time);
+            $date = $datetime->format('d-m-Y');
+            $time = $datetime->format('H:i:s');
+            //custom_varDump($time);
+            $record['date'] = $date;
+            if($entry->entry_type == 1){
+                $record['time_in'] = $time;
+            }else{
+                $record['time_out'] = $time;
+                $records[] = $record;
+                $record = [];
+            }
+        }
+
+       //dd($records);
         if (!empty($status)) {
             //custom_varDump('Not Empty');
-            //$TimeIn=UserTime::where(['user_id' => Auth::user()->id])->where('')
             $strtime = strtotime($status->time);
             $today = date('l-d-M', $strtime);
         }else{
@@ -256,9 +275,10 @@ class UserController extends Controller
         }
 
         return view('users.userlog')->with([
-            'data' => $data ,
+            'data' => $entries ,
             'status'=> $status,
             'today' => $today,
+            'records' => $records,
         ]);
     }
 

@@ -45,24 +45,20 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Time</th>
-                                <th>Type</th>
+                                <th>Time In</th>
+                                <th>Time Out</th>
+                                <th>Date</th>
                                 <th>Day</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($data as $key => $val)
+                            @forelse($records as $key => $val)
 
                                 <tr>
-                                    @if($val->entry_type == 1)
-                                        <td>{{$val->time}}</td>
-                                        <td>Time In</td>
+                                    <td>{{$val['time_in']}}</td>
+                                        <td>{{$val['time_out']}}</td>
+                                        <td>{{$val['date']}}</td>
                                         <td>{{$today}}</td>
-                                    @else
-                                        <td>{{$val->time}}</td>
-                                        <td>Time Out</td>
-                                        <td>{{$today}}</td>
-                                    @endif
                                 </tr>
                             @empty
 
