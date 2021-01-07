@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="card-body">
-                        @if($status->time_in)
+                        @if($status->entry_type == 1)
                             <button class="btn btn-app" name="time_out" id="time_out" type="button">
                                 <i class="fas fa-stopwatch"></i> Time Out
                             </button>
@@ -42,7 +42,6 @@
 
         </div>
     </div>
-
 
 
 @endsection
@@ -119,12 +118,10 @@
 
         })
 
-      //  $('#time_out').hide();
+        // $('#time_out').hide();
 
         $('#time_in').click(function () {
-
             var status = "time_in";
-
             $.ajax({
                 url: '{{route('users.time_log')}}',
                 type: 'post',
@@ -157,9 +154,9 @@
                 success: function (res) {
                     console.log(res);
                     toastr.error("Successfully time out.", "Time Log!");
+                    $('#time_in').show();
                     $('#time_out').hide();
-                    $('#time_in').show
-                    ();
+
                 }
             });
             // $('#time_in').show();

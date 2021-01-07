@@ -10,4 +10,5 @@ class TimeLogs extends Model
     protected $fillable = [
         'user_id','time_in','time_out','attendance',
     ];
+    //public $timestamps = false;
 }

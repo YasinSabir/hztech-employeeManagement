@@ -6,6 +6,7 @@ use App\Roles;
 use App\TimeLogs;
 use App\User;
 use App\UserMeta;
+use App\UserTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +23,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public const const_timeIn=1;
+    public const const_timeOut=2;
+
     public function index()
     {
         $data = User::all();
@@ -235,46 +239,72 @@ class UserController extends Controller
 
     public function UserLogView()
     {
-        $status = TimeLogs::where(['user_id'=> Auth::user()->id ])->first();
-        //custom_varDump_die($status);
+        $status = UserTime::where(['user_id'=> Auth::user()->id ])->orderBy('id','DESC')->first();
+
         return view('users.userlog',compact('status'));
     }
 
     public function TimeLog(Request $request)
     {
+        $timeZone = date_default_timezone_set("Asia/Karachi");
+        $user_id=auth()->id();
+        $usertime=new UserTime();
+        if($request->data == "time_in" && self::const_timeIn){
+            $usertime->user_id= $user_id;
+            $usertime->time= date('Y-m-d H:i:s');
+            $usertime->entry_type = self::const_timeIn;
+            $usertime->save();
+            return response()->json(array(['msg' => 'Time In' , 'status' => 'done']),200);
+        }
+        elseif ($request->data == "time_out" && self::const_timeOut)
+        {
+            $usertime->user_id= $user_id;
+            $usertime->time= date('Y-m-d H:i:s');
+            $usertime->entry_type = self::const_timeOut;
+            $usertime->save();
+            return response()->json(array(['msg' => 'Time Out' , 'status' => 'done']),200);
+        }
+        else{
+            return response()->json(array(['msg' => 'Something went wrong!' , 'status' => 'done']),422);
+        }
+    }
+
+    /*public function TimeLog(Request $request)
+    {
         $user = auth()->id();
         $my_time = new TimeLogs();
         $timeZone = date_default_timezone_set("Asia/Karachi");
         //status = TimeLogs::where(['user_id'=> Auth::user()->id ])->last();
-        //custom_varDump_die($request->all());
-
         if($request->data == "time_in"){
-
-            TimeLogs::create([
-                'user_id'            => $user,
-                'time_in'            => date('Y-m-d H:i:s A'),
-                'time_out'           => "",
-                'time_difference'    => "",
-                'attendance'         => 1,
-            ]);
+                $my_time->user_id= $user;
+                $my_time->time_in= date("H:i:s");
+                $my_time->time_out= "";
+                $my_time->time_difference= "";
+                $my_time->attendance= 1;
+                $my_time->save();
             return response()->json(array(['msg' => 'Time In' , 'status' => 'done']),200);
 
         }elseif($request->data == "time_out"){
           $startTime = Carbon::parse($my_time->time_in);
-          $endTime = Carbon::parse($my_time->time_out);
           TimeLogs::where(['user_id' => $user])->update([
-                'time_out' => date('Y-m-d H:i:s A'),
-            ]);
-          TimeLogs::where(['user_id' => $user])->update([
-                'time_difference' => $startTime->diffForHumans($endTime),
-            ]);
+                'time_out' => date("H:i:s"),//date('Y-m-d H:i:s A'),
+          ]);
+
+//
+//          TimeLogs::where(['user_id' => $user])->update([
+//                'time_difference' => $endTime->diffForHumans($startTime),
+//          ]);
+            $endTime = Carbon::parse($my_time->time_out);
+
+            custom_varDump_die($endTime->diffF($startTime));
+
             return response()->json(array(['msg' => 'Time Out' , 'status' => 'done']),200);
 
         }else{
             return response()->json(array(['msg' => 'Something went wrong!' , 'status' => 'done']),422);
         }
 
-    }
+    }*/
 
 
 }
