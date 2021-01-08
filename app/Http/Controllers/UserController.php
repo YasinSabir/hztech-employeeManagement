@@ -274,14 +274,11 @@ class UserController extends Controller
                         $record             = [];
                     }
 
-                  //  custom_varDump($records);
-
                 }else{
                     $record = [];
                 }
 
             }
-//            die;
 
         }else{
 
@@ -306,7 +303,6 @@ class UserController extends Controller
                     $records[]          = $record;
                     $record             = [];
                 }
-
             }
         }
         if (!empty($status)) {

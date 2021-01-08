@@ -17,10 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 */
-Route::get('/', function () {
+Route::get('/home', function () {
       //    return view('welcome');
       return view('pages.index');
-})->name('dashboard.v1');
+})->name('dashboard.v1')->middleware('auth');
 
 
 /*
@@ -51,6 +51,6 @@ Route::get('/Advanced' , function (){
 
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
 Route::post('/logouts','Auth\LogoutController@store')->name('logouts');
 
