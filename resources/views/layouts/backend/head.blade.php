@@ -43,7 +43,7 @@
     <!-- fullCalendar -->
     <link rel="stylesheet" href="{{asset('theme-assets/plugins/fullcalendar/main.min.css')}}">
     <link rel="stylesheet" href="{{asset('theme-assets/plugins/fullcalendar-daygrid/main.min.css')}}">
-    <link rel="stylesheet" href="{{asset('theme-assets/plugins/plugins/fullcalendar-timegrid/main.min.css')}}">
+    <link rel="stylesheet" href="{{asset('theme-assets/plugins/fullcalendar-timegrid/main.min.css')}}">
     <link rel="stylesheet" href="{{asset('theme-assets/plugins/fullcalendar-bootstrap/main.min.css')}}">
 
     <!-- Ekko Lightbox -->

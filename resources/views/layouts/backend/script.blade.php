@@ -6,6 +6,7 @@
 <script>
     $.widget.bridge('uibutton', $.ui.button);
 </script>
+
 <!-- Bootstrap 4 -->
 <script src="{{asset('theme-assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- ChartJS -->
@@ -30,7 +31,7 @@
 <script src="{{asset('theme-assets/dist/js/adminlte.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('theme-assets/dist/js/pages/dashboard.js')}}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
 
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('theme-assets/dist/js/demo.js')}}"></script>

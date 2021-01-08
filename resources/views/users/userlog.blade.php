@@ -1,7 +1,9 @@
 @extends('layouts.backend.app')
 @section('section')
 
-
+    <?php
+    use Carbon\Carbon;
+    ?>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -14,6 +16,17 @@
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">User Logs</li>
+                            <li class="breadcrumb-item active">
+{{--                                @php--}}
+{{--                                    $col =0;--}}
+{{--                                @endphp--}}
+{{--                                @forelse($records as $key => $val)--}}
+{{--                                {{ $col =$col+(new Carbon($val['time_in']))->floatDiffInSeconds(new Carbon($val['time_out'])) }}</br>--}}
+{{--                                --}}{{--                                    {{ date('H:i:s', strtotime($val['time_in']) + strtotime($val['time_out'])) }}</br>--}}
+{{--                                @empty--}}
+
+{{--                                @endforelse--}}
+                            </li>
                         </ol>
                     </div>
                 </div>
@@ -42,6 +55,61 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+                        <form method="get" action="{{route('users.UserLog')}}">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <select name="get_month" id="" class="form-control">
+                                            <option value="01" {{ ( !empty($_GET['get_month']) == '01') ? "selected" : ''  }}>
+                                                Jan
+                                            </option>
+                                            <option value="02" {{ (!empty($_GET['get_month']) == '02') ? "selected" : ''  }}>
+                                                Feb
+                                            </option>
+                                            <option value="03" {{ (!empty($_GET['get_month']) == '03') ? "selected" : ''  }}>
+                                                Mar
+                                            </option>
+                                            <option value="04" {{ (!empty($_GET['get_month']) == '04') ? "selected" : ''  }}>
+                                                Apr
+                                            </option>
+                                            <option value="05" {{ (!empty($_GET['get_month']) == '05') ? "selected" : ''  }}>
+                                                May
+                                            </option>
+                                            <option value="06" {{ (!empty($_GET['get_month']) == '06') ? "selected" : ''  }}>
+                                                June
+                                            </option>
+                                            <option value="07" {{ (!empty($_GET['get_month']) == '07') ? "selected" : ''  }}>
+                                                July
+                                            </option>
+                                            <option value="08" {{ (!empty($_GET['get_month']) == '08') ? "selected" : ''  }}>
+                                                Aug
+                                            </option>
+                                            <option value="09" {{ (!empty($_GET['get_month']) == '09') ? "selected" : ''  }}>
+                                                Sept
+                                            </option>
+                                            <option value="10" {{ (!empty($_GET['get_month']) == '10') ? "selected" : ''  }}>
+                                                Oct
+                                            </option>
+                                            <option value="11" {{ (!empty($_GET['get_month']) == '11') ? "selected" : ''  }}>
+                                                Nov
+                                            </option>
+                                            <option value="12" {{ (!empty($_GET['get_month']) == '12') ? "selected" : ''  }}>
+                                                Dec
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <hr>
+
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
@@ -49,16 +117,21 @@
                                 <th>Time Out</th>
                                 <th>Date</th>
                                 <th>Day</th>
+                                <th>Difference</th>
                             </tr>
                             </thead>
                             <tbody>
                             @forelse($records as $key => $val)
-
                                 <tr>
                                     <td>{{$val['time_in']}}</td>
-                                        <td>{{$val['time_out']}}</td>
-                                        <td>{{$val['date']}}</td>
-                                        <td>{{$today}}</td>
+                                    <td>{{$val['time_out']}}</td>
+                                    <td>{{$val['date']}}</td>
+                                    <td>{{$val['day']}}</td>
+                                    {{--                                    <td>{{ date('H:i:s', strtotime($val['time_in']) + strtotime($val['time_out'])) }}</td>--}}
+                                    {{--                                    <td>{{ (new Carbon($val['time_in']))->diff(new Carbon($val['time_out']))->format('%H:%I:%s') }}</td>--}}
+                                    <td>Time out {{ (new Carbon($val['time_out']))->diffForHumans(new Carbon($val['time_in'])) }}</td>
+                                    {{--                                    <td>{{ $val['diffIn'] }}</td>--}}
+                                    {{--                                    <td>{{ $val['diffOut'] }}</td>--}}
                                 </tr>
                             @empty
 
@@ -96,7 +169,7 @@
             $('[data-mask]').inputmask()
 
             //Date range picker
-            $('#reservation').daterangepicker()
+            $('#reservation').datepicker()
             //Date range picker with time picker
             $('#reservationtime').daterangepicker({
                 timePicker: true,
@@ -105,6 +178,7 @@
                     format: 'MM/DD/YYYY hh:mm A'
                 }
             })
+
             //Date range as a button
             $('#daterange-btn').daterangepicker(
                 {
@@ -123,6 +197,7 @@
                     $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
                 }
             )
+
 
             //Timepicker
             $('#timepicker').datetimepicker({

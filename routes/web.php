@@ -41,9 +41,16 @@ include_once('complains/complains.php');
 include_once('suggestions/suggestions.php');
 include_once('users/users.php');
 
+// Forms Section...
+
+Route::get('/Advanced' , function (){
+    return view('pages.forms.advanced');
+})->name('advanced');
+
 
 
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/logouts','Auth\LogoutController@store')->name('logouts');
+

@@ -238,38 +238,80 @@ class UserController extends Controller
         return redirect()->back()->with($noti);
     }
 
-    public function UserLogView()
+    public function UserLogView(Request $request)
     {
         $timeZone = date_default_timezone_set("Asia/Karachi");
-        $user_id = auth()->id();
-        $records = [];
-        $status = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
-        $my_time = new UserTime();
-        $entries = UserTime::where(['user_id' => $user_id])->get();
-        $record = [];
-        foreach ($entries as $entry )
-        {
-            $datetime = new DateTime($entry->time);
-            $date = $datetime->format('d-m-Y');
-            $time = $datetime->format('H:i:s');
-            //custom_varDump($time);
-            $record['date'] = $date;
-            if($entry->entry_type == 1){
-                $record['time_in'] = $time;
-            }else{
-                $record['time_out'] = $time;
-                $records[] = $record;
-                $record = [];
+        $user_id  = auth()->id();
+        $records  = [];
+        $status   = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
+        $my_time  = new UserTime();
+        $entries  = UserTime::where(['user_id' => $user_id])->get();
+        $record   = [];
+
+        if(isset($request->get_month)){
+
+            $selected_month = $request->get_month;
+
+            foreach ($entries as $entry ){
+
+                $monthFormat        = new DateTime($entry->time);
+                $month              = $monthFormat->format('m');
+
+                if( $selected_month == $month ){
+
+                    $datetime       = new DateTime($entry->time);
+                    $day            = $datetime->format('l');
+                    $date           = $datetime->format('d-m-Y');
+                    $time           = $datetime->format('H:i:s');
+                    $record['date'] = $date;
+                    $record['day']  = $day;
+
+                    if($entry->entry_type == 1){
+                        $record['time_in']  = $time;
+                    }else{
+                        $record['time_out'] = $time;
+                        $records[]          = $record;
+                        $record             = [];
+                    }
+
+                  //  custom_varDump($records);
+
+                }else{
+                    $record = [];
+                }
+
+            }
+//            die;
+
+        }else{
+
+            foreach ($entries as $entry ){
+
+                $monthFormat    = new DateTime($entry->time);
+                $month          = $monthFormat->format('m');
+                $datetime       = new DateTime($entry->time);
+                $day            = $datetime->format('l');
+                $date           = $datetime->format('d-m-Y');
+                $time           = $datetime->format('h:i:s A');
+                $record['date'] = $date;
+                $record['day']  = $day;
+
+                if($entry->entry_type == 1){
+                    $record['time_in']  = $time;
+                    //$records['diffIn'] = (new Carbon($record['time_in']))->diffForHumans();
+
+                }else{
+                    $record['time_out'] = $time;
+                    //$records['diffOut'] = (new Carbon($record['time_out']))->diffForHumans();
+                    $records[]          = $record;
+                    $record             = [];
+                }
+
             }
         }
-
-       //dd($records);
         if (!empty($status)) {
-            //custom_varDump('Not Empty');
             $strtime = strtotime($status->time);
-            $today = date('l-d-M', $strtime);
         }else{
-            //custom_varDump("Empty");
             $today = "";
             $status = [];
         }
@@ -277,7 +319,6 @@ class UserController extends Controller
         return view('users.userlog')->with([
             'data' => $entries ,
             'status'=> $status,
-            'today' => $today,
             'records' => $records,
         ]);
     }
@@ -303,43 +344,6 @@ class UserController extends Controller
             return response()->json(array(['msg' => 'Something went wrong!', 'status' => 'done']), 422);
         }
     }
-
-    /*public function TimeLog(Request $request)
-    {
-        $user = auth()->id();
-        $my_time = new TimeLogs();
-        $timeZone = date_default_timezone_set("Asia/Karachi");
-        //status = TimeLogs::where(['user_id'=> Auth::user()->id ])->last();
-        if($request->data == "time_in"){
-                $my_time->user_id= $user;
-                $my_time->time_in= date("H:i:s");
-                $my_time->time_out= "";
-                $my_time->time_difference= "";
-                $my_time->attendance= 1;
-                $my_time->save();
-            return response()->json(array(['msg' => 'Time In' , 'status' => 'done']),200);
-
-        }elseif($request->data == "time_out"){
-          $startTime = Carbon::parse($my_time->time_in);
-          TimeLogs::where(['user_id' => $user])->update([
-                'time_out' => date("H:i:s"),//date('Y-m-d H:i:s A'),
-          ]);
-
-//
-//          TimeLogs::where(['user_id' => $user])->update([
-//                'time_difference' => $endTime->diffForHumans($startTime),
-//          ]);
-            $endTime = Carbon::parse($my_time->time_out);
-
-            custom_varDump_die($endTime->diffF($startTime));
-
-            return response()->json(array(['msg' => 'Time Out' , 'status' => 'done']),200);
-
-        }else{
-            return response()->json(array(['msg' => 'Something went wrong!' , 'status' => 'done']),422);
-        }
-
-    }*/
 
 
 }
