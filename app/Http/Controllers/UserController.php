@@ -241,80 +241,80 @@ class UserController extends Controller
     public function UserLogView(Request $request)
     {
         $timeZone = date_default_timezone_set("Asia/Karachi");
-        $user_id  = auth()->id();
-        $records  = [];
-        $status   = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
-        $my_time  = new UserTime();
-        $entries  = UserTime::where(['user_id' => $user_id])->get();
-        $record   = [];
+        $user_id = auth()->id();
+        $records = [];
+        $status = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
+        $my_time = new UserTime();
+        $entries = UserTime::where(['user_id' => $user_id])->get();
+        $record = [];
 
-        if(isset($request->get_month)){
+        if (isset($request->get_month)) {
 
             $selected_month = $request->get_month;
 
-            foreach ($entries as $entry ){
+            foreach ($entries as $entry) {
 
-                $monthFormat        = new DateTime($entry->time);
-                $month              = $monthFormat->format('m');
+                $monthFormat = new DateTime($entry->time);
+                $month = $monthFormat->format('m');
 
-                if( $selected_month == $month ){
+                if ($selected_month == $month) {
 
-                    $datetime       = new DateTime($entry->time);
-                    $day            = $datetime->format('l');
-                    $date           = $datetime->format('d-m-Y');
-                    $time           = $datetime->format('H:i:s');
+                    $datetime = new DateTime($entry->time);
+                    $day = $datetime->format('l');
+                    $date = $datetime->format('d-m-Y');
+                    $time = $datetime->format('H:i:s');
                     $record['date'] = $date;
-                    $record['day']  = $day;
+                    $record['day'] = $day;
 
-                    if($entry->entry_type == 1){
-                        $record['time_in']  = $time;
-                    }else{
+                    if ($entry->entry_type == 1) {
+                        $record['time_in'] = $time;
+                    } else {
                         $record['time_out'] = $time;
-                        $records[]          = $record;
-                        $record             = [];
+                        $records[] = $record;
+                        $record = [];
                     }
 
-                }else{
+                } else {
                     $record = [];
                 }
 
             }
 
-        }else{
+        } else {
 
-            foreach ($entries as $entry ){
+            foreach ($entries as $entry) {
 
-                $monthFormat    = new DateTime($entry->time);
-                $month          = $monthFormat->format('m');
-                $datetime       = new DateTime($entry->time);
-                $day            = $datetime->format('l');
-                $date           = $datetime->format('d-m-Y');
-                $time           = $datetime->format('h:i:s A');
+                $monthFormat = new DateTime($entry->time);
+                $month = $monthFormat->format('m');
+                $datetime = new DateTime($entry->time);
+                $day = $datetime->format('l');
+                $date = $datetime->format('d-m-Y');
+                $time = $datetime->format('h:i:s A');
                 $record['date'] = $date;
-                $record['day']  = $day;
+                $record['day'] = $day;
 
-                if($entry->entry_type == 1){
-                    $record['time_in']  = $time;
+                if ($entry->entry_type == 1) {
+                    $record['time_in'] = $time;
                     //$records['diffIn'] = (new Carbon($record['time_in']))->diffForHumans();
 
-                }else{
+                } else {
                     $record['time_out'] = $time;
                     //$records['diffOut'] = (new Carbon($record['time_out']))->diffForHumans();
-                    $records[]          = $record;
-                    $record             = [];
+                    $records[] = $record;
+                    $record = [];
                 }
             }
         }
         if (!empty($status)) {
             $strtime = strtotime($status->time);
-        }else{
+        } else {
             $today = "";
             $status = [];
         }
 
         return view('users.userlog')->with([
-            'data' => $entries ,
-            'status'=> $status,
+            'data' => $entries,
+            'status' => $status,
             'records' => $records,
         ]);
     }
@@ -340,6 +340,8 @@ class UserController extends Controller
             return response()->json(array(['msg' => 'Something went wrong!', 'status' => 'done']), 422);
         }
     }
+
+
 
 
 }
