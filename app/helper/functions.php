@@ -72,171 +72,161 @@ function get_lead_hr_role($id)
 
 function CalculateTime()
 {
-    $timeZone = date_default_timezone_set("Asia/Karachi");
-    $user_id = auth()->id();
-    $records = [];
-    $status = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
-    $my_time = new UserTime();
-    $entries = UserTime::where(['user_id' => $user_id])->get();
-    $record = [];
+    $timeZone           = date_default_timezone_set("Asia/Karachi");
+    $user_id            = auth()->id();
+    $records            = [];
+    $status             = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
+    $my_time            = new UserTime();
+    $entries            = UserTime::where(['user_id' => $user_id])->get();
+    $record             = [];
     foreach ($entries as $entry) {
-        $Format = new DateTime($entry->time);
-        $month = $Format->format('m');
-        $checkdate = $Format->format('Y-m-d');
-
-        $day = $Format->format('d');
+        $Format         = new DateTime($entry->time);
+        $month          = $Format->format('m');
+        $checkdate      = $Format->format('Y-m-d');
+        $day            = $Format->format('d');
 
         if ($checkdate == date('Y-m-d')) {
 
-            $datetime = new DateTime($entry->time);
-            $date = $datetime->format('d-m-Y');
-            $time = $datetime->format('H:i:s');
-            $record['date'] = $date;
-            $record['day'] = $day;
+            $datetime   = new DateTime($entry->time);
+            $date       = $datetime->format('d-m-Y');
+            $time       = $datetime->format('H:i:s');
+        $record['date'] = $date;
+         $record['day'] = $day;
 
             if ($entry->entry_type == 1) {
-                $record['time_in'] = $time;
+     $record['time_in'] = $time;
             } else {
-                $record['time_out'] = $time;
-                $records[] = $record;
+    $record['time_out'] = $time;
+             $records[] = $record;
                 $record = [];
             }
         } else {
-            $record = [];
+            $record     = [];
         }
     }
     foreach ($records as $k => $v) {
-        $diffs [] = number_format(Carbon::parse($v['time_out'])->floatDiffInMinutes(Carbon::parse($v['time_in'])), 0);
+        $diffs []       = number_format(Carbon::parse($v['time_out'])->floatDiffInMinutes(Carbon::parse($v['time_in'])), 0);
     }
-    $TodaysTotal = array_sum($diffs);
-    $hours = $TodaysTotal / 60;
+    $TodaysTotal        = array_sum($diffs);
+    $hours              = $TodaysTotal / 60;
     UserLogsTime::updateOrInsert(['user_id' => $user_id],[ 'todayhours' => $TodaysTotal,'created_at' => now(),'updated_at' => now()]);
-    //echo $hours.' hours / '.$TodaysTotal.' mins';//array_sum($diffs);
     echo sprintf('%02d hours %02d mins', (int) $hours, fmod($hours, 1) * 60);
 
 }
 
 function TodaysRemaininghours()
 {
-    $timeZone = date_default_timezone_set("Asia/Karachi");
-    $user_id = auth()->id();
-    $records = [];
-    $status = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
-    $my_time = new UserTime();
-    $entries = UserTime::where(['user_id' => $user_id])->get();
-    $record = [];
+    $timeZone                   = date_default_timezone_set("Asia/Karachi");
+    $user_id                    = auth()->id();
+    $records                    = [];
+    $status                     = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
+    $my_time                    = new UserTime();
+    $entries                    = UserTime::where(['user_id' => $user_id])->get();
+    $record                     = [];
     foreach ($entries as $entry) {
 
-        $Format = new DateTime($entry->time);
-        $month = $Format->format('m');
-        $checkdate = $Format->format('Y-m-d');
-
-        $day = $Format->format('d');
+        $Format                 = new DateTime($entry->time);
+        $month                  = $Format->format('m');
+        $checkdate              = $Format->format('Y-m-d');
+        $day                    = $Format->format('d');
 
         if ($checkdate == date('Y-m-d')) {
-            $datetime = new DateTime($entry->time);
-            $date = $datetime->format('d-m-Y');
-            $time = $datetime->format('H:i:s');
-            $record['date'] = $date;
-            $record['day'] = $day;
+            $datetime           = new DateTime($entry->time);
+            $date               = $datetime->format('d-m-Y');
+            $time               = $datetime->format('H:i:s');
+            $record['date']     = $date;
+            $record['day']      = $day;
 
             if ($entry->entry_type == 1) {
-                $record['time_in'] = $time;
+             $record['time_in'] = $time;
             } else {
-                $record['time_out'] = $time;//
-                $records[] = $record;
-                $record = [];
+             $record['time_out']= $time;//
+             $records[]         = $record;
+             $record            = [];
             }
         } else {
             $record = [];
         }
     }
     foreach ($records as $k => $v) {
-        $diffs [] = number_format(Carbon::parse($v['time_out'])->floatDiffInMinutes(Carbon::parse($v['time_in'])), 0);
+            $diffs []           = number_format(Carbon::parse($v['time_out'])->floatDiffInMinutes(Carbon::parse($v['time_in'])), 0);
     }
     $TodaysTotal=array_sum($diffs);
     $hours =0;
     if($TodaysTotal <= 540)
     {
-        $ReaminHour=540-$TodaysTotal;
-        $hours = $ReaminHour / 60;
+        $ReaminHour             =540-$TodaysTotal;
+        $hours                  = $ReaminHour / 60;
         UserLogsTime::updateOrInsert(['user_id' => $user_id],[ 'todayremaining' => $ReaminHour,'created_at' => now(),'updated_at' => now()]);
-        //echo $hours.' hours / '.$ReaminHour.' mins';
         echo sprintf('%02d hours %02d mins', (int) $hours, fmod($hours, 1) * 60);
     }
     else
     {
-        $overHours=$TodaysTotal-540;
+        $overHours              =$TodaysTotal-540;
         UserLogsTime::updateOrInsert(['user_id' => $user_id],[ 'extratime' => $overHours,'created_at' => now(),'updated_at' => now()]);
-        //echo 'extra time: '.$overHours.' mins';
         echo sprintf('%02d hours %02d mins', (int) $overHours, fmod($overHours, 1) * 60);
     }
 }
 
 function MonthTotalHours()
 {
-    $user_id = auth()->id();
-    $getdata=UserLogsTime::where('user_id',$user_id)->first();
-    $hours = $getdata->monthlyhours / 60;
+    $user_id    = auth()->id();
+    $getdata    =UserLogsTime::where('user_id',$user_id)->first();
+    $hours      = $getdata->monthlyhours / 60;
     echo sprintf('%02d hours %02d mins', (int) $hours, fmod($hours, 1) * 60);
 }
 
 
 function MonthRemainingHours()
 {
-    $timeZone = date_default_timezone_set("Asia/Karachi");
-    $user_id = auth()->id();
-    $records = [];
-    $status = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
-    $my_time = new UserTime();
-    $entries = UserTime::where(['user_id' => $user_id])->get();
-    $record = [];
+    $timeZone                   = date_default_timezone_set("Asia/Karachi");
+    $user_id                    = auth()->id();
+    $records                    = [];
+    $status                     = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
+    $my_time                    = new UserTime();
+    $entries                    = UserTime::where(['user_id' => $user_id])->get();
+    $record                     = [];
     foreach ($entries as $entry) {
 
-        $Format = new DateTime($entry->time);
-        $month = $Format->format('m');
-        $checkdate = $Format->format('Y-m-d');
-
-        $day = $Format->format('d');
-
+        $Format                 = new DateTime($entry->time);
+        $month                  = $Format->format('m');
+        $checkdate              = $Format->format('Y-m-d');
+        $day                    = $Format->format('d');
         if ($checkdate == date('Y-m-d')) {
-            $datetime = new DateTime($entry->time);
-            $date = $datetime->format('d-m-Y');
-            $time = $datetime->format('H:i:s');
-            $record['date'] = $date;
-            $record['day'] = $day;
+            $datetime           = new DateTime($entry->time);
+            $date               = $datetime->format('d-m-Y');
+            $time               = $datetime->format('H:i:s');
+            $record['date']     = $date;
+            $record['day']      = $day;
 
             if ($entry->entry_type == 1) {
-                $record['time_in'] = $time;
+             $record['time_in'] = $time;
             } else {
-                $record['time_out'] = $time;//
-                $records[] = $record;
-                $record = [];
+            $record['time_out'] = $time;//
+                $records[]      = $record;
+                $record         = [];
             }
         } else {
-            $record = [];
+            $record             = [];
         }
     }
     foreach ($records as $k => $v) {
-        $diffs [] = number_format(Carbon::parse($v['time_out'])->floatDiffInMinutes(Carbon::parse($v['time_in'])), 0);
+        $diffs []               = number_format(Carbon::parse($v['time_out'])->floatDiffInMinutes(Carbon::parse($v['time_in'])), 0);
     }
     $TodaysTotal=array_sum($diffs);
     $GetTimeData=UserLogsTime::where('user_id',$user_id)->first();
     $hours =0;
     if($GetTimeData->monthlyremaining <= $GetTimeData->monthlyhours)
     {
-        $ReaminHour=$GetTimeData->monthlyhours - $GetTimeData->todayhours;
-        $hours = $ReaminHour / 60;
+        $ReaminHour             =$GetTimeData->monthlyhours - $GetTimeData->todayhours;
+        $hours                  = $ReaminHour / 60;
         UserLogsTime::updateOrInsert(['user_id' => $user_id],[ 'monthtlyremaining' => $ReaminHour,'created_at' => now(),'updated_at' => now()]);
-        //echo $hours.' hours / '.$ReaminHour.' mins';
         echo sprintf('%02d hours %02d mins', (int) $hours, fmod($hours, 1) * 60);
 
     }
     else
     {
-        //$overHours=$TodaysTotal-540;
-        $overtime= $GetTimeData->monthlyhours - $GetTimeData->monthtlyremaining ;($overtime);
-        //echo 'extra time: '.$overtime.' mins';
+        $overtime               = $GetTimeData->monthlyhours - $GetTimeData->monthtlyremaining ;($overtime);
         echo sprintf('%02d hours %02d mins', (int) $overtime, fmod($overtime, 1) * 60);
 
     }
