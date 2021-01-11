@@ -32,19 +32,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/users/users.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="75" selection-start-line="24" selection-start-column="68" selection-end-line="24" selection-end-column="75" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="716">
-              <caret line="335" column="21" selection-start-line="335" selection-start-column="21" selection-end-line="335" selection-end-column="21" />
+            <state relative-caret-position="-661">
+              <caret line="312" column="45" selection-start-line="312" selection-start-column="45" selection-end-line="312" selection-end-column="45" />
               <folding>
                 <element signature="e#40#58#0#PHP" expanded="true" />
                 <element signature="e#9606#11618#0#PHP" />
@@ -53,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/users/userlog.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="86" column="67" selection-start-line="86" selection-start-column="67" selection-end-line="86" selection-end-column="67" />
+            <state relative-caret-position="294">
+              <caret line="195" column="48" selection-start-line="195" selection-start-column="48" selection-end-line="195" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -65,7 +56,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/helper/functions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="614">
+            <state relative-caret-position="-49">
               <caret line="202" column="35" selection-start-line="202" selection-start-column="35" selection-end-line="202" selection-end-column="35" />
               <folding>
                 <element signature="e#7#28#0#PHP" expanded="true" />
@@ -149,8 +140,8 @@
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/UserLogsTime.php" />
         <option value="$PROJECT_DIR$/app/helper/functions.php" />
-        <option value="$PROJECT_DIR$/resources/views/users/userlog.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
+        <option value="$PROJECT_DIR$/resources/views/users/userlog.blade.php" />
       </list>
     </option>
   </component>
@@ -349,7 +340,7 @@
       <workItem from="1609922652956" duration="22693000" />
       <workItem from="1610003764740" duration="27300000" />
       <workItem from="1610091248790" duration="25314000" />
-      <workItem from="1610350549702" duration="25389000" />
+      <workItem from="1610350549702" duration="25798000" />
     </task>
     <task id="LOCAL-00001" summary="database update">
       <created>1609420406943</created>
@@ -484,11 +475,18 @@
       <option name="project" value="LOCAL" />
       <updated>1610372409990</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Users,Roles,Complains,Profile,User Logs and Suggestions Update By Muhammad Irfan.">
+      <created>1610381018630</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1610381018631</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="191420000" />
+    <option name="totallyTimeSpent" value="191829000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -841,16 +839,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/users/userlog.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="86" column="67" selection-start-line="86" selection-start-column="67" selection-end-line="86" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/helper/functions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="614">
+        <state relative-caret-position="-49">
           <caret line="202" column="35" selection-start-line="202" selection-start-column="35" selection-end-line="202" selection-end-column="35" />
           <folding>
             <element signature="e#7#28#0#PHP" expanded="true" />
@@ -863,12 +854,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="716">
-          <caret line="335" column="21" selection-start-line="335" selection-start-column="21" selection-end-line="335" selection-end-column="21" />
+        <state relative-caret-position="-661">
+          <caret line="312" column="45" selection-start-line="312" selection-start-column="45" selection-end-line="312" selection-end-column="45" />
           <folding>
             <element signature="e#40#58#0#PHP" expanded="true" />
             <element signature="e#9606#11618#0#PHP" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/users/userlog.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="195" column="48" selection-start-line="195" selection-start-column="48" selection-end-line="195" selection-end-column="48" />
         </state>
       </provider>
     </entry>

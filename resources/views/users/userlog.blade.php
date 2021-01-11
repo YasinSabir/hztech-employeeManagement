@@ -182,6 +182,7 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
+                                <th>S.No</th>
                                 <th>Time In</th>
                                 <th>Time Out</th>
                                 <th>Date</th>
@@ -192,6 +193,7 @@
                             <tbody>
                             @forelse($records as $key => $val)
                                 <tr>
+                                    <td>{{$key+1}}</td>
                                     <td>{{$val['time_in']}}</td>
                                     <td>{{$val['time_out']}}</td>
                                     <td>{{$val['date']}}</td>

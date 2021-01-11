@@ -310,12 +310,12 @@ class UserController extends Controller
                     $today                   = $datetime->format('d');
                     if($entry->entry_type == 2 && $record['date'] != $date)
                     {
-                        $record['time_out'] = null;
+                        $record['time_out']  = null;
                         $records[]=$record;
                         $record=null;
-                        $record['date']          = $date;
-                        $record['day']           = $day;
-                        $record['today']         = $today;
+                        $record['date']      = $date;
+                        $record['day']       = $day;
+                        $record['today']     = $today;
                         $record['time_in']   = null;
                         $record['time_out']  = $time;
                         $records[]           = $record;
