@@ -41,10 +41,8 @@
                                 <!-- small box -->
                                 <div class="small-box bg-info">
                                     <div class="inner">
-{{--                                        <h3>{{CalculateTime()}}</h3>--}}
-                                        <h3>150</h3>
-
-                                        <p>Todays Hours</p>
+                                        <h5>Todays Hours</h5>
+                                        <p >{{CalculateTime()}}</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-bag"></i>
@@ -57,9 +55,9 @@
                                 <!-- small box -->
                                 <div class="small-box bg-success">
                                     <div class="inner">
-                                        <h3>53<sup style="font-size: 20px">%</sup></h3>
+                                        <h5>Today Hours Remaining</h5>
 
-                                        <p>Today Hours Remaining</p>
+                                        <p>{{TodaysRemaininghours()}}</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-stats-bars"></i>
@@ -72,9 +70,8 @@
                                 <!-- small box -->
                                 <div class="small-box bg-warning">
                                     <div class="inner">
-                                        <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                                        <p>Monthly Hours Remaining</p>
+                                        <h5 style="color: #FFFFFF;">Monthly Total Hours</h5>
+                                        <p style="color: #FFFFFF;">{{MonthTotalHours()}}</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-person-add"></i>
@@ -87,9 +84,9 @@
                                 <!-- small box -->
                                 <div class="small-box bg-danger">
                                     <div class="inner">
-                                        <h3>65</h3>
+                                        <h5>Monthly Remaining Hours</h5>
 
-                                        <p>Unique Visitors</p>
+                                        <p>{{MonthRemainingHours()}}</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-pie-graph"></i>
