@@ -41,7 +41,7 @@
                                 <!-- small box -->
                                 <div class="small-box bg-info">
                                     <div class="inner">
-                                        <h5>Todays Hours</h5>
+                                        <h5>Todays <br/>Hours</h5>
                                         <p >{{CalculateTime()}}</p>
                                     </div>
                                     <div class="icon">
@@ -55,7 +55,7 @@
                                 <!-- small box -->
                                 <div class="small-box bg-success">
                                     <div class="inner">
-                                        <h5>Today Hours Remaining</h5>
+                                        <h5>Today Hours <br/>Remaining</h5>
 
                                         <p>{{TodaysRemaininghours()}}</p>
                                     </div>
@@ -70,7 +70,7 @@
                                 <!-- small box -->
                                 <div class="small-box bg-warning">
                                     <div class="inner">
-                                        <h5 style="color: #FFFFFF;">Monthly Total Hours</h5>
+                                        <h5 style="color: #FFFFFF;">Monthly Total <br/>Hours</h5>
                                         <p style="color: #FFFFFF;">{{MonthTotalHours()}}</p>
                                     </div>
                                     <div class="icon">
@@ -84,7 +84,7 @@
                                 <!-- small box -->
                                 <div class="small-box bg-danger">
                                     <div class="inner">
-                                        <h5>Monthly Remaining Hours</h5>
+                                        <h5>Monthly Remaining <br/>Hours</h5>
 
                                         <p>{{MonthRemainingHours()}}</p>
                                     </div>

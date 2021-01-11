@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3ed66682-93d8-4e6b-b801-f17c24f04b22" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/helper/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/helper/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/users/userlog.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/userlog.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,26 +43,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-811">
-              <caret line="234" column="85" lean-forward="true" selection-start-line="234" selection-start-column="18" selection-end-line="234" selection-end-column="85" />
+            <state relative-caret-position="716">
+              <caret line="335" column="21" selection-start-line="335" selection-start-column="21" selection-end-line="335" selection-end-column="21" />
               <folding>
                 <element signature="e#40#58#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/helper/functions.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="175" column="26" selection-start-line="175" selection-start-column="26" selection-end-line="175" selection-end-column="26" />
-              <folding>
-                <element signature="e#7#28#0#PHP" expanded="true" />
-                <element signature="n#CalculateTime#0;n#!!top" />
-                <element signature="n#TodaysRemaininghours#0;n#!!top" />
-                <element signature="n#monthTotalHours#0;n#!!top" />
-                <element signature="n#monthRemainingHours#0;n#!!top" />
+                <element signature="e#9606#11618#0#PHP" />
               </folding>
             </state>
           </provider>
@@ -71,11 +56,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/users/userlog.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="73" column="86" selection-start-line="73" selection-start-column="86" selection-end-line="73" selection-end-column="86" />
+            <state relative-caret-position="430">
+              <caret line="86" column="67" selection-start-line="86" selection-start-column="67" selection-end-line="86" selection-end-column="67" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/helper/functions.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="614">
+              <caret line="202" column="35" selection-start-line="202" selection-start-column="35" selection-end-line="202" selection-end-column="35" />
               <folding>
-                <element signature="e#3600#3620#0#HTML" expanded="true" />
-                <element signature="e#3657#3680#0#HTML" expanded="true" />
+                <element signature="e#7#28#0#PHP" expanded="true" />
+                <element signature="n#CalculateTime#0;n#!!top" />
+                <element signature="n#TodaysRemaininghours#0;n#!!top" />
+                <element signature="n#monthTotalHours#0;n#!!top" />
               </folding>
             </state>
           </provider>
@@ -151,10 +147,10 @@
         <option value="$PROJECT_DIR$/resources/views/pages/forms/advanced.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/backend/script.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
         <option value="$PROJECT_DIR$/app/UserLogsTime.php" />
-        <option value="$PROJECT_DIR$/resources/views/users/userlog.blade.php" />
         <option value="$PROJECT_DIR$/app/helper/functions.php" />
+        <option value="$PROJECT_DIR$/resources/views/users/userlog.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
       </list>
     </option>
   </component>
@@ -353,7 +349,7 @@
       <workItem from="1609922652956" duration="22693000" />
       <workItem from="1610003764740" duration="27300000" />
       <workItem from="1610091248790" duration="25314000" />
-      <workItem from="1610350549702" duration="15963000" />
+      <workItem from="1610350549702" duration="25389000" />
     </task>
     <task id="LOCAL-00001" summary="database update">
       <created>1609420406943</created>
@@ -474,11 +470,25 @@
       <option name="project" value="LOCAL" />
       <updated>1610122438926</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Users,Roles,Complains,Profile,User Logs and Suggestions Update By Muhammad Irfan.">
+      <created>1610370070703</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1610370070703</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Users,Roles,Complains,Profile,User Logs and Suggestions Update By Muhammad Irfan.">
+      <created>1610372409990</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1610372409990</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="181994000" />
+    <option name="totallyTimeSpent" value="191420000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -817,28 +827,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/users/userlog.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/UserLogsTime.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="73" column="86" selection-start-line="73" selection-start-column="86" selection-end-line="73" selection-end-column="86" />
-          <folding>
-            <element signature="e#3600#3620#0#HTML" expanded="true" />
-            <element signature="e#3657#3680#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/helper/functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="175" column="26" selection-start-line="175" selection-start-column="26" selection-end-line="175" selection-end-column="26" />
-          <folding>
-            <element signature="e#7#28#0#PHP" expanded="true" />
-            <element signature="n#CalculateTime#0;n#!!top" />
-            <element signature="n#TodaysRemaininghours#0;n#!!top" />
-            <element signature="n#monthTotalHours#0;n#!!top" />
-            <element signature="n#monthRemainingHours#0;n#!!top" />
-          </folding>
+        <state relative-caret-position="119">
+          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -849,19 +841,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/UserLogsTime.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/users/userlog.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+        <state relative-caret-position="430">
+          <caret line="86" column="67" selection-start-line="86" selection-start-column="67" selection-end-line="86" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/helper/functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="614">
+          <caret line="202" column="35" selection-start-line="202" selection-start-column="35" selection-end-line="202" selection-end-column="35" />
+          <folding>
+            <element signature="e#7#28#0#PHP" expanded="true" />
+            <element signature="n#CalculateTime#0;n#!!top" />
+            <element signature="n#TodaysRemaininghours#0;n#!!top" />
+            <element signature="n#monthTotalHours#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-811">
-          <caret line="234" column="85" lean-forward="true" selection-start-line="234" selection-start-column="18" selection-end-line="234" selection-end-column="85" />
+        <state relative-caret-position="716">
+          <caret line="335" column="21" selection-start-line="335" selection-start-column="21" selection-end-line="335" selection-end-column="21" />
           <folding>
             <element signature="e#40#58#0#PHP" expanded="true" />
+            <element signature="e#9606#11618#0#PHP" />
           </folding>
         </state>
       </provider>

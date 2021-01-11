@@ -249,59 +249,91 @@ class UserController extends Controller
         $record     = [];
         if (isset($request->get_month)) {
 
+            $FormatLastEnrty                 = new DateTime($status->time);
+            $lastdate                        = $FormatLastEnrty->format('Y-m-d');
                     $selected_month          = $request->get_month;
-
             foreach ($entries as $entry) {
-
                     $monthFormat             = new DateTime($entry->time);
                     $month                   = $monthFormat->format('m');
-
+                    //dd($today);
+                    //die;
                 if ($selected_month == $month) {
 
                     $datetime= new DateTime($entry->time);
                     $day                     = $datetime->format('l');
                     $date                    = $datetime->format('d-m-Y');
-                    $time                    = $datetime->format('H:i:s');
-                    $record['date'] = $date;
-                    $record['day'] = $day;
+                    $time                    = $datetime->format('h:i:s A');
+                    $today                   = $datetime->format('d');
+                    if($entry->entry_type == 2 && $record['date'] != $date)
+                    {
+                        $record['time_out'] = null;
+                        $records[]=$record;
+                        $record=null;
+                        $record['date']          = $date;
+                        $record['day']           = $day;
+                        $record['today']         = $today;
+                            $record['time_in']   = null;
+                            $record['time_out']  = $time;
+                            $records[]           = $record;
+                            $record              = [];
 
-                    if ($entry->entry_type == 1) {
-                        $record['time_in']  = $time;
-                    } else {
-                        $record['time_out'] = $time;
-                        $records[]          = $record;
-                        $record             = [];
                     }
-
+                    else{
+                        $record['date']          = $date;
+                        $record['day']           = $day;
+                        $record['today']         = $today;
+                        if ($entry->entry_type   == 1) {
+                            $record['time_in']   = $time;
+                        } else {
+                            $record['time_out']  = $time;
+                            $records[]           = $record;
+                            $record              = [];
+                        }
+                    }
                 } else {
                     $record = [];
                 }
-
             }
 
         } else {
 
             foreach ($entries as $entry) {
 
-                $monthFormat     = new DateTime($entry->time);
-                $month           = $monthFormat->format('m');
-                $datetime        = new DateTime($entry->time);
-                $day             = $datetime->format('l');
-                $date            = $datetime->format('d-m-Y');
-                $time            = $datetime->format('h:i:s A');
-                $record['date']  = $date;
-                $record['day']   = $day;
 
-                if ($entry->entry_type == 1) {
-                    $record['time_in']  = $time;
-                    //$records['diffIn'] = (new Carbon($record['time_in']))->diffForHumans();
+                $monthFormat             = new DateTime($entry->time);
+                $month                   = $monthFormat->format('m');
 
-                } else {
-                    $record['time_out'] = $time;
-                    //$records['diffOut'] = (new Carbon($record['time_out']))->diffForHumans();
-                    $records[]          = $record;
-                    $record             = [];
-                }
+                    $datetime= new DateTime($entry->time);
+                    $day                     = $datetime->format('l');
+                    $date                    = $datetime->format('d-m-Y');
+                    $time                    = $datetime->format('h:i:s A');
+                    $today                   = $datetime->format('d');
+                    if($entry->entry_type == 2 && $record['date'] != $date)
+                    {
+                        $record['time_out'] = null;
+                        $records[]=$record;
+                        $record=null;
+                        $record['date']          = $date;
+                        $record['day']           = $day;
+                        $record['today']         = $today;
+                        $record['time_in']   = null;
+                        $record['time_out']  = $time;
+                        $records[]           = $record;
+                        $record              = [];
+
+                    }
+                    else{
+                        $record['date']          = $date;
+                        $record['day']           = $day;
+                        $record['today']         = $today;
+                        if ($entry->entry_type   == 1) {
+                            $record['time_in']   = $time;
+                        } else {
+                            $record['time_out']  = $time;
+                            $records[]           = $record;
+                            $record              = [];
+                        }
+                    }
             }
         }
         if (!empty($status)) {
