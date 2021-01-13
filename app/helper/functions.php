@@ -70,6 +70,93 @@ function get_lead_hr_role($id)
     return $data;
 }
 
+function claculation()
+{
+    $timeZone   = date_default_timezone_set("Asia/Karachi");
+    $user_id    = auth()->id();
+    $records    = [];
+    $status     = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
+    $my_time    = new UserTime();
+    $entries    = UserTime::where(['user_id' => $user_id])->get();
+    $record     = [];
+
+        $FormatLastEnrty = new DateTime($status->time);
+        $lastdate = $FormatLastEnrty->format('Y-m-d');
+        foreach ($entries as $key => $entry) {
+            $monthFormat = new DateTime($entry->time);
+            $month = $monthFormat->format('m');
+            $datetime = new DateTime($entry->time);
+            $day = $datetime->format('l');
+            $date = $datetime->format('d-m-Y');
+            $time = $datetime->format('h:i:s A');
+            $today = $datetime->format('d');
+            if ($entry->entry_type == 2 && $record['date'] != $date) {
+                $record['time_out'] = null;
+                $records[] = $record;
+                $record = null;
+                $record['date'] = $date;
+                $record['day'] = $day;
+                $record['today'] = $today;
+                $record['time_in'] = null;
+                $record['time_out'] = $time;
+                $interval = strtotime($entry->time) - strtotime($entries[$key - 1]->time);
+                $hours = $interval / 3600;
+                $difference = sprintf('%02d hours %02d mins', (int)$hours, fmod($hours, 1) * 60);
+                $record['difference'] = $difference;
+                $records[] = $record;
+                $record = [];
+            } else {
+                $record['date'] = $date;
+                $record['day'] = $day;
+                $record['today'] = $today;
+                if ($entry->entry_type == 1) {
+                    $record['time_in'] = $time;
+                } else {
+                    $record['time_out'] = $time;
+                    $interval = strtotime($entry->time) - strtotime($entries[$key - 1]->time);
+                    $hours = $interval / 3600;
+                    $difference = sprintf('%02d hours %02d mins', (int)$hours, fmod($hours, 1) * 60);
+                    $record['difference'] = $difference;
+                    $record['totalhours'] = $hours;
+                    $records[] = $record;
+                    $record = [];
+                }
+            }
+        }
+        if (!empty($status)) {
+            $strtime = strtotime($status->time);
+        } else {
+            $today = "";
+            $status = [];
+        }
+        $sum=[];
+        $totalsum=[];
+        foreach ($records as $key => $myenrty)
+        {
+            //custom_varDump($records[$key]['totalhours']);
+            if($records[$key]['date'] == date('d-m-Y'))
+            {
+                $sum['nethours']= $records[$key]['totalhours'];
+                $sum['todaydate']= $records[$key]['date'];
+                $totalsum[]=$sum;
+            }
+        }
+        $Nsum=0;
+        foreach ($totalsum as $k => $val)
+        {
+            $NetSum=$totalsum[$k]['nethours'];
+            $Nsum=$Nsum+$NetSum;
+
+        }
+        //custom_varDump($Nsum);
+            //custom_varDump_die($totalsum);
+            //$totalhoursfloat=array_sum($sum);
+            $NetTotal = sprintf('%02d hours %02d mins', (int)$Nsum, fmod($Nsum, 1) * 60);
+        echo $NetTotal;
+            //custom_varDump($NetTotal);
+
+}
+
 function CalculateTime()
 {
     $timeZone           = date_default_timezone_set("Asia/Karachi");
@@ -79,6 +166,7 @@ function CalculateTime()
     $my_time            = new UserTime();
     $entries            = UserTime::where(['user_id' => $user_id])->get();
     $record             = [];
+    $diffs=[];
     foreach ($entries as $entry) {
         $Format         = new DateTime($entry->time);
         $month          = $Format->format('m');
@@ -123,6 +211,7 @@ function TodaysRemaininghours()
     $my_time                    = new UserTime();
     $entries                    = UserTime::where(['user_id' => $user_id])->get();
     $record                     = [];
+    $diffs=[];
     foreach ($entries as $entry) {
 
         $Format                 = new DateTime($entry->time);
@@ -186,6 +275,7 @@ function MonthRemainingHours()
     $my_time                    = new UserTime();
     $entries                    = UserTime::where(['user_id' => $user_id])->get();
     $record                     = [];
+    $diffs=[];
     foreach ($entries as $entry) {
 
         $Format                 = new DateTime($entry->time);

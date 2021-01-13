@@ -252,14 +252,12 @@ class UserController extends Controller
             $FormatLastEnrty                 = new DateTime($status->time);
             $lastdate                        = $FormatLastEnrty->format('Y-m-d');
                     $selected_month          = $request->get_month;
-            foreach ($entries as $entry) {
+            foreach ($entries as $key => $entry) {
                     $monthFormat             = new DateTime($entry->time);
                     $month                   = $monthFormat->format('m');
-                    //dd($today);
-                    //die;
                 if ($selected_month == $month) {
-
                     $datetime= new DateTime($entry->time);
+                    //$TimeZone   = date_default_timezone_set("Asia/Karachi");
                     $day                     = $datetime->format('l');
                     $date                    = $datetime->format('d-m-Y');
                     $time                    = $datetime->format('h:i:s A');
@@ -272,11 +270,14 @@ class UserController extends Controller
                         $record['date']          = $date;
                         $record['day']           = $day;
                         $record['today']         = $today;
-                            $record['time_in']   = null;
-                            $record['time_out']  = $time;
+                        $record['time_in']       = null;
+                        $record['time_out']      = $time;
+                        $interval                =strtotime($entry->time) - strtotime($entries[$key-1]->time);
+                        $hours                   = $interval / 3600;
+                        $difference              = sprintf('%02d hours %02d mins', (int) $hours, fmod($hours, 1) * 60);
+                        $record['difference']    = $difference;
                             $records[]           = $record;
                             $record              = [];
-
                     }
                     else{
                         $record['date']          = $date;
@@ -286,6 +287,10 @@ class UserController extends Controller
                             $record['time_in']   = $time;
                         } else {
                             $record['time_out']  = $time;
+                            $interval            =strtotime($entry->time) - strtotime($entries[$key-1]->time);
+                            $hours               = $interval / 3600;
+                            $difference          = sprintf('%02d hours %02d mins', (int) $hours, fmod($hours, 1) * 60);
+                            $record['difference']= $difference;
                             $records[]           = $record;
                             $record              = [];
                         }
@@ -296,14 +301,10 @@ class UserController extends Controller
             }
 
         } else {
-
-            foreach ($entries as $entry) {
-
-
-                $monthFormat             = new DateTime($entry->time);
-                $month                   = $monthFormat->format('m');
-
-                    $datetime= new DateTime($entry->time);
+            foreach ($entries as $key => $entry) {
+                    $monthFormat             = new DateTime($entry->time);
+                    $month                   = $monthFormat->format('m');
+                    $datetime                = new DateTime($entry->time);
                     $day                     = $datetime->format('l');
                     $date                    = $datetime->format('d-m-Y');
                     $time                    = $datetime->format('h:i:s A');
@@ -318,9 +319,12 @@ class UserController extends Controller
                         $record['today']     = $today;
                         $record['time_in']   = null;
                         $record['time_out']  = $time;
+                        $interval =strtotime($entry->time) - strtotime($entries[$key-1]->time);
+                        $hours      = $interval / 3600;
+                        $difference = sprintf('%02d hours %02d mins', (int) $hours, fmod($hours, 1) * 60);
+                        $record['difference']= $difference;
                         $records[]           = $record;
                         $record              = [];
-
                     }
                     else{
                         $record['date']          = $date;
@@ -330,11 +334,16 @@ class UserController extends Controller
                             $record['time_in']   = $time;
                         } else {
                             $record['time_out']  = $time;
+                            $interval            =strtotime($entry->time) - strtotime($entries[$key-1]->time);
+                            $hours               = $interval / 3600;
+                            $difference          = sprintf('%02d hours %02d mins', (int) $hours, fmod($hours, 1) * 60);
+                            $record['difference']= $difference;
                             $records[]           = $record;
                             $record              = [];
                         }
                     }
             }
+
         }
         if (!empty($status)) {
             $strtime   = strtotime($status->time);
@@ -371,8 +380,5 @@ class UserController extends Controller
             return response()->json(array(['msg' => 'Something went wrong!', 'status' => 'done']), 422);
         }
     }
-
-
-
 
 }

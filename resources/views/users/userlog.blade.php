@@ -17,15 +17,7 @@
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">User Logs</li>
                             <li class="breadcrumb-item active">
-{{--                                @php--}}
-{{--                                    $col =0;--}}
-{{--                                @endphp--}}
-{{--                                @forelse($records as $key => $val)--}}
-{{--                                {{ $col =$col+(new Carbon($val['time_in']))->floatDiffInSeconds(new Carbon($val['time_out'])) }}</br>--}}
-{{--                                --}}{{--                                    {{ date('H:i:s', strtotime($val['time_in']) + strtotime($val['time_out'])) }}</br>--}}
-{{--                                @empty--}}
-
-{{--                                @endforelse--}}
+{{--                                {{claculation()}}--}}
                             </li>
                         </ol>
                     </div>
@@ -198,11 +190,7 @@
                                     <td>{{$val['time_out']}}</td>
                                     <td>{{$val['date']}}</td>
                                     <td>{{$val['day']}}</td>
-                                    {{--                                    <td>{{ date('H:i:s', strtotime($val['time_in']) + strtotime($val['time_out'])) }}</td>--}}
-                                    {{--                                    <td>{{ (new Carbon($val['time_in']))->diff(new Carbon($val['time_out']))->format('%H:%I:%s') }}</td>--}}
-                                    <td>Time out {{ (new Carbon($val['time_out']))->diffForHumans(new Carbon($val['time_in'])) }}</td>
-                                    {{--                                    <td>{{ $val['diffIn'] }}</td>--}}
-                                    {{--                                    <td>{{ $val['diffOut'] }}</td>--}}
+                                    <td>{{isset($val['difference']) ? $val['difference'] : ''}}</td>
                                 </tr>
                             @empty
 
