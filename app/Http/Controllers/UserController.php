@@ -82,18 +82,6 @@ class UserController extends Controller
             'password' => Hash::make($request['password']),
             'string_password' => $request->password,
         ]);
-
-
-//        $user_meta = [
-//          ['user_id' => '1' , 'meta_key'=> 'address' , 'meta_value' => '312332'],
-//          ['user_id' => '1' , 'meta_key'=> 'cnic' , 'meta_value' => '2222-33232-2232'],
-//        ];
-//
-//        foreach ($user_meta as $key => $val){
-//            //userMeta = user_meta::updateOrInsert(['user_id' => $val['user_id'] , 'meta_key' => $val['meta_key'] ] , $val);
-//        }
-
-
         $noti = array("message" => "User Add Successfully!", "alert-type" => "success");
         return redirect()->back()->with($noti);
     }
@@ -379,6 +367,92 @@ class UserController extends Controller
         } else {
             return response()->json(array(['msg' => 'Something went wrong!', 'status' => 'done']), 422);
         }
+    }
+
+    public function DayLogView(Request $request)
+    {
+            $timeZone        = date_default_timezone_set("Asia/Karachi");
+            $user_id         = auth()->id();
+            $records         = [];
+            $status          = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
+            $entries         = UserTime::where(['user_id' => $user_id])->get();
+            $record          = [];
+            $NetTotal        =0;
+            $ReaminingFormat =0;
+        if (isset($request->todaydate)) {
+            foreach ($entries as $key => $entry) {
+                $dayFormat   = new DateTime($entry->time);
+                $days        = $dayFormat->format('d-m-Y');
+                if($request->todaydate == $days) {
+                    $datetime= new DateTime($entry->time);
+                    $day     = $datetime->format('l');
+                    $date    = $datetime->format('d-m-Y');
+                    $time    = $datetime->format('h:i:s A');
+                    $today   = $datetime->format('d');
+                    if ($entry->entry_type == 2 && $record['date'] != $date) {
+                        $record['time_out'] = null;
+                        $records[]          = $record;
+                        $record             = null;
+                        $record['date']     = $date;
+                        $record['day']      = $day;
+                        $record['today']    = $today;
+                        $record['time_in']  = null;
+                        $record['time_out'] = $time;
+                        $interval           = strtotime($entry->time) - strtotime($entries[$key - 1]->time);
+                        $hours              = $interval / 3600;
+                        $difference         = sprintf('%02d hours %02d mins', (int)$hours, fmod($hours, 1) * 60);
+                       $record['difference']= $difference;
+                        $records[]          = $record;
+                        $record             = [];
+                    } else {
+                        $record['date']     = $date;
+                        $record['day']      = $day;
+                        $record['today']    = $today;
+                        if ($entry->entry_type == 1) {
+                            $record['time_in']      = $time;
+                        } else {
+                            $record['time_out']     = $time;
+                            $interval               = strtotime($entry->time) - strtotime($entries[$key - 1]->time);
+                            $hours                  = $interval / 3600;
+                            $difference = sprintf('%02d hours %02d mins', (int)$hours, fmod($hours, 1) * 60);
+                            $record['difference']   = $difference;
+                            $record['totalhours']   = round($hours,3);
+                            $records[]              = $record;
+                            $record                 = [];
+                        }
+                    }
+                }
+            }
+            if (!empty($status)) {
+                $strtime = strtotime($status->time);
+            } else {
+                $today = "";
+                $status = [];
+            }
+            $sum = [];
+            $totalsum = [];
+            foreach ($records as $key => $myenrty) {
+                if ($records[$key]['date'] == $request->todaydate) {
+                    $sum['nethours']       = $records[$key]['totalhours'];
+                    $sum['todaydate']      = $records[$key]['date'];
+                    $totalsum[]            = $sum;
+                }
+            }
+            $Nsum = 0;
+            foreach ($totalsum as $k => $val) {
+                $NetSum                    = $totalsum[$k]['nethours'];
+                $Nsum                      = $Nsum + $NetSum;
+            }
+            $RemainingToday                = 9.000 - round($Nsum, 3);
+            $NetTotal                      = sprintf('%02d hours %02d mins', $Nsum, fmod($Nsum, 1) * 60);
+            $ReaminingFormat               = sprintf('%02d hours %02d mins', $RemainingToday, fmod($RemainingToday, 1) * 60);
+        }
+        return view('users.monthlylog')->with([
+            'records'           => $records,
+            'NetTotal'          =>$NetTotal,
+            'ReaminingFormat'   =>$ReaminingFormat,
+
+        ]);
     }
 
 }

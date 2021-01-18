@@ -70,7 +70,7 @@ function get_lead_hr_role($id)
     return $data;
 }
 
-function claculation()
+function claculation(Request $request)
 {
     $timeZone   = date_default_timezone_set("Asia/Karachi");
     $user_id    = auth()->id();
@@ -80,6 +80,7 @@ function claculation()
     $entries    = UserTime::where(['user_id' => $user_id])->get();
     $record     = [];
 
+    if($request->todaydate) {
         $FormatLastEnrty = new DateTime($status->time);
         $lastdate = $FormatLastEnrty->format('Y-m-d');
         foreach ($entries as $key => $entry) {
@@ -129,31 +130,30 @@ function claculation()
             $today = "";
             $status = [];
         }
-        $sum=[];
-        $totalsum=[];
-        foreach ($records as $key => $myenrty)
-        {
+        $sum = [];
+        $totalsum = [];
+        foreach ($records as $key => $myenrty) {
             //custom_varDump($records[$key]['totalhours']);
-            if($records[$key]['date'] == date('d-m-Y'))
-            {
-                $sum['nethours']= $records[$key]['totalhours'];
-                $sum['todaydate']= $records[$key]['date'];
-                $totalsum[]=$sum;
+            if ($records[$key]['date'] == date('d-m-Y')) {
+                $sum['nethours'] = $records[$key]['totalhours'];
+                $sum['todaydate'] = $records[$key]['date'];
+                $totalsum[] = $sum;
             }
         }
-        $Nsum=0;
-        foreach ($totalsum as $k => $val)
-        {
-            $NetSum=$totalsum[$k]['nethours'];
-            $Nsum=$Nsum+$NetSum;
+        $Nsum = 0;
+        foreach ($totalsum as $k => $val) {
+            $NetSum = $totalsum[$k]['nethours'];
+            $Nsum = $Nsum + $NetSum;
 
         }
-        //custom_varDump($Nsum);
-            //custom_varDump_die($totalsum);
-            //$totalhoursfloat=array_sum($sum);
-            $NetTotal = sprintf('%02d hours %02d mins', (int)$Nsum, fmod($Nsum, 1) * 60);
+        $NetTotal = sprintf('%02d hours %02d mins', (int)$Nsum, fmod($Nsum, 1) * 60);
         echo $NetTotal;
-            //custom_varDump($NetTotal);
+        //custom_varDump($NetTotal);
+    }
+    else
+    {
+        echo "No date is selected.";
+    }
 
 }
 

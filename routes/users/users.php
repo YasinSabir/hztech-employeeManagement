@@ -25,6 +25,7 @@
         Route::get('/UserLog', 'UserController@UserLogView')->name('UserLog');
         Route::post('/TimeLog', 'UserController@TimeLog')->name('time_log');
 
+        Route::get('/DayLog', 'UserController@DayLogView')->name('DayLog');
 
     });
 

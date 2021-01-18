@@ -17,7 +17,7 @@
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">User Logs</li>
                             <li class="breadcrumb-item active">
-{{--                                {{claculation()}}--}}
+{{--                                {{claculation('14-01-2021')}}--}}
                             </li>
                         </ol>
                     </div>
@@ -335,7 +335,11 @@
             // $('#time_in').show();
             //$('#time_out').hide();
         });
-
-
+        $(document).keypress(
+            function(event){
+                if (event.which == '13') {
+                    event.preventDefault();
+                }
+            });
     </script>
 @endsection
