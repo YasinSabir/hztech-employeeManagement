@@ -54,10 +54,18 @@
                                             <option value="Employee">Employee</option>
                                         </select>
                                     </div>
+                                    @error('role_title')
+                                    <span class="invalid-feedback d-block"
+                                          role="alert"> <strong>{{ $message }}</strong> </span>
+                                    @enderror
                                     <div class="form-group">
                                         <label>Role Description</label>
                                         <textarea  class="form-control" name="role_description" rows="4" placeholder="Enter Role Description.">{{$role->description}}</textarea>
                                     </div>
+                                    @error('role_description')
+                                    <span class="invalid-feedback d-block"
+                                          role="alert"> <strong>{{ $message }}</strong> </span>
+                                    @enderror
                                     <div class="form-group">
                                         <label>Status</label>
                                         <select class="form-control select2" name="role_status" style="width: 100%;">

@@ -18,6 +18,7 @@ function get_role($id)
     return (!empty($data->title) ? $data->title : "Not Found!");
 }
 
+
 function custom_varDump_die($arr)
 {
     echo "<pre>";

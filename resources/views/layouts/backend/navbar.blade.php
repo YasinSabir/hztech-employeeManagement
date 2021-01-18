@@ -2,7 +2,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-        <img src="{{asset('theme-assets/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        <img src="{{asset('theme-assets/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
+             class="brand-image img-circle elevation-3"
              style="opacity: .8">
         <h3 class="brand-text font-weight-light">HZ-Tech</h3>
     </a>
@@ -42,32 +43,33 @@
 
                     </ul>
                 </li>
-
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            Users
-                            <i class="fas fa-angle-left right"></i>
-                                <span class="badge badge-info right">{{users_count()}}</span>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('users.add')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Add New</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('users.show')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>View All</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
+                @if(get_role(auth()->id()) == "head" || get_role(auth()->id()) == "admin")
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Users
+                                <i class="fas fa-angle-left right"></i>
+                                {{--                            {{users_count()}}--}}
+                                <span class="badge badge-info right">{{( !empty(users_count())) ? users_count() : '0'  }}</span>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('users.add')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add New</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('users.show')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>View All</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
@@ -109,31 +111,40 @@
                             </a>
                         </li>
                     </ul>
-                </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>
-                            Roles
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('roles.add')}}" class="nav-link">
+                            <a href="{{route('users.MonthLog')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Add New</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('roles.show')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>View All</p>
+                                <p>Month Logs</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-
+                @if(get_role(auth()->id()) == "head" || get_role(auth()->id()) == "admin")
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>
+                                Roles
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('roles.add')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add New</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('roles.show')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>View All</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
@@ -203,6 +214,31 @@
                         </li>
                     </ul>
                 </li>
+                @if(get_role(auth()->id()) == "head" || get_role(auth()->id()) == "admin")
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-shield-alt"></i>
+                            <p>
+                                Give Permissions
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add New</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>View All</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
                 <li class="nav-header">MISCELLANEOUS</li>
                 <li class="nav-item">
                     <a href="https://adminlte.io/docs/3.0" class="nav-link">

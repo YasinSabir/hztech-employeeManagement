@@ -56,12 +56,18 @@
                                         </select>
                                     </div>
 
+                                    @error('role_title')
+                                    <span class="invalid-feedback d-block"
+                                     role="alert"> <strong>{{ $message }}</strong> </span>
+                                    @enderror
                                     <div class="form-group">
                                         <label>Role Description</label>
-                                        <textarea class="form-control" name="role_description" rows="4" placeholder="Enter Role Description."></textarea>
+                                        <textarea class="form-control" name="role_description" rows="4"
+                                                  placeholder="Enter Role Description."></textarea>
                                     </div>
                                     @error('role_description')
-                                    {{$message}}
+                                    <span class="invalid-feedback d-block"
+                                          role="alert"> <strong>{{ $message }}</strong> </span>
                                     @enderror
                                     <div class="form-group">
                                         <label>Status</label>
@@ -87,7 +93,7 @@
 
     </div>
 
-        @endsection
+@endsection
 
 @section('page-script')
 
@@ -102,9 +108,9 @@
             })
 
             //Datemask dd/mm/yyyy
-            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+            $('#datemask').inputmask('dd/mm/yyyy', {'placeholder': 'dd/mm/yyyy'})
             //Datemask2 mm/dd/yyyy
-            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            $('#datemask2').inputmask('mm/dd/yyyy', {'placeholder': 'mm/dd/yyyy'})
             //Money Euro
             $('[data-mask]').inputmask()
 
@@ -121,16 +127,16 @@
             //Date range as a button
             $('#daterange-btn').daterangepicker(
                 {
-                    ranges   : {
-                        'Today'       : [moment(), moment()],
-                        'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                        'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
                         'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                        'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-                        'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
                     },
                     startDate: moment().subtract(29, 'days'),
-                    endDate  : moment()
+                    endDate: moment()
                 },
                 function (start, end) {
                     $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
@@ -150,11 +156,11 @@
             //color picker with addon
             $('.my-colorpicker2').colorpicker()
 
-            $('.my-colorpicker2').on('colorpickerChange', function(event) {
+            $('.my-colorpicker2').on('colorpickerChange', function (event) {
                 $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
             });
 
-            $("input[data-bootstrap-switch]").each(function(){
+            $("input[data-bootstrap-switch]").each(function () {
                 $(this).bootstrapSwitch('state', $(this).prop('checked'));
             });
 

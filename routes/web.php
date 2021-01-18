@@ -22,6 +22,10 @@ Route::get('/home', function () {
       return view('pages.index');
 })->name('dashboard.v1')->middleware('auth');
 
+Route::get('error', function () {
+    return view('errors.privillige');
+})->name('error')->middleware('auth');
+
 
 /*
  *

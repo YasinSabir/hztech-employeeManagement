@@ -17,8 +17,8 @@
 
         Route::delete('delete/{id}','UserController@destroy')->name('delete');
 
-        Route::get('profile','UserController@profile')->name('profile');
-        Route::post('profile','UserController@editprofile')->name('profile');
+        Route::get('profile','UserController@profile')->name('profile')->middleware('role');
+        Route::post('profile','UserController@editprofile')->name('profile')->middleware('role');
 
         Route::get('/getEmployees', 'UserController@getEmployees')->name('getEmployees');
 
@@ -26,6 +26,7 @@
         Route::post('/TimeLog', 'UserController@TimeLog')->name('time_log');
 
         Route::get('/DayLog', 'UserController@DayLogView')->name('DayLog');
+        Route::get('/MonthLog', 'UserController@MonthLogView')->name('MonthLog');
 
     });
 

@@ -38,6 +38,7 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'role_description' => 'required|max:255',
+            'role_title' => 'required|unique:Roles,title',
         ]);
         Roles::create([
             'title' => $request->role_title,
@@ -83,6 +84,7 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'role_description' => 'required|max:255',
+            'role_title' => 'required|unique:Roles,title',
         ]);
         $role = new Roles();
         $role = Roles::find($id);

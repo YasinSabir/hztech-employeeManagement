@@ -52,9 +52,6 @@ class UserController extends Controller
     public function create()
     {
         $role = Roles::all();
-//        SELECT users.id,roles.id,users.fullname,roles.title,roles.status FROM `users`
-//        INNER JOIN `roles` ON users.role_id=roles.id where roles.title='lead' or roles.title='hr'
-
         return view('users.add', compact('role'));
     }
 
@@ -449,9 +446,104 @@ class UserController extends Controller
         }
         return view('users.monthlylog')->with([
             'records'           => $records,
-            'NetTotal'          =>$NetTotal,
-            'ReaminingFormat'   =>$ReaminingFormat,
+            'NetTotal'          => $NetTotal,
+            'ReaminingFormat'   => $ReaminingFormat,
+        ]);
+    }
 
+    public function MonthLogView(Request $request)
+    {
+        $timeZone         = date_default_timezone_set("Asia/Karachi");
+        $user_id          = auth()->id();
+        $records          = [];
+        $status           = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
+        $entries          = UserTime::where(['user_id' => $user_id])->get();
+        $record           = [];
+        $NetTotal         = 0;
+        $ReaminingToFormat= 0;
+        $monthcaps        = 0;
+
+        if (isset($request->get_month)) {
+            foreach ($entries as $key => $entry) {
+                $monthFormat = new DateTime($entry->time);
+                $days        = $monthFormat->format('d-m-Y');
+                $month       = $monthFormat->format('m');
+                if($request->get_month == $month) {
+                    $datetime= new DateTime($entry->time);
+                    $day     = $datetime->format('l');
+                    $date    = $datetime->format('d-m-Y');
+                    $time    = $datetime->format('h:i:s A');
+                    $today   = $datetime->format('d');
+                    $monthcaps   = $monthFormat->format('F');
+                    if ($entry->entry_type == 2 && $record['date'] != $date) {
+                        $record['time_out'] = null;
+                        $records[]          = $record;
+                        $record             = null;
+                        $record['date']     = $date;
+                        $record['month']    = $month;
+                        $record['time_in']  = null;
+                        $record['time_out'] = $time;
+                        $interval           = strtotime($entry->time) - strtotime($entries[$key - 1]->time);
+                        $hours              = $interval / 3600;
+                        $difference         = sprintf('%02d hours %02d mins', (int)$hours, fmod($hours, 1) * 60);
+                        $record['difference']= $difference;
+                        $records[]          = $record;
+                        $record             = [];
+                    } else {
+                        $record['date']     = $date;
+                        $record['month']    = $month;
+                        if ($entry->entry_type      == 1) {
+                            $record['time_in']      = $time;
+                        } else {
+                            $record['time_out']     = $time;
+                            $interval               = strtotime($entry->time) - strtotime($entries[$key - 1]->time);
+                            $hours                  = $interval / 3600;
+                            $difference = sprintf('%02d hours %02d mins', (int)$hours, fmod($hours, 1) * 60);
+                            $record['difference']   = $difference;
+                            $record['totalhours']   = round($hours,3);
+                            $records[]              = $record;
+                            $record                 = [];
+                        }
+                    }
+                }
+
+            }
+            if (!empty($status)) {
+                $strtime = strtotime($status->time);
+            } else {
+                $today   = "";
+                $status  = [];
+            }
+            $sum = [];
+            $totalsum = [];
+            foreach ($records as $key => $myenrty) {
+                if ($records[$key]['month'] == $request->get_month) {
+                    $sum['nethours']        = $records[$key]['totalhours'];
+                    $sum['get_month']       = $records[$key]['month'];
+                    $totalsum[]             = $sum;
+                }
+            }
+            $Nsum = 0;
+            foreach ($totalsum as $k => $val) {
+                $NetSum                    = $totalsum[$k]['nethours'];
+                $Nsum                      = $Nsum + $NetSum;
+            }
+            $NetTotal                      = sprintf('%02d hours %02d mins', $Nsum, fmod($Nsum, 1) * 60);
+            $RemainingTo                   = 180.000 - round($NetTotal, 3);
+            $ReaminingToFormat             = sprintf('%02d hours %02d mins', $RemainingTo, fmod($RemainingTo, 1) * 60);
+
+        }
+        else
+        {
+            $NetTotal= "Please select a month";
+            $ReaminingToFormat= "Please select a month";
+            $monthcaps= "Please select a month";
+        }
+        return view('users.monthlog')->with([
+            'records'             =>    $records,
+            'NetTotal'            =>    $NetTotal,
+            'monthcaps'           =>    $monthcaps,
+            'ReaminingToFormat'   =>    $ReaminingToFormat,
         ]);
     }
 

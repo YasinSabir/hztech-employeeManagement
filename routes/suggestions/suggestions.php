@@ -8,10 +8,10 @@
 
         Route::get('show','SuggestionController@show')->name('show');
 
-        Route::get('Edit/{id}','SuggestionController@edit')->name('Edit');
-        Route::post('Edit/{id}','SuggestionController@update')->name('Edit');
+        Route::get('Edit/{id}','SuggestionController@edit')->name('Edit')->middleware('role');
+        Route::post('Edit/{id}','SuggestionController@update')->name('Edit')->middleware('role');
 
-        Route::delete('delete/{id}','SuggestionController@destroy')->name('delete');
+        Route::delete('delete/{id}','SuggestionController@destroy')->name('delete')->middleware('role');
     });
 
 ?>
