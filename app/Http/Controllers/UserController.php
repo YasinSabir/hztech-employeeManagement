@@ -459,6 +459,7 @@ class UserController extends Controller
         $status           = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
         $entries          = UserTime::where(['user_id' => $user_id])->get();
         $record           = [];
+        $tt           = [];
         $NetTotal         = 0;
         $ReaminingToFormat= 0;
         $monthcaps        = 0;
@@ -474,6 +475,7 @@ class UserController extends Controller
                     $date    = $datetime->format('d-m-Y');
                     $time    = $datetime->format('h:i:s A');
                     $today   = $datetime->format('d');
+                    //custom_varDump_die($today);
                     $monthcaps   = $monthFormat->format('F');
                     if ($entry->entry_type == 2 && $record['date'] != $date) {
                         $record['time_out'] = null;
@@ -481,17 +483,20 @@ class UserController extends Controller
                         $record             = null;
                         $record['date']     = $date;
                         $record['month']    = $month;
+                        $record['today']    = $today;
                         $record['time_in']  = null;
                         $record['time_out'] = $time;
                         $interval           = strtotime($entry->time) - strtotime($entries[$key - 1]->time);
                         $hours              = $interval / 3600;
                         $difference         = sprintf('%02d hours %02d mins', (int)$hours, fmod($hours, 1) * 60);
                         $record['difference']= $difference;
+                        $record['totalhours']   = round($hours,3);
                         $records[]          = $record;
                         $record             = [];
                     } else {
                         $record['date']     = $date;
                         $record['month']    = $month;
+                        $record['today']    = $today;
                         if ($entry->entry_type      == 1) {
                             $record['time_in']      = $time;
                         } else {
@@ -506,31 +511,60 @@ class UserController extends Controller
                         }
                     }
                 }
-
             }
+//            custom_varDump_die($records);
+           $tt = [];
+            foreach ($records as $kk => $v){
+                if( !in_array( $v['today'] , $tt) ){
+                    $tt [ $v['today'] ]['day'][]  = $v['totalhours'];
+                    $tt [ $v['today'] ]['date'] = $v['date'];
+                    $tt [ $v['today'] ]['today'] = $v['today'];
+
+                }else{
+                    $tt [ $v['today'] ]['day'][] = $v['totalhours'];
+                    $tt [ $v['today'] ]['date'] = $v['date'];
+                    $tt [ $v['today'] ]['today'] = $v['today'];
+                }
+            }
+
+
+            $tt = array_map(function($i){
+                $r['hours']   = array_sum($i['day']);
+                $r['date']    = $i['date'];
+                $r['today']   = Carbon::parse($i['date'])->englishDayOfWeek;
+                $r['format']  = sprintf('%02d hours %02d mins', $r['hours'], fmod($r['hours'], 1) * 60);
+                return $r;
+            },$tt);
+
+            //custom_varDump_die($tt);
+
+
             if (!empty($status)) {
                 $strtime = strtotime($status->time);
             } else {
                 $today   = "";
                 $status  = [];
             }
-            $sum = [];
-            $totalsum = [];
-            foreach ($records as $key => $myenrty) {
-                if ($records[$key]['month'] == $request->get_month) {
-                    $sum['nethours']        = $records[$key]['totalhours'];
-                    $sum['get_month']       = $records[$key]['month'];
-                    $totalsum[]             = $sum;
-                }
-            }
-            $Nsum = 0;
-            foreach ($totalsum as $k => $val) {
-                $NetSum                    = $totalsum[$k]['nethours'];
-                $Nsum                      = $Nsum + $NetSum;
-            }
-            $NetTotal                      = sprintf('%02d hours %02d mins', $Nsum, fmod($Nsum, 1) * 60);
-            $RemainingTo                   = 180.000 - round($NetTotal, 3);
-            $ReaminingToFormat             = sprintf('%02d hours %02d mins', $RemainingTo, fmod($RemainingTo, 1) * 60);
+
+//            $sum = [];
+//            $totalsum = [];
+//            foreach ($records as $key => $myenrty) {
+//                if ($records[$key]['month'] == $request->get_month) {
+//                    $sum['nethours']        = $records[$key]['totalhours'];
+//                    $sum['get_month']       = $records[$key]['month'];
+//                    $totalsum[]             = $sum;
+//                }
+//            }
+//            //custom_varDump_die($sum);
+//            $Nsum = 0;
+//            foreach ($totalsum as $k => $val) {
+//                $NetSum                    = $totalsum[$k]['nethours'];
+//                $Nsum                      = $Nsum + $NetSum;
+//            }
+//            //custom_varDump_die($Nsum);
+//            $NetTotal                      = sprintf('%02d hours %02d mins', $Nsum, fmod($Nsum, 1) * 60);
+//            $RemainingTo                   = 180.000 - round($NetTotal, 3);
+//            $ReaminingToFormat             = sprintf('%02d hours %02d mins', $RemainingTo, fmod($RemainingTo, 1) * 60);
 
         }
         else
@@ -544,6 +578,7 @@ class UserController extends Controller
             'NetTotal'            =>    $NetTotal,
             'monthcaps'           =>    $monthcaps,
             'ReaminingToFormat'   =>    $ReaminingToFormat,
+            'tt'   =>    $tt,
         ]);
     }
 

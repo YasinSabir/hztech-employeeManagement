@@ -90,16 +90,22 @@
                             <thead>
                             <tr>
                                 <th>Given Hours</th>
-                                <th>Remaining</th>
-                                <th>Month</th>
+                                <th>Date</th>
+                                <th>Day</th>
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($tt as $t => $v)
                             <tr>
-                                <td>{{( !empty($NetTotal) && !empty($monthcaps)) ? $NetTotal : 'No Logs Found'  }}</td>
-                                <td>{{(!empty($ReaminingToFormat) && !empty($monthcaps)) ? $ReaminingToFormat : 'No Logs Found' }}</td>
-                                <td>{{(!empty($monthcaps)) ? $monthcaps : 'No Logs Found' }}</td>
+                                   <td>{{$v['format']}}</td>
+                                    <td>{{$v['date']}}</td>
+                                    <td>{{$v['today']}}</td>
+{{--                                <td>{{( !empty($NetTotal) && !empty($monthcaps)) ? $NetTotal : 'No Logs Found'  }}</td>--}}
+{{--                                <td>{{(!empty($ReaminingToFormat) && !empty($monthcaps)) ? $ReaminingToFormat : 'No Logs Found' }}</td>--}}
+{{--                                <td>{{(!empty($monthcaps)) ? $monthcaps : 'No Logs Found' }}</td>--}}
+
                             </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

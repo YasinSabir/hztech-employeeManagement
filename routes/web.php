@@ -44,6 +44,7 @@ include_once('applications/applications.php');
 include_once('complains/complains.php');
 include_once('suggestions/suggestions.php');
 include_once('users/users.php');
+include_once('holidays/holidays.php');
 
 // Forms Section...
 
