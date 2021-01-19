@@ -328,7 +328,6 @@ class UserController extends Controller
                         }
                     }
             }
-
         }
         if (!empty($status)) {
             $strtime   = strtotime($status->time);
@@ -336,7 +335,6 @@ class UserController extends Controller
             $today     = "";
             $status    = [];
         }
-
         return view('users.userlog')->with([
             'data'    => $entries,
             'status'  => $status,
@@ -355,7 +353,7 @@ class UserController extends Controller
             $usertime->entry_type   = self::const_timeIn;
             $usertime->save();
             return response()->json(array(['msg' => 'Time In', 'status' => 'done']), 200);
-        } elseif ($request->data == "time_out" && self::const_timeOut) {
+        } elseif ($request->data    == "time_out" && self::const_timeOut) {
             $usertime->user_id      = $user_id;
             $usertime->time         = date('Y-m-d H:i:s');
             $usertime->entry_type   = self::const_timeOut;
@@ -514,6 +512,7 @@ class UserController extends Controller
             }
 //            custom_varDump_die($records);
            $tt = [];
+           $j = 0;
             foreach ($records as $kk => $v){
                 if( !in_array( $v['today'] , $tt) ){
                     $tt [ $v['today'] ]['day'][]  = $v['totalhours'];
@@ -567,17 +566,7 @@ class UserController extends Controller
 //            $ReaminingToFormat             = sprintf('%02d hours %02d mins', $RemainingTo, fmod($RemainingTo, 1) * 60);
 
         }
-        else
-        {
-            $NetTotal= "Please select a month";
-            $ReaminingToFormat= "Please select a month";
-            $monthcaps= "Please select a month";
-        }
         return view('users.monthlog')->with([
-            'records'             =>    $records,
-            'NetTotal'            =>    $NetTotal,
-            'monthcaps'           =>    $monthcaps,
-            'ReaminingToFormat'   =>    $ReaminingToFormat,
             'tt'   =>    $tt,
         ]);
     }

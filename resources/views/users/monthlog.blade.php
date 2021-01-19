@@ -97,7 +97,7 @@
                             <tbody>
                             @foreach($tt as $t => $v)
                             <tr>
-                                   <td>{{$v['format']}}</td>
+                                    <td>{{$v['format']}}</td>
                                     <td>{{$v['date']}}</td>
                                     <td>{{$v['today']}}</td>
 {{--                                <td>{{( !empty($NetTotal) && !empty($monthcaps)) ? $NetTotal : 'No Logs Found'  }}</td>--}}
@@ -196,7 +196,7 @@
         $('#example2').DataTable({
             "paging": true,
             "lengthChange": false,
-            "searching": false,
+            "searching": true,
             "ordering": true,
             "info": true,
             "autoWidth": false,
