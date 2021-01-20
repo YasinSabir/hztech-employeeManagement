@@ -5,6 +5,8 @@ use App\UserTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\Roles;
+use App\PrevilligeUser;
 
 use Carbon\Carbon;
 
@@ -69,6 +71,31 @@ function get_lead_hr_role($id)
         ->join('roles', 'users.role_id', '=', 'roles.id')
         ->select('roles.title', 'roles.id')->where(['roles.title' => ['lead'], 'roles.title' => 'hr'])->first();
     return $data;
+}
+
+function checkprevilige($role_id,$previlige_id)
+{
+    $check=DB::table('privilege_user')
+        ->select('role_id','privillige_id')
+        ->where('role_id','=',$role_id)
+        ->where('privillige_id','=',$previlige_id)
+        ->get();
+
+    if(!empty($check[0]->role_id) && !empty($check[0]->privillige_id))
+    {
+       return true;
+    }else{
+        return false;
+    }
+}
+
+function get_priviliges($role_id)
+{
+    $get_priv = DB::table('privilege_user')
+        ->join('privileges', 'privilege_user.privillige_id', '=', 'privileges.id')
+        ->select('privilege_user.privillige_id', 'privileges.title')
+        ->where('role_id','=',$role_id)->get();
+    return $get_priv;
 }
 
 function claculation(Request $request)

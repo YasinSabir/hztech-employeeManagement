@@ -457,15 +457,15 @@ class UserController extends Controller
         $status           = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
         $entries          = UserTime::where(['user_id' => $user_id])->get();
         $record           = [];
-        $tt           = [];
-        $NetTotal         = 0;
-        $ReaminingToFormat= 0;
-        $monthcaps        = 0;
+        $tt               = [];
+//        $NetTotal         = 0;
+//        $ReaminingToFormat= 0;
+//        $monthcaps        = 0;
 
         if (isset($request->get_month)) {
             foreach ($entries as $key => $entry) {
                 $monthFormat = new DateTime($entry->time);
-                $days        = $monthFormat->format('d-m-Y');
+                //$days        = $monthFormat->format('d-m-Y');
                 $month       = $monthFormat->format('m');
                 if($request->get_month == $month) {
                     $datetime= new DateTime($entry->time);
@@ -473,8 +473,7 @@ class UserController extends Controller
                     $date    = $datetime->format('d-m-Y');
                     $time    = $datetime->format('h:i:s A');
                     $today   = $datetime->format('d');
-                    //custom_varDump_die($today);
-                    $monthcaps   = $monthFormat->format('F');
+                    //$monthcaps   = $monthFormat->format('F');
                     if ($entry->entry_type == 2 && $record['date'] != $date) {
                         $record['time_out'] = null;
                         $records[]          = $record;
@@ -510,23 +509,20 @@ class UserController extends Controller
                     }
                 }
             }
-//            custom_varDump_die($records);
            $tt = [];
            $j = 0;
             foreach ($records as $kk => $v){
                 if( !in_array( $v['today'] , $tt) ){
                     $tt [ $v['today'] ]['day'][]  = $v['totalhours'];
-                    $tt [ $v['today'] ]['date'] = $v['date'];
-                    $tt [ $v['today'] ]['today'] = $v['today'];
+                    $tt [ $v['today'] ]['date']   = $v['date'];
+                    $tt [ $v['today'] ]['today']  = $v['today'];
 
                 }else{
-                    $tt [ $v['today'] ]['day'][] = $v['totalhours'];
-                    $tt [ $v['today'] ]['date'] = $v['date'];
-                    $tt [ $v['today'] ]['today'] = $v['today'];
+                    $tt [ $v['today'] ]['day'][]  = $v['totalhours'];
+                    $tt [ $v['today'] ]['date']   = $v['date'];
+                    $tt [ $v['today'] ]['today']  = $v['today'];
                 }
             }
-
-
             $tt = array_map(function($i){
                 $r['hours']   = array_sum($i['day']);
                 $r['date']    = $i['date'];
@@ -535,16 +531,12 @@ class UserController extends Controller
                 return $r;
             },$tt);
 
-            //custom_varDump_die($tt);
-
-
             if (!empty($status)) {
                 $strtime = strtotime($status->time);
             } else {
                 $today   = "";
                 $status  = [];
             }
-
 //            $sum = [];
 //            $totalsum = [];
 //            foreach ($records as $key => $myenrty) {

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\PrevilligeUser;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 class Roles extends Model
@@ -14,4 +15,11 @@ class Roles extends Model
     	//this role belongs to this user.
         return $this->belongsTo('App\User','user_id','role_id');
     }
+
+    public function permissions() {
+
+        return $this->belongsToMany(PrevilligeUser::class,'privilege_user');
+
+    }
+
 }
