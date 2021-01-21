@@ -38,8 +38,12 @@
                                     <th>Date</th>
                                     <th>Day</th>
                                     <th>Created At</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <?php if(check_role_previliges('Edit','edit holiday'))
+                                    { ?>
+                                    <th>Edit</th><?php } ?>
+                                    <?php if(check_role_previliges('delete','delete holiday'))
+                                    { ?>
+                                    <th>Delete</th><?php } ?>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -54,6 +58,8 @@
                                             <td>{{$d->date}}</td>
                                             <td>{{Carbon::parse($d->date)->englishDayOfWeek}}</td>
                                             <td>{{$d->created_at}}</td>
+                                            <?php if(check_role_previliges('Edit','edit holiday'))
+                                            { ?>
                                             <td>
                                                 <form action="{{route('holidays.Edit',$d->id)}}" method="get">
                                                     @csrf
@@ -61,13 +67,15 @@
                                                         Edit
                                                     </button>
                                                 </form>
-                                            </td>
+                                            </td><?php } ?>
+                                            <?php if(check_role_previliges('delete','delete holiday'))
+                                            { ?>
                                             <td>
-                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter" >
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter_{{$d->id}}" >
                                                     Delete
                                                 </button>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal fade" id="exampleModalCenter_{{$d->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -89,7 +97,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td>
+                                            </td><?php } ?>
                                         </tr>
                                     @endforeach
                                 @endif

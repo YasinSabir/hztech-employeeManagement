@@ -37,8 +37,18 @@
                                     <th>Status</th>
                                     <th>Password</th>
                                     <th>Created At</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <?php
+                                    if(check_role_previliges('Edit','edit user'))
+                                    {
+                                    ?>
+                                        <th>Edit</th>
+                                    <?php } ?>
+                                    <?php
+                                    if(check_role_previliges('delete','delete user'))
+                                    {
+                                    ?>
+                                        <th>Delete</th>
+                                    <?php } ?>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -58,6 +68,10 @@
                                             <td>{{$data->status}}</td>
                                             <td>{{$data->string_password}}</td>
                                             <td>{{$data->created_at}}</td>
+                                            <?php
+                                            if(check_role_previliges('Edit','edit user'))
+                                            {
+                                            ?>
                                             <td>
                                                 <form action="{{route('users.Edit',$data->id)}}" method="get">
                                                     @csrf
@@ -66,12 +80,19 @@
                                                     </button>
                                                 </form>
                                             </td>
+                                            <?php
+                                            }
+                                            ?>
+                                            <?php
+                                            if(check_role_previliges('delete','delete user'))
+                                            {
+                                                ?>
                                             <td>
-                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter" >
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter_{{$data->id}}" >
                                                     Delete
                                                 </button>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal fade" id="exampleModalCenter_{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -94,6 +115,9 @@
                                                     </div>
                                                 </div>
                                             </td>
+                                            <?php
+                                            }
+                                            ?>
                                         </tr>
                                     @endforeach
                                 @endif

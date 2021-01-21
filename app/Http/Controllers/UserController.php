@@ -563,4 +563,34 @@ class UserController extends Controller
         ]);
     }
 
+
+    function manualtime(Request $request)
+    {
+        $this->validate($request, [
+            'man_timein' => 'required',
+            'man_timeout' => 'required',
+        ]);
+        //custom_varDump_die($request->all());
+
+        $first=new UserTime();
+        $first->user_id = auth()->id();
+        $first->time =$request->man_timein;
+        /*$datetime= new DateTime($request->man_timein);
+        $first     = $datetime->format('y-m-d');*/
+        $first->entry_type=1;
+        $first->save();
+
+        $second              =new UserTime();
+        $second->user_id     = auth()->id();
+        $second->time        =$request->man_timeout;
+//        $datetime            = new DateTime($request->man_timeout);
+//        $second              = $datetime->format('y-m-d');
+        $second->entry_type  =2;
+        $second->save();
+
+        $noti = array("message" => "Manual Time Added Successfully!", "alert-type" => "success");
+        return redirect()->back()->with($noti);
+
+    }
+
 }

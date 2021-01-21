@@ -19,7 +19,7 @@ class RoleMiddleware
         {
             return $next($request);
         }else{
-            $noti = array("message" => "You don't have rights to access this page!", "alert-type" => "danger");
+            $noti = array("message" => "You don't have rights to access this page!", "alert-type" => "error");
             return redirect('error')->with($noti);
         }
     }

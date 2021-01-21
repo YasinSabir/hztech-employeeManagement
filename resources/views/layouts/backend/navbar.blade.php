@@ -43,7 +43,6 @@
 
                     </ul>
                 </li>
-                @if(get_role(auth()->id()) == "head" || get_role(auth()->id()) == "admin")
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
@@ -55,47 +54,58 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+                            <?php if(check_role_previliges('add','add user'))
+                            { ?>
                             <li class="nav-item">
                                 <a href="{{route('users.add')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Add New</p>
                                 </a>
-                            </li>
+                            </li><?php
+                                } ?>
+                                <?php if(check_role_previliges('view','view user'))
+                                { ?>
                             <li class="nav-item">
                                 <a href="{{route('users.show')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>View All</p>
                                 </a>
-                            </li>
+                            </li><?php
+                                } ?>
                         </ul>
                     </li>
-                @endif
+                @if(count_role_previliges('holiday') > 0)
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
+                        <i class="nav-icon fas fa-globe-europe"></i>
                         <p>
                             Holidays
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <?php if(check_role_previliges('add','add holiday'))
+                        { ?>
                         <li class="nav-item">
                             <a href="{{route('holidays.add')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add New</p>
                             </a>
-                        </li>
+                        </li><?php }?>
+                            <?php if(check_role_previliges('view','view holiday'))
+                            { ?>
                         <li class="nav-item">
                             <a href="{{route('holidays.show')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>View All</p>
                             </a>
-                        </li>
+                        </li><?php }?>
                     </ul>
                 </li>
+                @endif
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
+                        <i class="nav-icon fas fa-user-astronaut"></i>
                         <p>
                             Profile
                             <i class="right fas fa-angle-left"></i>
@@ -112,7 +122,7 @@
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
+                        <i class="nav-icon fas fa-user-clock"></i>
                         <p>
                             User Logs
                             <i class="right fas fa-angle-left"></i>
@@ -143,10 +153,10 @@
                         </li>
                     </ul>
                 </li>
-                @if(get_role(auth()->id()) == "head" || get_role(auth()->id()) == "admin")
+
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-user"></i>
+                            <i class="nav-icon fas fa-user-tag"></i>
                             <p>
                                 Roles
                                 <i class="right fas fa-angle-left"></i>
@@ -167,7 +177,7 @@
                             </li>
                         </ul>
                     </li>
-                @endif
+
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
@@ -237,7 +247,7 @@
                         </li>
                     </ul>
                 </li>
-                @if(get_role(auth()->id()) == "head" || get_role(auth()->id()) == "admin")
+
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-shield-alt"></i>
@@ -261,7 +271,7 @@
                             </li>
                         </ul>
                     </li>
-                @endif
+
                 <li class="nav-header">MISCELLANEOUS</li>
                 <li class="nav-item">
                     <a href="https://adminlte.io/docs/3.0" class="nav-link">

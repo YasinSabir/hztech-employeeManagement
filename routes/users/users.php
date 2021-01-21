@@ -3,22 +3,22 @@
     Route::group(['prefix' => 'Users' , 'as' => 'users.','middleware' => ['auth:web']],function(){
 
 
-        Route::get('add','UserController@create')->name('add');
-        Route::post('store','UserController@store')->name('store');
+        Route::get('add','UserController@create')->name('add')->middleware('permission:add user,add');
+        Route::post('store','UserController@store')->name('store')->middleware('permission:add user,add');
 
-        Route::get('show','UserController@index')->name('show');
+        Route::get('show','UserController@index')->name('show')->middleware('permission:view user,view');
 
         Route::get('Edit' , function (){
             return view('users.Edit');
         })->name('Edit');
 
-        Route::get('Edit/{id}','UserController@edit')->name('Edit');
+        Route::get('Edit/{id}','UserController@edit')->name('Edit')->middleware('permission:edit user,Edit');
         Route::post('Edit/{id}','UserController@update')->name('Edit');
 
-        Route::delete('delete/{id}','UserController@destroy')->name('delete');
+        Route::delete('delete/{id}','UserController@destroy')->name('delete')->middleware('permission:delete user,delete');
 
-        Route::get('profile','UserController@profile')->name('profile')->middleware('role');
-        Route::post('profile','UserController@editprofile')->name('profile')->middleware('role');
+        Route::get('profile','UserController@profile')->name('profile');
+        Route::post('profile','UserController@editprofile')->name('profile');
 
         Route::get('/getEmployees', 'UserController@getEmployees')->name('getEmployees');
 
@@ -27,6 +27,8 @@
 
         Route::get('/DayLog', 'UserController@DayLogView')->name('DayLog');
         Route::get('/MonthLog', 'UserController@MonthLogView')->name('MonthLog');
+
+        Route::post('manualtime','UserController@manualtime')->name('manualtime');
 
     });
 

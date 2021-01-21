@@ -68,7 +68,7 @@ class PreviligesController extends Controller
         $role=Roles::all();
         $previlige = DB::table('privilege_user')
             ->join('privileges', 'privilege_user.privillige_id', '=', 'privileges.id')
-            ->select('privileges.title', 'privileges.status','privilege_user.id AS pu_id','privileges.id')
+            ->select('privileges.title', 'privileges.status','privileges.id','privilege_user.id AS pu_id')
             ->where('privilege_user.role_id' ,'=', $request->get_role)
             ->get();
         return view('previliges.show',compact('previlige','role'));
@@ -124,7 +124,7 @@ class PreviligesController extends Controller
     {
         $previlige=PrevilligeUser::find($id);
         $previlige->delete();
-        $noti = array("message" => "User Previlige Deleted Successfully!", "alert-type" => "success");
+        $noti = array("message" => "User Previlige Deleted Successfully! ", "alert-type" => "success");
         return redirect()->back()->with($noti);
     }
 }

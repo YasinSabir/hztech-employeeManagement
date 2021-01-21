@@ -69,11 +69,11 @@
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                            data-target="#exampleModalCenter">
+                                                            data-target="#exampleModalCenter_{{$data->id}}">
                                                         Delete
                                                     </button>
                                                     <!-- Modal -->
-                                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1"
+                                                    <div class="modal fade" id="exampleModalCenter_{{$data->id}}" tabindex="-1"
                                                          role="dialog" aria-labelledby="exampleModalCenterTitle"
                                                          aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered" role="document">

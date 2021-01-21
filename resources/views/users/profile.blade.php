@@ -454,6 +454,8 @@
 
                                                     </div>
                                                 </div>
+                                                <?php if(check_role_previliges('Edit','edit profile'))
+                                                { ?>
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
@@ -461,6 +463,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <?php } ?>
                                             </form>
                                         </div>
                                     </div>

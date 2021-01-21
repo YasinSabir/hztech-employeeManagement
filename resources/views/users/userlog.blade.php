@@ -17,7 +17,7 @@
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">User Logs</li>
                             <li class="breadcrumb-item active">
-{{--                                {{claculation('14-01-2021')}}--}}
+                                {{--                                {{claculation('14-01-2021')}}--}}
                             </li>
                         </ol>
                     </div>
@@ -34,12 +34,13 @@
                                 <div class="small-box bg-info">
                                     <div class="inner">
                                         <h5>Todays <br/>Hours</h5>
-                                        <p >{{CalculateTime()}}</p>
+                                        <p>{{CalculateTime()}}</p>
                                     </div>
                                     <div class="icon">
                                         <i class="ion ion-bag"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="#" class="small-box-footer">More info <i
+                                                class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                             <!-- ./col -->
@@ -54,7 +55,8 @@
                                     <div class="icon">
                                         <i class="ion ion-stats-bars"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="#" class="small-box-footer">More info <i
+                                                class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
 
@@ -68,7 +70,8 @@
                                     <div class="icon">
                                         <i class="ion ion-person-add"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="#" class="small-box-footer">More info <i
+                                                class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
 
@@ -83,7 +86,8 @@
                                     <div class="icon">
                                         <i class="ion ion-pie-graph"></i>
                                     </div>
-                                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                    <a href="#" class="small-box-footer">More info <i
+                                                class="fas fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                             <!-- ./col -->
@@ -104,12 +108,52 @@
                                     <button class="btn btn-app like" name="time_in" id="time_in" type="button">
                                         <i class="fas fa-clock"></i> Time In
                                     </button>
+                                    <button class="btn btn-app like" data-toggle="modal" data-target="#modal-lg"
+                                            name="manual_time" id="manual_time" type="button">
+                                        <i class="fas fa-clock"></i> Manual Time
+                                    </button>
                                 @endif
+
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="modal-lg">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Manual Time Entry</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form method="post" action="{{route('users.manualtime')}}">
+                                @csrf
+                                <div class="modal-body">
 
+                                    <div class="form-group">
+                                        <label>Time In</label>
+                                        <input type="datetime-local" class="form-control"
+                                               name="man_timein"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Time Out</label>
+                                        <input type="datetime-local" class="form-control"
+                                               name="man_timeout"/>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </form>
+
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">User Logs Data</h3>
@@ -307,7 +351,9 @@
                     console.log(res);
                     toastr.success("Successfully time in.", "Time Log!");
                     $('#time_in').css("display", "none");
+                    $('#manual_time').css("display", "none");
                     $('#time_out').css("display", "inline-block");
+                    //$('#manual_time').css("display", "inline-block");
 
                 }
             });
@@ -329,6 +375,7 @@
                     console.log(res);
                     toastr.error("Successfully time out.", "Time Log!");
                     $('#time_out').css("display", "none");
+                    //$('#manual_time').css("display", "none");
                     $('#time_in').css("display", "inline-block");
                 }
             });
@@ -336,7 +383,7 @@
             //$('#time_out').hide();
         });
         $(document).keypress(
-            function(event){
+            function (event) {
                 if (event.which == '13') {
                     event.preventDefault();
                 }
