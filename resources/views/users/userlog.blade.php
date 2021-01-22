@@ -108,16 +108,20 @@
                                     <button class="btn btn-app like" name="time_in" id="time_in" type="button">
                                         <i class="fas fa-clock"></i> Time In
                                     </button>
+                                    <?php if(check_role_previliges('manual-time','manual time'))
+                                    { ?>
                                     <button class="btn btn-app like" data-toggle="modal" data-target="#modal-lg"
                                             name="manual_time" id="manual_time" type="button">
                                         <i class="fas fa-clock"></i> Manual Time
-                                    </button>
+                                    </button><?php } ?>
                                 @endif
 
                             </div>
                         </div>
                     </div>
                 </div>
+                <?php if(check_role_previliges('manual-time','manual time'))
+                { ?>
                 <div class="modal fade" id="modal-lg">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -153,7 +157,7 @@
                         <!-- /.modal-content -->
                     </div>
                     <!-- /.modal-dialog -->
-                </div>
+                </div><?php } ?>
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">User Logs Data</h3>

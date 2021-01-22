@@ -3,22 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="3ed66682-93d8-4e6b-b801-f17c24f04b22" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PreviligesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PreviligesController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RoleMiddleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RoleMiddleware.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/helper/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/helper/functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/complains/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/complains/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/holidays/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/holidays/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/backend/navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/backend/navbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/previliges/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/previliges/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/previliges/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/previliges/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/roles/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/roles/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/suggestions/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/suggestions/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/users/userlog.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/userlog.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/holidays/holidays.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/holidays/holidays.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/complains/complains.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/complains/complains.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/roles/roles.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/roles/roles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/suggestions/suggestions.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/suggestions/suggestions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/users/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/users/users.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,11 +40,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/layouts/backend/navbar.blade.php">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/users/users.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="107" column="64" selection-start-line="107" selection-start-column="64" selection-end-line="107" selection-end-column="64" />
+            <state relative-caret-position="196">
+              <caret line="14" column="108" selection-start-line="14" selection-start-column="67" selection-end-line="14" selection-end-column="108" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/helper/functions.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="277">
+              <caret line="123" column="38" selection-start-line="123" selection-start-column="38" selection-end-line="123" selection-end-column="38" />
+              <folding>
+                <element signature="e#7#28#0#PHP" expanded="true" />
+                <element signature="n#claculation#0;n#!!top" />
+                <element signature="n#TodaysRemaininghours#0;n#!!top" />
+                <element signature="n#MonthTotalHours#0;n#!!top" />
+                <element signature="n#MonthRemainingHours#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="107">
+              <caret line="375" column="31" selection-start-line="375" selection-start-column="31" selection-end-line="375" selection-end-column="31" />
+              <folding>
+                <element signature="e#40#58#0#PHP" expanded="true" />
+                <element signature="e#437#538#0#PHP" />
+                <element signature="e#615#731#0#PHP" />
+                <element signature="e#737#846#0#PHP" />
+                <element signature="e#851#1212#0#PHP" />
+                <element signature="e#915#995#0#PHP" />
+                <element signature="e#915#1046#0#PHP" />
+                <element signature="e#915#1094#0#PHP" />
+                <element signature="e#915#1142#0#PHP" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -59,10 +89,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>data-mask</find>
-      <find>diff</find>
-      <find>appl</find>
-      <find>application</find>
       <find>admin</find>
       <find>name</find>
       <find>appli</find>
@@ -89,6 +115,10 @@
       <find>datetime-local</find>
       <find>pu_id</find>
       <find>profile</find>
+      <find>float</find>
+      <find>claculation</find>
+      <find>getEm</find>
+      <find>role</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -98,12 +128,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="&lt;3a4f9bca-7533-4c76-9bf8-7561293c38ba&gt;/resources/views/admin/coupons/index.blade.php" />
-        <option value="&lt;3a4f9bca-7533-4c76-9bf8-7561293c38ba&gt;/routes/web.php" />
         <option value="&lt;3a4f9bca-7533-4c76-9bf8-7561293c38ba&gt;/app/Http/Controllers/Admin/CouponController.php" />
         <option value="&lt;3a4f9bca-7533-4c76-9bf8-7561293c38ba&gt;/resources/views/admin/coupons/edit.blade.php" />
         <option value="$PROJECT_DIR$/config/session.php" />
-        <option value="$PROJECT_DIR$/routes/suggestions/suggestions.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/examples/500.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/errors/privillige.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/roles/add.blade.php" />
@@ -134,21 +161,24 @@
         <option value="$PROJECT_DIR$/app/Http/Middleware/PermissionMiddleware.php" />
         <option value="$PROJECT_DIR$/resources/views/previliges/add.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/users/monthlylog.blade.php" />
-        <option value="$PROJECT_DIR$/routes/users/users.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
-        <option value="$PROJECT_DIR$/resources/views/users/userlog.blade.php" />
         <option value="$PROJECT_DIR$/routes/holidays/holidays.php" />
-        <option value="$PROJECT_DIR$/app/helper/functions.php" />
         <option value="$PROJECT_DIR$/app/PrevilligeUser.php" />
-        <option value="$PROJECT_DIR$/resources/views/complains/show.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/holidays/show.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/roles/show.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/suggestions/show.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/users/show.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/users/profile.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/PreviligesController.php" />
         <option value="$PROJECT_DIR$/resources/views/previliges/show.blade.php" />
+        <option value="$PROJECT_DIR$/app/helper/functions.php" />
+        <option value="$PROJECT_DIR$/resources/views/users/userlog.blade.php" />
+        <option value="$PROJECT_DIR$/routes/users/users.php" />
+        <option value="$PROJECT_DIR$/routes/roles/roles.php" />
+        <option value="$PROJECT_DIR$/resources/views/roles/show.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/complains/show.blade.php" />
+        <option value="$PROJECT_DIR$/routes/complains/complains.php" />
+        <option value="$PROJECT_DIR$/routes/suggestions/suggestions.php" />
+        <option value="$PROJECT_DIR$/resources/views/suggestions/show.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/backend/navbar.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
       </list>
     </option>
   </component>
@@ -254,6 +284,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -265,6 +296,12 @@
               <item name="hztech-employeeManagement" type="b2602c69:ProjectViewProjectNode" />
               <item name="hztech-employeeManagement" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hztech-employeeManagement" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hztech-employeeManagement" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="helper" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="hztech-employeeManagement" type="b2602c69:ProjectViewProjectNode" />
@@ -293,30 +330,18 @@
             <path>
               <item name="hztech-employeeManagement" type="b2602c69:ProjectViewProjectNode" />
               <item name="hztech-employeeManagement" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="hztech-employeeManagement" type="b2602c69:ProjectViewProjectNode" />
               <item name="hztech-employeeManagement" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="layouts" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hztech-employeeManagement" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hztech-employeeManagement" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="previliges" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
+              <item name="users" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -380,7 +405,8 @@
       <workItem from="1610953883450" duration="21099000" />
       <workItem from="1611040549048" duration="23222000" />
       <workItem from="1611125975144" duration="25213000" />
-      <workItem from="1611213035375" duration="24250000" />
+      <workItem from="1611213035375" duration="24314000" />
+      <workItem from="1611299698566" duration="9235000" />
     </task>
     <task id="LOCAL-00001" summary="database update">
       <created>1609420406943</created>
@@ -571,17 +597,24 @@
       <option name="project" value="LOCAL" />
       <updated>1611158382565</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Users,Roles,Complains,Profile,User Logs, Holidays, Permissions and Suggestions Update By Muhammad Irfan.">
+      <created>1611245223388</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1611245223388</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="350793000" />
+    <option name="totallyTimeSpent" value="360092000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16868381" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23827533" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -604,30 +637,6 @@
       <window_info anchor="right" id="Remote Host" order="3" weight="0.32980332" />
       <window_info anchor="right" id="Database" order="4" weight="0.32980332" />
     </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16641453" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="npm" order="2" side_tool="true" />
-      <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3289689" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.3289689" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3584288" />
-      <window_info anchor="bottom" id="File Transfer" order="12" weight="0.3289689" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Remote Host" order="3" weight="0.32980332" />
-      <window_info anchor="right" id="Database" order="4" weight="0.32980332" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -641,19 +650,10 @@
     <MESSAGE value="Users,Roles,Complains,Profile and Suggestions Update By Muhammad Irfan." />
     <MESSAGE value="Users,Roles,Complains,Profile,User Logs and Suggestions Update By Muhammad Irfan." />
     <MESSAGE value="Users,Roles,Complains,Profile,User Logs, Holidays and Suggestions Update By Muhammad Irfan." />
-    <option name="LAST_COMMIT_MESSAGE" value="Users,Roles,Complains,Profile,User Logs, Holidays and Suggestions Update By Muhammad Irfan." />
+    <MESSAGE value="Users,Roles,Complains,Profile,User Logs, Holidays, Permissions and Suggestions Update By Muhammad Irfan." />
+    <option name="LAST_COMMIT_MESSAGE" value="Users,Roles,Complains,Profile,User Logs, Holidays, Permissions and Suggestions Update By Muhammad Irfan." />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/suggestions/Edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="52" column="138" lean-forward="true" selection-start-line="52" selection-start-column="102" selection-end-line="52" selection-end-column="138" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/applications/add.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/roles/add.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="392">
@@ -688,9 +688,6 @@
           <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/complains/complains.php">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/holidays/add.blade.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -879,58 +876,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/users/users.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="102" lean-forward="true" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="102" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1494">
-          <caret line="578" column="50" selection-start-line="577" selection-start-column="8" selection-end-line="578" selection-end-column="50" />
-          <folding>
-            <element signature="e#40#58#0#PHP" expanded="true" />
-            <element signature="e#437#538#0#PHP" />
-            <element signature="e#615#731#0#PHP" />
-            <element signature="e#737#846#0#PHP" />
-            <element signature="e#851#1212#0#PHP" />
-            <element signature="e#915#995#0#PHP" />
-            <element signature="e#915#1046#0#PHP" />
-            <element signature="e#915#1094#0#PHP" />
-            <element signature="e#915#1142#0#PHP" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/UserTime.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="10" column="36" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/users/userlog.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4037">
-          <caret line="353" column="58" selection-start-line="353" selection-start-column="58" selection-end-line="353" selection-end-column="58" />
-          <folding>
-            <element signature="e#6274#6281#1#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/helper/functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="124" selection-start-line="124" selection-end-line="124" />
-          <folding>
-            <element signature="e#7#28#0#PHP" expanded="true" />
-            <element signature="n#claculation#0;n#!!top" />
-            <element signature="n#MonthTotalHours#0;n#!!top" />
-            <element signature="n#MonthRemainingHours#0;n#!!top" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -968,38 +917,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/complains/show.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="67" column="145" selection-start-line="67" selection-start-column="145" selection-end-line="67" selection-end-column="159" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/holidays/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="77" column="105" selection-start-line="77" selection-start-column="105" selection-end-line="77" selection-end-column="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/roles/show.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="62" column="155" selection-start-line="62" selection-start-column="141" selection-end-line="62" selection-end-column="155" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/suggestions/show.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="75" column="112" selection-start-line="75" selection-start-column="112" selection-end-line="75" selection-end-column="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/users/show.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="94" column="108" selection-start-line="94" selection-start-column="108" selection-end-line="94" selection-end-column="108" />
         </state>
       </provider>
     </entry>
@@ -1010,16 +931,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PreviligesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="119" column="23" lean-forward="true" selection-start-line="119" selection-start-column="23" selection-end-line="119" selection-end-column="23" />
-          <folding>
-            <element signature="e#39#58#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/previliges/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -1027,10 +938,115 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/users/userlog.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="159" column="32" selection-start-line="159" selection-start-column="32" selection-end-line="159" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/roles/roles.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="62" selection-start-line="15" selection-start-column="62" selection-end-line="15" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/complains/complains.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/complains/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="101" column="56" selection-start-line="101" selection-start-column="56" selection-end-line="101" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/roles/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="40" column="83" selection-start-line="40" selection-start-column="83" selection-end-line="40" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/suggestions/suggestions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="115" selection-start-line="6" selection-start-column="115" selection-end-line="6" selection-end-column="115" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/layouts/backend/navbar.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="107" column="64" selection-start-line="107" selection-start-column="64" selection-end-line="107" selection-end-column="64" />
+        <state relative-caret-position="464">
+          <caret line="235" column="38" selection-start-line="235" selection-start-column="35" selection-end-line="235" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/suggestions/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="117" column="63" selection-start-line="117" selection-start-column="63" selection-end-line="117" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/users/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="38" column="55" lean-forward="true" selection-start-line="38" selection-start-column="55" selection-end-line="38" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PreviligesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="60" column="38" lean-forward="true" selection-start-line="60" selection-start-column="38" selection-end-line="60" selection-end-column="38" />
+          <folding>
+            <element signature="e#39#58#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/users/users.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="14" column="108" selection-start-line="14" selection-start-column="67" selection-end-line="14" selection-end-column="108" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/helper/functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="123" column="38" selection-start-line="123" selection-start-column="38" selection-end-line="123" selection-end-column="38" />
+          <folding>
+            <element signature="e#7#28#0#PHP" expanded="true" />
+            <element signature="n#claculation#0;n#!!top" />
+            <element signature="n#TodaysRemaininghours#0;n#!!top" />
+            <element signature="n#MonthTotalHours#0;n#!!top" />
+            <element signature="n#MonthRemainingHours#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="375" column="31" selection-start-line="375" selection-start-column="31" selection-end-line="375" selection-end-column="31" />
+          <folding>
+            <element signature="e#40#58#0#PHP" expanded="true" />
+            <element signature="e#437#538#0#PHP" />
+            <element signature="e#615#731#0#PHP" />
+            <element signature="e#737#846#0#PHP" />
+            <element signature="e#851#1212#0#PHP" />
+            <element signature="e#915#995#0#PHP" />
+            <element signature="e#915#1046#0#PHP" />
+            <element signature="e#915#1094#0#PHP" />
+            <element signature="e#915#1142#0#PHP" />
+          </folding>
         </state>
       </provider>
     </entry>

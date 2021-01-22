@@ -228,19 +228,19 @@ function CalculateTime()
         $checkdate      = $Format->format('Y-m-d');
         $day            = $Format->format('d');
 
-        if ($checkdate == date('Y-m-d')) {
+        if ($checkdate == date('Y-m-d') || $checkdate == date('Y-m-d')) {
 
             $datetime   = new DateTime($entry->time);
             $date       = $datetime->format('d-m-Y');
             $time       = $datetime->format('H:i:s');
-        $record['date'] = $date;
-         $record['day'] = $day;
+            $record['date'] = $date;
+            $record['day'] = $day;
 
             if ($entry->entry_type == 1) {
-     $record['time_in'] = $time;
+                $record['time_in'] = $time;
             } else {
-    $record['time_out'] = $time;
-             $records[] = $record;
+                $record['time_out'] = $time;
+                $records[] = $record;
                 $record = [];
             }
         } else {

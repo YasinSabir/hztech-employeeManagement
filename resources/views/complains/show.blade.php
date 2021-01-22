@@ -36,8 +36,12 @@
                                     <th>Status</th>
                                     <th>Complain By</th>
                                     <th>Date</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <?php if(check_role_previliges('Edit','edit complain'))
+                                    { ?>
+                                    <th>Edit</th><?php } ?>
+                                    <?php if(check_role_previliges('delete','delete complain'))
+                                    { ?>
+                                    <th>Delete</th><?php } ?>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -56,6 +60,8 @@
                                             <td>{{$data->status}}</td>
                                             <td>{{ ($user) ? $user->fullname : "Not Found"  }}</td>
                                             <td>{{$data->created_at}}</td>
+                                            <?php if(check_role_previliges('Edit','edit complain'))
+                                            { ?>
                                             <td>
                                                 <form action="{{route('complains.Edit',$data->id)}}" method="get">
                                                     @csrf
@@ -63,7 +69,9 @@
                                                         Edit
                                                     </button>
                                                 </form>
-                                            </td>
+                                            </td><?php } ?>
+                                            <?php if(check_role_previliges('delete','delete complain'))
+                                            { ?>
                                             <td>
                                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter_{{$data->id}}" >
                                                     Delete
@@ -91,7 +99,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td>
+                                            </td><?php } ?>
                                         </tr>
                                     @endforeach
                                 @endif

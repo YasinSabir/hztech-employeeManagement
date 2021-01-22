@@ -36,10 +36,18 @@
                                     <th>Status</th>
                                     <th>Suggestion By</th>
                                     <th>Date</th>
-                                    @if(get_role(auth()->id()) == "head" || get_role(auth()->id()) == "admin")
-                                        <th>Edit</th>
-                                        <th>Delete</th>
-                                    @endif
+                                    <?php
+                                    if(check_role_previliges('Edit','edit suggestion'))
+                                    {
+                                    ?>
+                                    <th>Edit</th>
+                                    <?php } ?>
+                                    <?php
+                                    if(check_role_previliges('delete','delete suggestion'))
+                                    {
+                                    ?>
+                                    <th>Delete</th>
+                                    <?php } ?>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -58,7 +66,9 @@
                                             <td>{{$data->status}}</td>
                                             <td>{{ ($user) ? $user->fullname : "Not Found"  }}</td>
                                             <td>{{$data->created_at}}</td>
-                                            @if(get_role(auth()->id()) == "head" || get_role(auth()->id()) == "admin")
+                                            <?php if(check_role_previliges('Edit','edit suggestion'))
+                                            {
+                                            ?>
                                                 <td>
                                                     <form action="{{route('suggestions.Edit',$data->id)}}" method="get">
                                                         @csrf
@@ -66,7 +76,10 @@
                                                             Edit
                                                         </button>
                                                     </form>
-                                                </td>
+                                                </td><?php } ?>
+                                            <?php if(check_role_previliges('delete','delete suggestion'))
+                                            {
+                                                ?>
                                                 <td>
                                                     <button type="button" class="btn btn-danger" data-toggle="modal"
                                                             data-target="#exampleModalCenter_{{$data->id}}">
@@ -102,7 +115,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </td>
+                                                </td><?php } ?>
                                             @endif
                                         </tr>
                                     @endforeach

@@ -35,8 +35,12 @@
                                     <th>Description</th>
                                     <th>Status</th>
                                     <th>Created At</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <?php if(check_role_previliges('Edit','edit role'))
+                                    { ?>
+                                    <th>Edit</th><?php } ?>
+                                    <?php if(check_role_previliges('delete','delete role'))
+                                    { ?>
+                                    <th>Delete</th><?php } ?>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -51,6 +55,8 @@
                                         <td>{{$role->description}}</td>
                                         <td>{{$role->status}}</td>
                                         <td>{{$role->created_at}}</td>
+                                        <?php if(check_role_previliges('Edit','edit role'))
+                                        { ?>
                                         <td>
                                             <form action="{{route('roles.Edit',$role->id)}}" method="get">
                                                 @csrf
@@ -58,7 +64,9 @@
                                                     Edit
                                                 </button>
                                             </form>
-                                        </td>
+                                        </td><?php } ?>
+                                        <?php if(check_role_previliges('delete','delete role'))
+                                        { ?>
                                         <td>
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter_{{$role->id}}" >
                                                 Delete
@@ -87,7 +95,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                    </tr>
+                                    </tr><?php } ?>
                                     @endforeach
                                 @endif
                                 </tbody>

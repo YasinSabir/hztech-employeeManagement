@@ -372,8 +372,8 @@ class UserController extends Controller
             $status          = UserTime::where(['user_id' => Auth::user()->id])->orderBy('id', 'DESC')->first();
             $entries         = UserTime::where(['user_id' => $user_id])->get();
             $record          = [];
-            $NetTotal        =0;
-            $ReaminingFormat =0;
+            $NetTotal        = 0;
+            $ReaminingFormat = 0;
         if (isset($request->todaydate)) {
             foreach ($entries as $key => $entry) {
                 $dayFormat   = new DateTime($entry->time);
