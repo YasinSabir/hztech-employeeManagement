@@ -3,22 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3ed66682-93d8-4e6b-b801-f17c24f04b22" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/helper/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/helper/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/complains/Edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/complains/Edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/complains/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/complains/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/holidays/Edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/holidays/Edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/holidays/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/holidays/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/backend/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/backend/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/suggestions/Edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/suggestions/Edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/suggestions/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/suggestions/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/suggestions/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/suggestions/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/Edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/Edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/users/userlog.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/userlog.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,11 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="612" column="13" lean-forward="true" selection-start-line="612" selection-start-column="13" selection-end-line="612" selection-end-column="13" />
+            <state relative-caret-position="150">
+              <caret line="214" column="75" lean-forward="true" selection-start-line="214" selection-start-column="75" selection-end-line="214" selection-end-column="75" />
               <folding>
                 <element signature="e#40#58#0#PHP" expanded="true" />
               </folding>
@@ -57,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/users/userlog.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="729">
-              <caret line="391" column="41" selection-start-line="391" selection-start-column="41" selection-end-line="391" selection-end-column="41" />
+            <state relative-caret-position="-231">
+              <caret line="363" column="78" selection-start-line="363" selection-start-column="78" selection-end-line="363" selection-end-column="78" />
             </state>
           </provider>
         </entry>
@@ -69,7 +54,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/helper/functions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
+            <state relative-caret-position="1117">
               <caret line="302" column="66" selection-start-line="302" selection-start-column="66" selection-end-line="302" selection-end-column="66" />
               <folding>
                 <element signature="e#7#28#0#PHP" expanded="true" />
@@ -183,8 +168,8 @@
         <option value="&lt;3a4f9bca-7533-4c76-9bf8-7561293c38ba&gt;/routes/api.php" />
         <option value="&lt;3a4f9bca-7533-4c76-9bf8-7561293c38ba&gt;/app/Http/Controllers/Api/ApiV3Controller.php" />
         <option value="$PROJECT_DIR$/app/helper/functions.php" />
-        <option value="$PROJECT_DIR$/resources/views/users/userlog.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
+        <option value="$PROJECT_DIR$/resources/views/users/userlog.blade.php" />
       </list>
     </option>
   </component>
@@ -332,13 +317,6 @@
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="hztech-employeeManagement" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hztech-employeeManagement" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="users" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -414,7 +392,7 @@
       <workItem from="1611647454030" duration="22654000" />
       <workItem from="1611731859787" duration="2991000" />
       <workItem from="1611919882161" duration="14266000" />
-      <workItem from="1612163479650" duration="6248000" />
+      <workItem from="1612163479650" duration="6464000" />
     </task>
     <task id="LOCAL-00001" summary="database update">
       <created>1609420406943</created>
@@ -619,11 +597,18 @@
       <option name="project" value="LOCAL" />
       <updated>1611316991468</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Users,Roles,Complains,Profile,User Logs, Holidays, Permissions and Suggestions Update By Muhammad Irfan.">
+      <created>1612178135198</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1612178135198</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="417006000" />
+    <option name="totallyTimeSpent" value="417222000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1045,9 +1030,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="214" column="75" lean-forward="true" selection-start-line="214" selection-start-column="75" selection-end-line="214" selection-end-column="75" />
+          <folding>
+            <element signature="e#40#58#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/helper/functions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
+        <state relative-caret-position="1117">
           <caret line="302" column="66" selection-start-line="302" selection-start-column="66" selection-end-line="302" selection-end-column="66" />
           <folding>
             <element signature="e#7#28#0#PHP" expanded="true" />
@@ -1058,18 +1053,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/users/userlog.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="729">
-          <caret line="391" column="41" selection-start-line="391" selection-start-column="41" selection-end-line="391" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="612" column="13" lean-forward="true" selection-start-line="612" selection-start-column="13" selection-end-line="612" selection-end-column="13" />
-          <folding>
-            <element signature="e#40#58#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="-231">
+          <caret line="363" column="78" selection-start-line="363" selection-start-column="78" selection-end-line="363" selection-end-column="78" />
         </state>
       </provider>
     </entry>

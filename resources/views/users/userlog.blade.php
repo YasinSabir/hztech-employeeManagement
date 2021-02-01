@@ -362,7 +362,6 @@
                     {
                         console.log(res);
                         toastr.error("You can mark attendance.", "Time Log!");
-
                     }
                     else
                     {
