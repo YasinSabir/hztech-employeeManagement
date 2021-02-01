@@ -193,23 +193,14 @@
             $("#role_title").change(function () {
                 var selectedRole = $(this).children("option:selected").text();
                 if(selectedRole == "employee") {
-                    // Department Change
-                    //$('#sel_role').change(function () {
-
-                        // Department id
-                        //var id = $(this).val();
-                        alert("You have selected the - " + selectedRole);
-                        // Empty the dropdown
                         $('#sel_emp').find('#sel_emp').not(':first').remove();
 
                         // AJAX request
                         $.ajax({
-                            // url: 'getEmployees/',
                             url : '{{route('users.getEmployees')}}',
                             type: 'get',
                             dataType: 'json',
                             success: function (response) {
-
                                 var len = 0;
                                 if (response['data'] != null) {
                                     len = response['data'].length;

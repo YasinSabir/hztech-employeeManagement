@@ -593,14 +593,14 @@ class UserController extends Controller
         ],$messages);
         $dt = Carbon::now();
         $holiday=Holiday::where('date','=',date('Y-m-d'))->first();
-        if(empty($holiday)) {
+        if(empty($holiday)){
             if (!$dt->isSaturday() || !$dt->isSunday()) {
                 $first = new UserTime();
                 $first->user_id = auth()->id();
                 $first->time = $request->man_timein;
                 $first->entry_type = 1;
                 $first->save();
-
+      // ------------------x x x x x x x x-------------------
                 $second = new UserTime();
                 $second->user_id = auth()->id();
                 $second->time = $request->man_timeout;
@@ -615,9 +615,7 @@ class UserController extends Controller
         else{
             $noti = array("message" => "Today is holiday!", "alert-type" => "error");
         }
-        //$noti = array("message" => "Manual Time Added Successfully!", "alert-type" => "success");
         return redirect()->back()->with($noti);
-
     }
 
 }

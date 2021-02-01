@@ -1,5 +1,5 @@
 <?php
-    // Roles Section.... Child funtion called Users of Parent function Pages
+    // Users Section.... Child funtion called Users of Parent function Pages
     Route::group(['prefix' => 'Users' , 'as' => 'users.','middleware' => ['auth:web']],function(){
 
 
