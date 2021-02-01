@@ -38,14 +38,16 @@
                                         <input type="text" value="{{$complain->title}}" class="form-control" name="complain_title" placeholder="Enter Suggestion Title."/>
                                     </div>
                                     @error('complain_title')
-                                    {{$message}}
+                                    <span class="invalid-feedback d-block"
+                                          role="alert"> <strong>{{ $message }}</strong> </span>
                                     @enderror
                                     <div class="form-group">
                                         <label>Complain Description</label>
                                         <textarea  class="form-control" name="complain_description" rows="4" placeholder="Enter Suggestion Description.">{{$complain->description}}</textarea>
                                     </div>
                                     @error('complain_description')
-                                    {{$message}}
+                                    <span class="invalid-feedback d-block"
+                                          role="alert"> <strong>{{ $message }}</strong> </span>
                                     @enderror
                                     <div class="form-group">
                                         <label>Complain Status</label>

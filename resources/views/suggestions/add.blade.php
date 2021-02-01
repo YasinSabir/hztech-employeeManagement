@@ -37,14 +37,16 @@
                                         <input type="text" class="form-control" name="suggestion_title" placeholder="Enter Suggestion Title."/>
                                     </div>
                                     @error('suggestion_title')
-                                    {{$message}}
+                                    <span class="invalid-feedback d-block"
+                                          role="alert"> <strong>{{ $message }}</strong> </span>
                                     @enderror
                                     <div class="form-group">
                                         <label>Suggestion Description</label>
                                         <textarea  class="form-control" name="suggestion_description" rows="4" placeholder="Enter Suggestion Description."></textarea>
                                     </div>
                                     @error('suggestion_description')
-                                    {{$message}}
+                                    <span class="invalid-feedback d-block"
+                                          role="alert"> <strong>{{ $message }}</strong> </span>
                                     @enderror
                                 </div>
                                 <!-- /.card-body -->

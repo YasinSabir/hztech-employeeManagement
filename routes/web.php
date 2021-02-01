@@ -19,7 +19,8 @@ Route::get('/', function () {
 */
 Route::get('/home', function () {
       //    return view('welcome');
-      return view('pages.index');
+    $notifications = auth()->User()->unreadNotifications;
+      return view('pages.index',compact('notifications'));
 })->name('dashboard.v1')->middleware('auth');
 
 Route::get('error', function () {

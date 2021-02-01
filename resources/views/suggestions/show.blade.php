@@ -116,7 +116,6 @@
                                                         </div>
                                                     </div>
                                                 </td><?php } ?>
-                                            @endif
                                         </tr>
                                     @endforeach
                                 @endif

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Complains;
+use App\Holiday;
 use App\Roles;
 use App\TimeLogs;
 use App\User;
@@ -345,23 +346,39 @@ class UserController extends Controller
     public function TimeLog(Request $request)
     {
         $timeZone                   = date_default_timezone_set("Asia/Karachi");
+        $dt = Carbon::now();
         $user_id                    = auth()->id();
         $usertime = new UserTime();
-        if ($request->data == "time_in" && self::const_timeIn) {
-            $usertime->user_id      = $user_id;
-            $usertime->time         = date('Y-m-d H:i:s');
-            $usertime->entry_type   = self::const_timeIn;
-            $usertime->save();
-            return response()->json(array(['msg' => 'Time In', 'status' => 'done']), 200);
-        } elseif ($request->data    == "time_out" && self::const_timeOut) {
-            $usertime->user_id      = $user_id;
-            $usertime->time         = date('Y-m-d H:i:s');
-            $usertime->entry_type   = self::const_timeOut;
-            $usertime->save();
-            return response()->json(array(['msg' => 'Time Out', 'status' => 'done']), 200);
-        } else {
-            return response()->json(array(['msg' => 'Something went wrong!', 'status' => 'done']), 422);
-        }
+        $holiday=Holiday::where('date','=',date('Y-m-d'))->first();
+        // && $dt->isMonday()
+            if(empty($holiday))
+            {
+                if(!$dt->isSaturday() || !$dt->isSunday())
+                {
+                    if ($request->data == "time_in" && self::const_timeIn) {
+                        $usertime->user_id = $user_id;
+                        $usertime->time = date('Y-m-d H:i:s');
+                        $usertime->entry_type = self::const_timeIn;
+                        $usertime->save();
+                        return response()->json(array(['msg' => 'Time In', 'status' => 'done']), 200);
+                    } elseif ($request->data    == "time_out" && self::const_timeOut) {
+                        $usertime->user_id = $user_id;
+                        $usertime->time = date('Y-m-d H:i:s');
+                        $usertime->entry_type = self::const_timeOut;
+                        $usertime->save();
+                        return response()->json(array(['msg' => 'Time Out', 'status' => 'done']), 200);
+                    } else {
+                        return response()->json(array(['msg' => 'Something went wrong!', 'status' => 'done']), 422);
+                    }
+                }
+                else{
+                    return response()->json(array(['msg' => 'Today is weekend', 'status' => 'notdone']), 422);
+                }
+            }
+            else {
+                return response()->json(array(['msg' => 'Today is Holiday You Cannot Mark Attendance!', 'status' => 'notdone']), 200);
+            }
+
     }
 
     public function DayLogView(Request $request)
@@ -566,29 +583,39 @@ class UserController extends Controller
 
     function manualtime(Request $request)
     {
+        $messages = [
+            'man_timein.required' => 'please enter a TimeIn!',
+            'man_timeout.required' => 'please enter a TimeOut!',
+        ];
         $this->validate($request, [
             'man_timein' => 'required',
             'man_timeout' => 'required',
-        ]);
-        //custom_varDump_die($request->all());
+        ],$messages);
+        $dt = Carbon::now();
+        $holiday=Holiday::where('date','=',date('Y-m-d'))->first();
+        if(empty($holiday)) {
+            if (!$dt->isSaturday() || !$dt->isSunday()) {
+                $first = new UserTime();
+                $first->user_id = auth()->id();
+                $first->time = $request->man_timein;
+                $first->entry_type = 1;
+                $first->save();
 
-        $first=new UserTime();
-        $first->user_id = auth()->id();
-        $first->time =$request->man_timein;
-        /*$datetime= new DateTime($request->man_timein);
-        $first     = $datetime->format('y-m-d');*/
-        $first->entry_type=1;
-        $first->save();
-
-        $second              =new UserTime();
-        $second->user_id     = auth()->id();
-        $second->time        =$request->man_timeout;
-//        $datetime            = new DateTime($request->man_timeout);
-//        $second              = $datetime->format('y-m-d');
-        $second->entry_type  =2;
-        $second->save();
-
-        $noti = array("message" => "Manual Time Added Successfully!", "alert-type" => "success");
+                $second = new UserTime();
+                $second->user_id = auth()->id();
+                $second->time = $request->man_timeout;
+                $second->entry_type = 2;
+                $second->save();
+                $noti = array("message" => "Manual Time Added Successfully !", "alert-type" => "success");
+            }
+            else{
+                $noti = array("message" => "Today is weekend !", "alert-type" => "error");
+            }
+        }
+        else{
+            $noti = array("message" => "Today is holiday!", "alert-type" => "error");
+        }
+        //$noti = array("message" => "Manual Time Added Successfully!", "alert-type" => "success");
         return redirect()->back()->with($noti);
 
     }

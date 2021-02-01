@@ -37,7 +37,8 @@
                                         <input type="text" value="{{$holiday->title}}" class="form-control" name="holiday_title" placeholder="Enter Holiday Title."/>
                                     </div>
                                     @error('holiday_title')
-                                    {{$message}}
+                                    <span class="invalid-feedback d-block"
+                                          role="alert"> <strong>{{ $message }}</strong> </span>
                                     @enderror
                                     <label>Select Holiday Date</label>
                                     <div class="form-group">
@@ -52,7 +53,8 @@
                                         </div>
                                     </div>
                                     @error('holiday_date')
-                                    {{$message}}
+                                    <span class="invalid-feedback d-block"
+                                          role="alert"> <strong>{{ $message }}</strong> </span>
                                     @enderror
                                 </div>
                                 <!-- /.card-body -->

@@ -95,9 +95,13 @@
 
                 <!-- Main row -->
                 <div class="row">
+                    <div class="col-lg-8">
+{{--                        @forelse($notifications as $notification)--}}
+{{--                        {{ $notification->data['fullname'] }}--}}
+{{--                        @empty--}}
 
-                    
-
+{{--                         @endforelse--}}
+                    </div>
                 </div>
                 <!-- /.row (main row) -->
 

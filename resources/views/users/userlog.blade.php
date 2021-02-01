@@ -134,18 +134,24 @@
                             <form method="post" action="{{route('users.manualtime')}}">
                                 @csrf
                                 <div class="modal-body">
-
                                     <div class="form-group">
                                         <label>Time In</label>
                                         <input type="datetime-local" class="form-control"
                                                name="man_timein"/>
                                     </div>
+                                    @error('man_timein')
+                                    <span class="invalid-feedback d-block mb-2"
+                                          role="alert"> <strong>{{ $message }}</strong> </span>
+                                    @enderror
                                     <div class="form-group">
                                         <label>Time Out</label>
                                         <input type="datetime-local" class="form-control"
                                                name="man_timeout"/>
                                     </div>
-
+                                    @error('man_timeout')
+                                    <span class="invalid-feedback d-block mb-2"
+                                          role="alert"> <strong>{{ $message }}</strong> </span>
+                                    @enderror
                                 </div>
                                 <div class="modal-footer justify-content-between">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -170,40 +176,40 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <select name="get_month" id="" class="form-control select2">
-                                            <option value="01" {{ ( !empty($_GET['get_month']) == '01') ? "selected" : ''  }}>
+                                            <option value="01" {{ ( !empty($_GET['get_month']) && $_GET['get_month'] == 01) ? "selected" : ''  }}>
                                                 Jan
                                             </option>
-                                            <option value="02" {{ (!empty($_GET['get_month']) == '02') ? "selected" : ''  }}>
+                                            <option value="02" {{ (!empty($_GET['get_month']) && $_GET['get_month']  == 02) ? "selected" : ''  }}>
                                                 Feb
                                             </option>
-                                            <option value="03" {{ (!empty($_GET['get_month']) == '03') ? "selected" : ''  }}>
+                                            <option value="03" {{ (!empty($_GET['get_month']) && $_GET['get_month']  == 03) ? "selected" : ''  }}>
                                                 Mar
                                             </option>
-                                            <option value="04" {{ (!empty($_GET['get_month']) == '04') ? "selected" : ''  }}>
+                                            <option value="04" {{ (!empty($_GET['get_month']) && $_GET['get_month']  == 04) ? "selected" : ''  }}>
                                                 Apr
                                             </option>
-                                            <option value="05" {{ (!empty($_GET['get_month']) == '05') ? "selected" : ''  }}>
+                                            <option value="05" {{ (!empty($_GET['get_month']) && $_GET['get_month'] == '05') ? "selected" : ''  }}>
                                                 May
                                             </option>
-                                            <option value="06" {{ (!empty($_GET['get_month']) == '06') ? "selected" : ''  }}>
+                                            <option value="06" {{ (!empty($_GET['get_month']) && $_GET['get_month'] == '06') ? "selected" : ''  }}>
                                                 June
                                             </option>
-                                            <option value="07" {{ (!empty($_GET['get_month']) == '07') ? "selected" : ''  }}>
+                                            <option value="07" {{ (!empty($_GET['get_month']) && $_GET['get_month'] == '07') ? "selected" : ''  }}>
                                                 July
                                             </option>
-                                            <option value="08" {{ (!empty($_GET['get_month']) == '08') ? "selected" : ''  }}>
+                                            <option value="08" {{ (!empty($_GET['get_month']) && $_GET['get_month'] == '08') ? "selected" : ''  }}>
                                                 Aug
                                             </option>
-                                            <option value="09" {{ (!empty($_GET['get_month']) == '09') ? "selected" : ''  }}>
+                                            <option value="09" {{ (!empty($_GET['get_month']) && $_GET['get_month'] == '09') ? "selected" : ''  }}>
                                                 Sept
                                             </option>
-                                            <option value="10" {{ (!empty($_GET['get_month']) == '10') ? "selected" : ''  }}>
+                                            <option value="10" {{ (!empty($_GET['get_month']) && $_GET['get_month'] == '10') ? "selected" : ''  }}>
                                                 Oct
                                             </option>
-                                            <option value="11" {{ (!empty($_GET['get_month']) == '11') ? "selected" : ''  }}>
+                                            <option value="11" {{ (!empty($_GET['get_month']) && $_GET['get_month'] == '11') ? "selected" : ''  }}>
                                                 Nov
                                             </option>
-                                            <option value="12" {{ (!empty($_GET['get_month']) == '12') ? "selected" : ''  }}>
+                                            <option value="12" {{ (!empty($_GET['get_month']) && $_GET['get_month'] == '12') ? "selected" : ''  }}>
                                                 Dec
                                             </option>
                                         </select>
@@ -352,12 +358,20 @@
                     "data": status
                 },
                 success: function (res) {
-                    console.log(res);
-                    toastr.success("Successfully time in.", "Time Log!");
-                    $('#time_in').css("display", "none");
-                    $('#manual_time').css("display", "none");
-                    $('#time_out').css("display", "inline-block");
-                    //$('#manual_time').css("display", "inline-block");
+                    if(res.status == 'notdone')
+                    {
+                        console.log(res);
+                        toastr.error("You can mark attendance.", "Time Log!");
+
+                    }
+                    else
+                    {
+                        console.log(res);
+                        toastr.success("Successfully time in.", "Time Log!");
+                        $('#time_in').css("display", "none");
+                        $('#manual_time').css("display", "none");
+                        $('#time_out').css("display", "inline-block");
+                    }
 
                 }
             });
@@ -370,17 +384,23 @@
             $.ajax({
                 url: '{{route('users.time_log')}}',
                 type: 'post',
-                // headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "data": status
                 },
                 success: function (res) {
-                    console.log(res);
-                    toastr.error("Successfully time out.", "Time Log!");
-                    $('#time_out').css("display", "none");
-                    //$('#manual_time').css("display", "none");
-                    $('#time_in').css("display", "inline-block");
+                    if(res.status == 'notdone')
+                    {
+                        console.log(res);
+                        toastr.error("You can mark attendance.", "Time Log!");
+                    }
+                    else{
+                        console.log(res);
+                        toastr.error("Successfully time out.", "Time Log!");
+                        $('#time_out').css("display", "none");
+                        //$('#manual_time').css("display", "none");
+                        $('#time_in').css("display", "inline-block");
+                    }
                 }
             });
             // $('#time_in').show();

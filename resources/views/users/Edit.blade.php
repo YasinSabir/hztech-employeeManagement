@@ -50,14 +50,16 @@
                                         <input type="text" value="{{$user->fullname}}" class="form-control" name="user_fullname" placeholder="Enter Full Name."/>
                                     </div>
                                     @error('user_fullname')
-                                    {{$message}}
+                                    <span class="invalid-feedback d-block"
+                                          role="alert"> <strong>{{ $message }}</strong> </span>
                                     @enderror
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input type="email" value="{{$user->email}}" class="form-control" name="user_email" placeholder="Enter User Email."/>
                                     </div>
                                     @error('user_email')
-                                    {{$message}}
+                                    <span class="invalid-feedback d-block"
+                                          role="alert"> <strong>{{ $message }}</strong> </span>
                                     @enderror
                                     <div class="form-group">
                                         <label>Role Title</label>
@@ -89,7 +91,8 @@
                                         <input type="password" value="{{$user->string_password}}" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                                     </div>
                                     @error('password')
-                                    {{$message}}
+                                    <span class="invalid-feedback d-block"
+                                          role="alert"> <strong>{{ $message }}</strong> </span>
                                     @enderror
                                 </div>
                                 <!-- /.card-body -->

@@ -248,10 +248,10 @@ function CalculateTime()
         }
     }
     foreach ($records as $k => $v) {
-        $diffs []       = number_format(Carbon::parse($v['time_out'])->floatDiffInMinutes(Carbon::parse($v['time_in'])), 0);
+        $diffs []       = number_format(Carbon::parse($v['time_out'])->floatDiffInMinutes(Carbon::parse($v['time_in'])), 2);
     }
     $TodaysTotal        = array_sum($diffs);
-    $hours              = $TodaysTotal / 60;
+    $hours              = number_format($TodaysTotal / 60,2);
     UserLogsTime::updateOrInsert(['user_id' => $user_id],[ 'todayhours' => $TodaysTotal,'created_at' => now(),'updated_at' => now()]);
     echo sprintf('%02d hours %02d mins', (int) $hours, fmod($hours, 1) * 60);
 
@@ -274,7 +274,7 @@ function TodaysRemaininghours()
         $checkdate              = $Format->format('Y-m-d');
         $day                    = $Format->format('d');
 
-        if ($checkdate == date('Y-m-d')) {
+        if ($checkdate == date('Y-m-d') || $checkdate == date('Y-m-d')) {
             $datetime           = new DateTime($entry->time);
             $date               = $datetime->format('d-m-Y');
             $time               = $datetime->format('H:i:s');
@@ -293,14 +293,14 @@ function TodaysRemaininghours()
         }
     }
     foreach ($records as $k => $v) {
-            $diffs []           = number_format(Carbon::parse($v['time_out'])->floatDiffInMinutes(Carbon::parse($v['time_in'])), 0);
+            $diffs []           = number_format(Carbon::parse($v['time_out'])->floatDiffInMinutes(Carbon::parse($v['time_in'])), 3);
     }
     $TodaysTotal=array_sum($diffs);
     $hours =0;
     if($TodaysTotal <= 540)
     {
         $ReaminHour             =540-$TodaysTotal;
-        $hours                  = $ReaminHour / 60;
+        $hours                  = number_format($ReaminHour / 60,2);
         UserLogsTime::updateOrInsert(['user_id' => $user_id],[ 'todayremaining' => $ReaminHour,'created_at' => now(),'updated_at' => now()]);
         echo sprintf('%02d hours %02d mins', (int) $hours, fmod($hours, 1) * 60);
     }
@@ -316,7 +316,7 @@ function MonthTotalHours()
 {
     $user_id    = auth()->id();
     $getdata    =UserLogsTime::where('user_id',$user_id)->first();
-    $hours      = $getdata->monthlyhours / 60;
+    $hours      = number_format($getdata->monthlyhours / 60,2);
     echo sprintf('%02d hours %02d mins', (int) $hours, fmod($hours, 1) * 60);
 }
 
@@ -364,7 +364,7 @@ function MonthRemainingHours()
     if($GetTimeData->monthlyremaining <= $GetTimeData->monthlyhours)
     {
         $ReaminHour             =$GetTimeData->monthlyhours - $GetTimeData->todayhours;
-        $hours                  = $ReaminHour / 60;
+        $hours                  = number_format($ReaminHour / 60,2);
         UserLogsTime::updateOrInsert(['user_id' => $user_id],[ 'monthtlyremaining' => $ReaminHour,'created_at' => now(),'updated_at' => now()]);
         echo sprintf('%02d hours %02d mins', (int) $hours, fmod($hours, 1) * 60);
 
