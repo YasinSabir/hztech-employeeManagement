@@ -6,7 +6,7 @@
         Route::get('add','UserController@create')->name('add')->middleware('permission:add user,add');
         Route::post('store','UserController@store')->name('store')->middleware('permission:add user,add');
 
-        Route::get('show','UserController@index')->name('show')->middleware('permission:view user,view');
+        Route::get('show','UserController@index')->name('show')->middleware('permission:view user,view');//,'maintain','restrict'
 
         Route::get('Edit' , function (){
             return view('users.Edit');

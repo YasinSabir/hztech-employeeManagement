@@ -59,14 +59,20 @@
                                 <thead>
                                 <tr>
                                     <th>Previlige</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <?php if(check_role_previliges('Edit','edit holiday'))
+                                    { ?>
+                                    <th>Edit</th><?php } ?>
+                                    <?php if(check_role_previliges('Edit','edit holiday'))
+                                    { ?>
+                                    <th>Delete</th><?php } ?>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @forelse($previlige as $previliges)
                                     <tr>
                                         <td>{{$previliges->title}}</td>
+                                        <?php if(check_role_previliges('Edit','edit permission'))
+                                        { ?>
                                         <td>
                                             <form action="{{route('previliges.Edit',$previliges->pu_id)}}" method="get">
                                                 @csrf
@@ -74,7 +80,9 @@
                                                     Edit
                                                 </button>
                                             </form>
-                                        </td>
+                                        </td><?php } ?>
+                                        <?php if(check_role_previliges('delete','delete permission'))
+                                        { ?>
                                         <td>
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter_{{$previliges->pu_id}}" >
                                                 Delete
@@ -102,7 +110,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </td>
+                                        </td><?php } ?>
                                     </tr>
                                 @empty
                                     <tr>

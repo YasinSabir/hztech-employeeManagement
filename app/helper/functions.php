@@ -97,6 +97,16 @@ function get_priviliges($role_id)
         ->where('role_id','=',$role_id)->get();
     return $get_priv;
 }
+
+function count_priviliges_role($role_id)
+{
+    $get_priv = DB::table('privilege_user')
+        ->join('privileges', 'privilege_user.privillige_id', '=', 'privileges.id')
+        ->select('privilege_user.privillige_id', 'privileges.title','privileges.guard_name','privilege_user.role_id')
+        ->where('role_id','=',$role_id)->count();
+    return $get_priv;
+}
+
 function check_role_previliges($guardname,$title)
 {
     $user=User::where('id','=',auth()->id())->first();
