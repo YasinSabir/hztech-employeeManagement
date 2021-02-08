@@ -21,8 +21,8 @@ class RestrictIp
         $clientIP = request()->ip();
         //if (in_array($request->ip(), $this->restrictIps)) {
         if($clientIP == '192.168.100.191'){
-            //return response()->json(['you dont have permission to access this application.']);
-            throw new HttpException(503);
+            //return response()->json(["you don't have permission to access this application."]);
+            throw new HttpException(404);
         }
         return $next($request);
         //throw new HttpException(503);
