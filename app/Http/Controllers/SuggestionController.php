@@ -59,7 +59,21 @@ class SuggestionController extends Controller
      */
     public function show()
     {
+        $data=Suggestions::where('user_id',auth()->id())->get();
+        if(empty($data))
+        {
+            return view('errors.error404');
+        }
+        return view('suggestions.show',compact('data'));
+    }
+
+    public function viewall()
+    {
         $data=Suggestions::all();
+        if(empty($data))
+        {
+            return view('errors.error404');
+        }
         return view('suggestions.show',compact('data'));
     }
 
@@ -72,6 +86,10 @@ class SuggestionController extends Controller
     public function edit($id)
     {
         $suggestion=Suggestions::find($id);
+        if(empty($suggestion))
+        {
+            return view('errors.error404');
+        }
         return view('suggestions.Edit',compact('suggestion'));
     }
 

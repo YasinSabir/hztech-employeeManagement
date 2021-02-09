@@ -105,6 +105,10 @@ class UserController extends Controller
     {
         $role = Roles::all();
         $user = User::find($id);
+        if(empty($user))
+        {
+            return view('errors.error404');
+        }
         return view('users.Edit', compact('user', 'role'));
     }
 
@@ -154,6 +158,10 @@ class UserController extends Controller
     public function profile()
     {
         $user = User::find(auth()->id());
+        if(empty($user))
+        {
+            return view('errors.error404');
+        }
         return view('users.profile', compact('user'));
     }
 

@@ -58,8 +58,22 @@ class ComplainController extends Controller
      */
     public function show()
     {
-        $data=Complains::all();
+        $data=Complains::where('user_id',auth()->id())->get();
+        if(empty($data))
+        {
+            return view('errors.error404');
+        }
         return view('complains.show',compact('data'));
+    }
+
+    public function viewall()
+    {
+        $data=Complains::all();
+        if(empty($data))
+        {
+            return view('errors.error404');
+        }
+        return view('complains.viewall',compact('data'));
     }
 
     /**
@@ -71,6 +85,10 @@ class ComplainController extends Controller
     public function edit($id)
     {
         $complain=Complains::find($id);
+        if(empty($complain))
+        {
+            return view('errors.error404');
+        }
         return view('complains.Edit',compact('complain'));
     }
 

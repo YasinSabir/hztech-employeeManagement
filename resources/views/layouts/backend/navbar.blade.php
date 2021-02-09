@@ -1,4 +1,5 @@
 <!-- Main Sidebar Container -->
+<!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -215,12 +216,21 @@
                             { ?>
                             <a href="{{route('suggestions.show')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>View All</p>
+                                <p>Your Suggestions</p>
                             </a>
                         </li><?php } ?>
+                            <li class="nav-item">
+                                <?php if(check_role_previliges('view all','view all suggestion'))
+                                { ?>
+                                <a href="{{route('suggestions.viewall')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>View All</p>
+                                </a>
+                            </li><?php } ?>
                     </ul>
                 </li>
                 @endif
+                @if(count_role_previliges('application') > 0)
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-newspaper"></i>
@@ -230,20 +240,33 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <?php if(check_role_previliges('add','add application'))
+                        { ?>
                         <li class="nav-item">
                             <a href="{{route('applications.add')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add New</p>
                             </a>
-                        </li>
+                        </li><?php } ?>
+                        <?php if(check_role_previliges('view','view application'))
+                        { ?>
                         <li class="nav-item">
                             <a href="{{route('applications.show')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
+                                <p>Your Applications</p>
+                            </a>
+                        </li><?php } ?>
+                        <?php if(check_role_previliges('view all','view all application'))
+                        { ?>
+                        <li class="nav-item">
+                            <a href="{{route('applications.viewall')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
                                 <p>View All</p>
                             </a>
-                        </li>
+                        </li><?php } ?>
                     </ul>
                 </li>
+                @endif
                 @if(count_role_previliges('complain') > 0)
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -262,8 +285,15 @@
                                 <p>Add New</p>
                             </a>
                         </li><?php } ?>
-
                             <?php if(check_role_previliges('view','view complain'))
+                            { ?>
+                            <li class="nav-item">
+                                <a href="{{route('complains.show')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Your Complains</p>
+                                </a>
+                            </li><?php } ?>
+                            <?php if(check_role_previliges('view all','view all complain'))
                             { ?>
                         <li class="nav-item">
                             <a href="{{route('complains.show')}}" class="nav-link">

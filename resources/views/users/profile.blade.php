@@ -274,10 +274,13 @@
                                                                 <span class="input-group-text"><i
                                                                         class="far fa-calendar-alt"></i></span>
                                                             </div>
-                                                            <input type="text" name="dob" class="form-control col-md-9"
-                                                                   data-inputmask-alias="datetime"
-                                                                   data-inputmask-inputformat="dd/mm/yyyy" data-mask value="{{get_user_meta(auth()->id(),'dob')}}">
+                                                            <input type="date" class="form-control col-md-9"
+                                                                   name="dob" value="{{get_user_meta(auth()->id(),'dob')}}"/>
                                                         </div>
+{{--                                                        <div class="input-group col-sm-10">--}}
+{{--                                                            <input type="date" class="form-control"--}}
+{{--                                                                   name="dob" value="{{get_user_meta(auth()->id(),'dob')}}"/>--}}
+{{--                                                        </div>--}}
                                                         <label for="inputName2" class="col-sm-6 col-form-label">User
                                                             Role</label>
                                                         <div class="form-group row ">

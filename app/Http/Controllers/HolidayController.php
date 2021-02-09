@@ -56,6 +56,10 @@ class HolidayController extends Controller
     public function show()
     {
         $data=Holiday::select('id','title','date','created_at')->get();
+        if(empty($data))
+        {
+            return view('errors.error404');
+        }
         return view('holidays.show',compact('data'));
     }
 
@@ -68,6 +72,10 @@ class HolidayController extends Controller
     public function edit($id)
     {
         $holiday=Holiday::find($id);
+        if(empty($holiday))
+        {
+            return view('errors.error404');
+        }
         return view('holidays.Edit',compact('holiday'));
     }
 

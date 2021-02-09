@@ -33,7 +33,7 @@
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label>Suggestion Title</label>
+                                        <label>Complain Title</label>
                                         <input type="text" class="form-control" name="complain_title" placeholder="Enter Complain Title."/>
                                     </div>
                                     @error('complain_title')
@@ -41,7 +41,7 @@
                                           role="alert"> <strong>{{ $message }}</strong> </span>
                                     @enderror
                                     <div class="form-group">
-                                        <label>Suggestion Description</label>
+                                        <label>Complain Description</label>
                                         <textarea  class="form-control" name="complain_description" rows="4" placeholder="Enter Complain Description."></textarea>
                                     </div>
                                     @error('complain_description')

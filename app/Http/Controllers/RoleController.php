@@ -58,6 +58,10 @@ class RoleController extends Controller
     public function show()
     {
         $roles = Roles::all();
+        if(empty($roles))
+        {
+            return view('errors.error404');
+        }
         return view('roles.show', compact('roles'));
     }
 
@@ -70,6 +74,10 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Roles::find($id);
+        if(empty($role))
+        {
+            return view('errors.error404');
+        }
         return view('roles.Edit', compact('role'));
     }
 

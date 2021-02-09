@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>All Applications</h1>
+                        <h1>All Complain</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">All Applications</li>
+                            <li class="breadcrumb-item active">All Complain</li>
                         </ol>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Applications</h3>
+                            <h3 class="card-title">Complain</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -32,31 +32,74 @@
                                 <thead>
                                 <tr>
                                     <th>Title</th>
-                                    <th>Application By</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th>Complain By</th>
                                     <th>Date</th>
-                                    <th>view</th>
+                                    <?php if(check_role_previliges('Edit','edit complain'))
+                                    { ?>
+                                    <th>Edit</th><?php } ?>
+                                    <?php if(check_role_previliges('delete','delete complain'))
+                                    { ?>
+                                    <th>Delete</th><?php } ?>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if($app->count() == 0)
+                                @if($data->count() == 0)
                                     <tr>
                                         No Suggestions Added Yet
                                     </tr>
                                 @else
-                                    @foreach($app as $data)
+                                    @foreach($data as $data)
                                         @php
                                             $user = \App\User::find($data->user_id);
                                         @endphp
                                         <tr>
                                             <td>{{$data->title}}</td>
+                                            <td>{{$data->description}}</td>
+                                            <td>{{$data->status}}</td>
                                             <td>{{ ($user) ? $user->fullname : "Not Found"  }}</td>
                                             <td>{{$data->created_at}}</td>
+                                            <?php if(check_role_previliges('Edit','edit complain'))
+                                            { ?>
                                             <td>
-                                                <form action="{{route('applications.view',$data->id)}}" method="get">
+                                                <form action="{{route('complains.Edit',$data->id)}}" method="get">
                                                     @csrf
-                                                    <a href="{{route('applications.view',$data->id)}}" style="color:black;"><i class="far fa-eye"></i></a>
+                                                    <button class="btn btn-success">
+                                                        Edit
+                                                    </button>
                                                 </form>
-                                            </td>
+                                            </td><?php } ?>
+                                            <?php if(check_role_previliges('delete','delete complain'))
+                                            { ?>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter_{{$data->id}}" >
+                                                    Delete
+                                                </button>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModalCenter_{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Are you sure you want to delete.
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <form method="post" action="{{route('complains.delete', ['id' => $data->id])}}">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-info">Save changes</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td><?php } ?>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -69,6 +112,7 @@
             </div>
         </section>
     </div>
+
 
 
 @endsection
