@@ -261,7 +261,7 @@ function CalculateTime()
         $diffs []       = number_format(Carbon::parse($v['time_out'])->floatDiffInMinutes(Carbon::parse($v['time_in'])), 2);
     }
     $TodaysTotal        = array_sum($diffs);
-    $hours              = number_format($TodaysTotal / 60,2);
+    $hours              = number_format($TodaysTotal / 60,3);
     UserLogsTime::updateOrInsert(['user_id' => $user_id],[ 'todayhours' => $TodaysTotal,'created_at' => now(),'updated_at' => now()]);
     echo sprintf('%02d hours %02d mins', (int) $hours, fmod($hours, 1) * 60);
 
