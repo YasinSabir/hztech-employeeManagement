@@ -28,18 +28,18 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>Title</th>
-                                    <th>Description</th>
                                     <th>Status</th>
                                     <th>Complain By</th>
                                     <th>Date</th>
-                                    <?php if(check_role_previliges('Edit','edit complain'))
+                                    <th>View</th>
+                                    <?php if(check_role_previliges('Edit all','edit all complain'))
                                     { ?>
                                     <th>Edit</th><?php } ?>
-                                    <?php if(check_role_previliges('delete','delete complain'))
+                                    <?php if(check_role_previliges('delete all','delete all complain'))
                                     { ?>
                                     <th>Delete</th><?php } ?>
                                 </tr>
@@ -56,21 +56,26 @@
                                         @endphp
                                         <tr>
                                             <td>{{$data->title}}</td>
-                                            <td>{{$data->description}}</td>
                                             <td>{{$data->status}}</td>
                                             <td>{{ ($user) ? $user->fullname : "Not Found"  }}</td>
                                             <td>{{$data->created_at}}</td>
-                                            <?php if(check_role_previliges('Edit','edit complain'))
+                                            <td>
+                                                <form action="{{route('complains.view',encrypt($data->id))}}" method="get">
+                                                    @csrf
+                                                    <a href="{{route('complains.view', encrypt($data->id))}}" style="color:black;"><i class="far fa-eye"></i></a>
+                                                </form>
+                                            </td>
+                                            <?php if(check_role_previliges('Edit all','edit all complain'))
                                             { ?>
                                             <td>
-                                                <form action="{{route('complains.Edit',$data->id)}}" method="get">
+                                                <form action="{{route('complains.EditAll',encrypt($data->id))}}" method="get">
                                                     @csrf
                                                     <button class="btn btn-success">
                                                         Edit
                                                     </button>
                                                 </form>
                                             </td><?php } ?>
-                                            <?php if(check_role_previliges('delete','delete complain'))
+                                            <?php if(check_role_previliges('delete all','delete all complain'))
                                             { ?>
                                             <td>
                                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter_{{$data->id}}" >
@@ -90,7 +95,7 @@
                                                                 Are you sure you want to delete.
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form method="post" action="{{route('complains.delete', ['id' => $data->id])}}">
+                                                                <form method="post" action="{{route('complains.deleteall', ['id' => $data->id])}}">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit" class="btn btn-info">Save changes</button>
@@ -121,6 +126,15 @@
 
     <script>
         $(function () {
+            $("#example1").DataTable();
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": false,
+                "info": true,
+                "autoWidth": false,
+            });
             //Initialize Select2 Elements
             $('.select2').select2()
 

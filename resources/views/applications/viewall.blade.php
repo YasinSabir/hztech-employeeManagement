@@ -28,7 +28,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>Title</th>
@@ -55,9 +55,9 @@
                                             <td>{{ ($user) ? $user->fullname : "Not Found"  }}</td>
                                             <td>{{$data->created_at}}</td>
                                             <td>
-                                                <form action="{{route('applications.view',$data->id)}}" method="get">
+                                                <form action="{{route('applications.view',encrypt($data->id))}}" method="get">
                                                     @csrf
-                                                    <a href="{{route('applications.view',$data->id)}}" style="color:black;"><i class="far fa-eye"></i></a>
+                                                    <a href="{{route('applications.view',encrypt($data->id))}}" style="color:black;"><i class="far fa-eye"></i></a>
                                                 </form>
                                             </td>
                                             <?php if(check_role_previliges('delete','delete application'))
@@ -80,7 +80,7 @@
                                                                 Are you sure you want to delete.
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form method="post" action="{{route('applications.delete', ['id' => $data->id])}}">
+                                                                <form method="post" action="{{route('applications.deleteall', ['id' => $data->id])}}">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit" class="btn btn-info">Save changes</button>
@@ -110,6 +110,16 @@
 
     <script>
         $(function () {
+
+            $("#example1").DataTable();
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": false,
+                "info": true,
+                "autoWidth": false,
+            });
             //Initialize Select2 Elements
             $('.select2').select2()
 

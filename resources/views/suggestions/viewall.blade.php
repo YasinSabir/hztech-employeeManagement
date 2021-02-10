@@ -28,22 +28,22 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>Title</th>
-                                    <th>Description</th>
                                     <th>Status</th>
                                     <th>Suggestion By</th>
+                                    <th>View</th>
                                     <th>Date</th>
                                     <?php
-                                    if(check_role_previliges('Edit','edit suggestion'))
+                                    if(check_role_previliges('Edit all','edit all suggestion'))
                                     {
                                     ?>
                                     <th>Edit</th>
                                     <?php } ?>
                                     <?php
-                                    if(check_role_previliges('delete','delete suggestion'))
+                                    if(check_role_previliges('delete all','delete all suggestion'))
                                     {
                                     ?>
                                     <th>Delete</th>
@@ -62,22 +62,27 @@
                                         @endphp
                                         <tr>
                                             <td>{{$data->title}}</td>
-                                            <td>{{$data->description}}</td>
                                             <td>{{$data->status}}</td>
                                             <td>{{ ($user) ? $user->fullname : "Not Found"  }}</td>
                                             <td>{{$data->created_at}}</td>
-                                            <?php if(check_role_previliges('Edit','edit suggestion'))
+                                            <td>
+                                                <form action="{{route('suggestions.view',encrypt($data->id))}}" method="get">
+                                                    @csrf
+                                                    <a href="{{route('suggestions.view',encrypt($data->id))}}" style="color:black;"><i class="far fa-eye"></i></a>
+                                                </form>
+                                            </td>
+                                            <?php  if(check_role_previliges('Edit all','edit all suggestion'))
                                             {
                                             ?>
                                             <td>
-                                                <form action="{{route('suggestions.Edit',$data->id)}}" method="get">
+                                                <form action="{{route('suggestions.EditAll',encrypt($data->id))}}" method="get">
                                                     @csrf
                                                     <button class="btn btn-success">
                                                         Edit
                                                     </button>
                                                 </form>
                                             </td><?php } ?>
-                                            <?php if(check_role_previliges('delete','delete suggestion'))
+                                            <?php if(check_role_previliges('delete all','delete all suggestion'))
                                             {
                                             ?>
                                             <td>
@@ -104,7 +109,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <form method="post"
-                                                                      action="{{route('suggestions.delete', ['id' => $data->id])}}">
+                                                                      action="{{route('suggestions.deleteall', ['id' => $data->id])}}">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit" class="btn btn-info">Save
@@ -136,6 +141,15 @@
 
     <script>
         $(function () {
+            $("#example1").DataTable();
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": false,
+                "info": true,
+                "autoWidth": false,
+            });
             //Initialize Select2 Elements
             $('.select2').select2()
 

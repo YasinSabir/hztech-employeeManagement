@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>View Application</h1>
+                        <h1>View Suggestion</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">View Application</li>
+                            <li class="breadcrumb-item active">View Suggestion</li>
                         </ol>
                     </div>
                 </div>
@@ -25,11 +25,11 @@
                     <div class="col-md-12">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">View Application</h3>
+                                <h3 class="card-title">View Suggestion</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form role="form" method="get" action="{{route('applications.view',['id' => $app->id])}}">
+                            <form role="form" method="get" action="{{route('suggestions.view',['id' => $data->id])}}">
                                 @csrf
                                 <div class="card card-outline card-info">
                                     <div class="card-header">
@@ -46,14 +46,14 @@
                                     <!-- /.card-header -->
                                     <div class="card-body pad">
                                         <div class="form-group">
-                                            <label>Application Title</label>
-                                            <input type="text" class="form-control" value="{{$app->title}}" disabled name="title" placeholder="Enter Application Title."/>
+                                            <label>Suggestion Title</label>
+                                            <input type="text" class="form-control" value="{{$data->title}}" disabled name="title" placeholder="Enter Application Title."/>
                                         </div>
                                         <div class="mb-3">
                                             <div class="form-group">
-                                                <label>Application Description</label>
+                                                <label>Suggestion Description</label>
                                                 <textarea disabled class="form-control" name="description" rows="20"
-                                                          placeholder="Write your application here ....">{{strip_tags($app->description)}}</textarea>
+                                                          placeholder="Write your application here ....">{{strip_tags($data->description)}}</textarea>
                                             </div>
 
                                         </div>

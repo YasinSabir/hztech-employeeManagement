@@ -38,7 +38,7 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'role_description' => 'required|max:255',
-            'role_title' => 'required|unique:Roles,title',
+            'role_title' => 'required|unique:roles,title',
         ]);
         Roles::create([
             'title' => $request->role_title,
@@ -73,7 +73,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = Roles::find($id);
+        $role = Roles::find(decrypt($id));
         if(empty($role))
         {
             return view('errors.error404');
@@ -92,16 +92,17 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'role_description' => 'required|max:255',
-            'role_title' => 'required|unique:Roles,title',
         ]);
+        $getrole = Roles::select('title')->where('id',$id)->first();
         $role = new Roles();
         $role = Roles::find($id);
-        $role->title = $request->role_title;
+        $role->title = $getrole->title;
+        //custom_varDump_die($getrole->title);
         $role->description = $request->role_description;
         $role->status = $request->role_status;
         $role->update();
         $noti = array("message" => "Role Updated Successfully!", "alert-type" => "success");
-        return redirect()->back()->with($noti);
+        return redirect()->route('roles.show')->with($noti);
     }
 
     /**

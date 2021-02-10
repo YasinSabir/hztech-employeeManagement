@@ -310,7 +310,7 @@ function TodaysRemaininghours()
     if($TodaysTotal <= 540)
     {
         $ReaminHour             =540-$TodaysTotal;
-        $hours                  = number_format($ReaminHour / 60,2);
+        $hours                  = number_format($ReaminHour / 60,3);
         UserLogsTime::updateOrInsert(['user_id' => $user_id],[ 'todayremaining' => $ReaminHour,'created_at' => now(),'updated_at' => now()]);
         echo sprintf('%02d hours %02d mins', (int) $hours, fmod($hours, 1) * 60);
     }

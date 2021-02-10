@@ -10,6 +10,7 @@
         Route::get('viewall', 'ApplicationController@viewall')->name('viewall');
 
         Route::delete('delete/{id}', 'ApplicationController@destroy')->name('delete');
+        Route::delete('deleteall/{id}', 'ApplicationController@destroyall')->name('deleteall');
 
         Route::get('Edit' , function (){
             return view('applications.Edit');

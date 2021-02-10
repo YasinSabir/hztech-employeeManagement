@@ -40,10 +40,21 @@
                                     <span class="invalid-feedback d-block"
                                           role="alert"> <strong>{{ $message }}</strong> </span>
                                     @enderror
+{{--                                    <div class="form-group">--}}
+{{--                                        <label>Select Holiday Date</label>--}}
+{{--                                        <input type="date" class="form-control"--}}
+{{--                                               name="holiday_date"/>--}}
+{{--                                    </div>--}}
                                     <div class="form-group">
-                                        <label>Select Holiday Date</label>
-                                        <input type="date" class="form-control"
-                                               name="holiday_date"/>
+                                        <label>Holiday Date:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" name="holiday_date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                                        </div>
+                                        <!-- /.input group -->
                                     </div>
                                     @error('holiday_date')
                                     <span class="invalid-feedback d-block"
@@ -70,6 +81,7 @@
     <script>
 
         $(function () {
+
             //Initialize Select2 Elements
             $('.select2').select2()
 

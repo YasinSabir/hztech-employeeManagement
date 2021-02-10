@@ -176,6 +176,7 @@ class UserController extends Controller
             'fullname.required' => 'please enter a full name!',
             'address.required' => 'please enter a address!',
             'designation.required' => 'please enter a designation!',
+            'dob.required' => 'please enter a date of birth!',
 //            'phonenumber.required'      => 'please enter a valid phone number!',
 //            'phonenumber.max'           => ':attribute may not be greater than 12 digits!',
             'picture.required' => 'please enter a picture!',
@@ -186,6 +187,7 @@ class UserController extends Controller
             'fullname' => 'required',
             'address' => 'required|max:500',
             'designation' => 'required',
+            'dob' => 'required|date_format:mm/dd/yyyy',
 //            'phonenumber'       => 'required|min:11|max:12',
 
         ], $messages);

@@ -10,6 +10,7 @@ class Roles extends Model
     protected $fillable = [
         'title','description','status',
     ];
+    protected $table="roles";
     public function RolesBelongsToUser()
     {
     	//this role belongs to this user.

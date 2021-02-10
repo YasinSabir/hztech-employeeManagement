@@ -1,69 +1,70 @@
 @extends('layouts.backend.app')
 @section('section')
 
-    <!-- Content Wrapper. Contains page content -->
+
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>All Applications</h1>
+                        <h1>Edit Suggestions</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">All Applications</li>
+                            <li class="breadcrumb-item active">Edit Suggestions</li>
                         </ol>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
         <section class="content">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Applications</h3>
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-8">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Edit Suggestions</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form role="form" method="post" action="{{route('suggestions.EditAll',['id' => $suggestion->id])}}">
+                                @csrf
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>Suggestion Title</label>
+                                        <input type="text" value="{{$suggestion->title}}" class="form-control" name="suggestion_title" placeholder="Enter Suggestion Title."/>
+                                    </div>
+                                    @error('suggestion_title')
+                                    <span class="invalid-feedback d-block"
+                                          role="alert"> <strong>{{ $message }}</strong> </span>
+                                    @enderror
+                                    <div class="form-group">
+                                        <label>Suggestion Description</label>
+                                        <textarea  class="form-control" name="suggestion_description" rows="4" placeholder="Enter Suggestion Description.">{{$suggestion->description}}</textarea>
+                                    </div>
+                                    @error('suggestion_description')
+                                    <span class="invalid-feedback d-block"
+                                          role="alert"> <strong>{{ $message }}</strong> </span>
+                                    @enderror
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select class="form-control select2" name="suggestion_status" style="width: 100%;">
+                                            <option value="Approved" {{ ( !empty($suggestion->status) && $suggestion->status == "Approved"  ) ? "selected" : '' }} >Approved</option>
+                                            <option value="Pending" {{ ( !empty($suggestion->status) && $suggestion->status == "Pending"  ) ? "selected" : '' }} >Pending</option>
+                                            <option value="Reject" {{ ( !empty($suggestion->status) && $suggestion->status == "Reject"  ) ? "selected" : '' }} >Reject</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Application By</th>
-                                    <th>Date</th>
-                                    <th>view</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @if($app->count() == 0)
-                                    <tr>
-                                        No Suggestions Added Yet
-                                    </tr>
-                                @else
-                                    @foreach($app as $data)
-                                        @php
-                                            $user = \App\User::find($data->user_id);
-                                        @endphp
-                                        <tr>
-                                            <td>{{$data->title}}</td>
-                                            <td>{{ ($user) ? $user->fullname : "Not Found"  }}</td>
-                                            <td>{{$data->created_at}}</td>
-                                            <td>
-                                                <form action="{{route('applications.view',encrypt($data->id))}}" method="get">
-                                                    @csrf
-                                                    <a href="{{route('applications.view',encrypt($data->id))}}" style="color:black;"><i class="far fa-eye"></i></a>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endif
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
                     </div>
                 </div>
             </div>
@@ -77,15 +78,6 @@
 
     <script>
         $(function () {
-            $("#example1").DataTable();
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": true,
-                "ordering": false,
-                "info": true,
-                "autoWidth": false,
-            });
             //Initialize Select2 Elements
             $('.select2').select2()
 

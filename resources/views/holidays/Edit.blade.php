@@ -40,17 +40,16 @@
                                     <span class="invalid-feedback d-block"
                                           role="alert"> <strong>{{ $message }}</strong> </span>
                                     @enderror
-                                    <label>Select Holiday Date</label>
                                     <div class="form-group">
+                                        <label>Holiday Date:</label>
+
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                            class="far fa-calendar-alt"></i></span>
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text"  value="{{$holiday->date}}" id="mydate" class="form-control"
-                                                   name="holiday_date" data-inputmask-alias="datetime"
-                                                   data-inputmask-inputformat="yyyy-mm-dd" data-mask>
+                                            <input type="text" value="{{$holiday->date}}" name="holiday_date" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                                         </div>
+                                        <!-- /.input group -->
                                     </div>
                                     @error('holiday_date')
                                     <span class="invalid-feedback d-block"

@@ -28,7 +28,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>Title</th>
@@ -58,7 +58,7 @@
                                         <?php if(check_role_previliges('Edit','edit role'))
                                         { ?>
                                         <td>
-                                            <form action="{{route('roles.Edit',$role->id)}}" method="get">
+                                            <form action="{{route('roles.Edit',encrypt($role->id))}}" method="get">
                                                 @csrf
                                                 <button class="btn btn-success">
                                                     Edit
@@ -115,6 +115,15 @@
 
     <script>
         $(function () {
+            $("#example1").DataTable();
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": false,
+                "info": true,
+                "autoWidth": false,
+            });
             //Initialize Select2 Elements
             $('.select2').select2()
 

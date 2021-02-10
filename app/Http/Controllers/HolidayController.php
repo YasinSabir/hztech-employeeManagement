@@ -37,11 +37,12 @@ class HolidayController extends Controller
     {
         $this->validate($request, [
             'holiday_title' => 'required|max:255',
-            'holiday_date' => 'required|unique:Holiday,date',
+            'holiday_date' => 'required|unique:holiday,date',
         ]);
+        //custom_varDump_die($request->all());
         $holiday= new Holiday();
         $holiday->title = $request->holiday_title;
-        $holiday->date = $request->holiday_date;
+        $holiday->date  = $request->holiday_date;
         $holiday->save();
         $noti = array("message" => "Holiday Added Successfully!", "alert-type" => "success");
         return redirect()->route('holidays.show')->with($noti);
@@ -71,8 +72,10 @@ class HolidayController extends Controller
      */
     public function edit($id)
     {
-        $holiday=Holiday::find($id);
-        if(empty($holiday))
+        $newid = decrypt($id);
+        $holiday=Holiday::find($newid);
+        //custom_varDump_die(decrypt($id));
+        if(empty($holiday) || $holiday->id != decrypt($id))
         {
             return view('errors.error404');
         }
@@ -88,9 +91,12 @@ class HolidayController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $message=[
+            'holiday_date.before_or_equal' => 'holiday date must be valid.'
+        ];
         $this->validate($request, [
             'holiday_title' => 'required|max:255',
-            'holiday_date' => 'required|unique:Holiday,date',
+            'holiday_date' => 'required|unique:holiday,date',
         ]);
         $holiday= new Holiday();
         $holiday=Holiday::find($id);

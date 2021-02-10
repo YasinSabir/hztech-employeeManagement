@@ -296,7 +296,7 @@
                             <?php if(check_role_previliges('view all','view all complain'))
                             { ?>
                         <li class="nav-item">
-                            <a href="{{route('complains.show')}}" class="nav-link">
+                            <a href="{{route('complains.viewall')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>View All</p>
                             </a>

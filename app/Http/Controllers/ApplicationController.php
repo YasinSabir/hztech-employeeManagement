@@ -70,7 +70,7 @@ class ApplicationController extends Controller
 
     public function view($id)
     {
-        $app=Applications::find($id);
+        $app=Applications::find(decrypt($id));
         if(empty($app))
         {
             return view('errors.error404');
@@ -117,6 +117,14 @@ class ApplicationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    {
+        $app=Applications::find($id);
+        $app->delete();
+        $noti = array("message" => "Application Deleted Successfully!", "alert-type" => "success");
+        return redirect()->back()->with($noti);
+    }
+
+    public function destroyall($id)
     {
         $app=Applications::find($id);
         $app->delete();

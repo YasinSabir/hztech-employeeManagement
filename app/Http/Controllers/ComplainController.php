@@ -76,6 +76,16 @@ class ComplainController extends Controller
         return view('complains.viewall',compact('data'));
     }
 
+    public function view($id)
+    {
+        $app=Complains::find(decrypt($id));
+        if(empty($app))
+        {
+            return view('errors.error404');
+        }
+        return view('complains.view',compact('app'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -84,7 +94,7 @@ class ComplainController extends Controller
      */
     public function edit($id)
     {
-        $complain=Complains::find($id);
+        $complain=Complains::find(decrypt($id));
         if(empty($complain))
         {
             return view('errors.error404');
@@ -116,6 +126,32 @@ class ComplainController extends Controller
         return redirect()->route('complains.show')->with($noti);
     }
 
+    public function editall($id)
+    {
+        $complain=Complains::find(decrypt($id));
+        if(empty($complain))
+        {
+            return view('errors.error404');
+        }
+        return view('complains.Editall',compact('complain'));
+    }
+
+    public function updateall(Request $request, $id)
+    {
+        $this->validate($request, [
+            'complain_title' => 'required|max:50',
+            'complain_description' => 'required|max:500',
+        ]);
+        $complain= new Complains();
+        $complain=Complains::find($id);
+        $complain->title = $request->complain_title;
+        $complain->description = $request->complain_description;
+        $complain->status= $request->complain_status;
+        $complain->user_id = auth()->id();
+        $complain->update();
+        $noti = array("message" => "Complain Updated Successfully!", "alert-type" => "success");
+        return redirect()->route('complains.viewall')->with($noti);
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -123,6 +159,14 @@ class ComplainController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    {
+        $complain=Complains::find($id);
+        $complain->delete();
+        $noti = array("message" => "Complain Deleted Successfully!", "alert-type" => "success");
+        return redirect()->back()->with($noti);
+    }
+
+    public function destroyall($id)
     {
         $complain=Complains::find($id);
         $complain->delete();

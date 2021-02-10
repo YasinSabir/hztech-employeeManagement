@@ -13,7 +13,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Add Suggestions</li>
+                            <li class="breadcrumb-item active">Edit Suggestions</li>
                         </ol>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                     <div class="col-md-8">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Add Suggestions</h3>
+                                <h3 class="card-title">Edit Suggestions</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->

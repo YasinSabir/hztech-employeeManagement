@@ -28,13 +28,13 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>Title</th>
-                                    <th>Description</th>
                                     <th>Status</th>
                                     <th>Suggestion By</th>
+                                    <th>View</th>
                                     <th>Date</th>
                                     <?php
                                     if(check_role_previliges('Edit','edit suggestion'))
@@ -62,15 +62,20 @@
                                         @endphp
                                         <tr>
                                             <td>{{$data->title}}</td>
-                                            <td>{{$data->description}}</td>
                                             <td>{{$data->status}}</td>
                                             <td>{{ ($user) ? $user->fullname : "Not Found"  }}</td>
                                             <td>{{$data->created_at}}</td>
+                                            <td>
+                                                <form action="{{route('suggestions.view',encrypt($data->id))}}" method="get">
+                                                    @csrf
+                                                    <a href="{{route('suggestions.view',encrypt($data->id))}}" style="color:black;"><i class="far fa-eye"></i></a>
+                                                </form>
+                                            </td>
                                             <?php if(check_role_previliges('Edit','edit suggestion'))
                                             {
                                             ?>
                                                 <td>
-                                                    <form action="{{route('suggestions.Edit',$data->id)}}" method="get">
+                                                    <form action="{{route('suggestions.Edit',encrypt($data->id))}}" method="get">
                                                         @csrf
                                                         <button class="btn btn-success">
                                                             Edit
@@ -136,6 +141,15 @@
 
     <script>
         $(function () {
+            $("#example1").DataTable();
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": false,
+                "info": true,
+                "autoWidth": false,
+            });
             //Initialize Select2 Elements
             $('.select2').select2()
 

@@ -51,9 +51,10 @@
                                 <span class="invalid-feedback d-block mb-3"
                                       role="alert"> <strong>{{ $message }}</strong> </span>
                                 @enderror
-                                <div class="mb-3">
-                                  <textarea class="textarea" name="description" placeholder="Place some text here"
-                                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                <div class="form-group">
+                                    <label>Application Description</label>
+                                    <textarea class="form-control" name="description" rows="20"
+                                              placeholder="Write your application here ...."></textarea>
                                 </div>
                                 @error('description')
                                 <span class="invalid-feedback d-block mb-3"

@@ -21,7 +21,7 @@
         </section>
         <section class="content">
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Previliges</h3>
@@ -33,17 +33,12 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <select name="get_role" id="" class="form-control select2">
-                                                <option>Select Role</option>
-                                                @forelse($role as $roles)
-                                                    <option value="{{$roles->id}}">
-                                                        {{$roles->title}}
+                                            <select name="get_role"  class="form-control select2">
+                                                @foreach($role as $roles)
+                                                    <option value="{{ (!empty($roles->id) ? $roles->id : '' )}}">
+                                                        {{ (!empty($roles->title) ? $roles->title : 'No Role Added Yet' )}}
                                                     </option>
-                                                @empty
-                                                    <option>
-                                                        No roles Added yet.
-                                                    </option>
-                                                @endforelse
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -59,10 +54,10 @@
                                 <thead>
                                 <tr>
                                     <th>Previlige</th>
-                                    <?php if(check_role_previliges('Edit','edit holiday'))
+                                    <?php if(check_role_previliges('Edit','edit permission'))
                                     { ?>
                                     <th>Edit</th><?php } ?>
-                                    <?php if(check_role_previliges('Edit','edit holiday'))
+                                    <?php if(check_role_previliges('delete','delete permission'))
                                     { ?>
                                     <th>Delete</th><?php } ?>
                                 </tr>
@@ -114,7 +109,9 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        No Previliges Assigned Yet.
+                                       <td colspan="3">
+                                           No Previliges Assigned Yet.
+                                       </td>
                                     </tr>
                                 @endforelse
                                 </tbody>

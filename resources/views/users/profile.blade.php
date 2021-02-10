@@ -272,15 +272,20 @@
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i
-                                                                        class="far fa-calendar-alt"></i></span>
+                                                                            class="far fa-calendar-alt"></i></span>
                                                             </div>
                                                             <input type="date" class="form-control col-md-9"
-                                                                   name="dob" value="{{get_user_meta(auth()->id(),'dob')}}"/>
+                                                                   name="dob" placeholder="dd-mm-yyyy" value="{{get_user_meta(auth()->id(),'dob')}}"/>
                                                         </div>
-{{--                                                        <div class="input-group col-sm-10">--}}
-{{--                                                            <input type="date" class="form-control"--}}
+{{--                                                        <div class="input-group col-md-12">--}}
+{{--                                                            <input type="date-local" class="form-control"--}}
 {{--                                                                   name="dob" value="{{get_user_meta(auth()->id(),'dob')}}"/>--}}
 {{--                                                        </div>--}}
+                                                        @error('dob')
+                                                        <span class="invalid-feedback d-block" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                        @enderror()
                                                         <label for="inputName2" class="col-sm-6 col-form-label">User
                                                             Role</label>
                                                         <div class="form-group row ">

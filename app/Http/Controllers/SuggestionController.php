@@ -74,9 +74,18 @@ class SuggestionController extends Controller
         {
             return view('errors.error404');
         }
-        return view('suggestions.show',compact('data'));
+        return view('suggestions.viewall',compact('data'));
     }
 
+    public function view($id)
+    {
+        $data=Suggestions::find(decrypt($id));
+        if(empty($data))
+        {
+            return view('errors.error404');
+        }
+        return view('suggestions.view',compact('data'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -85,7 +94,7 @@ class SuggestionController extends Controller
      */
     public function edit($id)
     {
-        $suggestion=Suggestions::find($id);
+        $suggestion=Suggestions::find(decrypt($id));
         if(empty($suggestion))
         {
             return view('errors.error404');
@@ -117,6 +126,32 @@ class SuggestionController extends Controller
         return redirect()->route('suggestions.show')->with($noti);
     }
 
+    public function editall($id)
+    {
+        $suggestion=Suggestions::find(decrypt($id));
+        if(empty($suggestion))
+        {
+            return view('errors.error404');
+        }
+        return view('suggestions.EditAll',compact('suggestion'));
+    }
+
+    public function updateall(Request $request, $id)
+    {
+        $this->validate($request, [
+            'suggestion_title' => 'required|max:50',
+            'suggestion_description' => 'required|max:500',
+        ]);
+        $suggestion= new Suggestions();
+        $suggestion=Suggestions::find($id);
+        $suggestion->title = $request->suggestion_title;
+        $suggestion->description = $request->suggestion_description;
+        $suggestion->status= $request->suggestion_status;
+        $suggestion->user_id = auth()->id();
+        $suggestion->update();
+        $noti = array("message" => "Suggestion Updated Successfully!", "alert-type" => "success");
+        return redirect()->route('suggestions.viewall')->with($noti);
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -124,6 +159,14 @@ class SuggestionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    {
+        $suggestion=Suggestions::find($id);
+        $suggestion->delete();
+        $noti = array("message" => "Suggestion Deleted Successfully!", "alert-type" => "success");
+        return redirect()->back()->with($noti);
+    }
+
+    public function destroyall($id)
     {
         $suggestion=Suggestions::find($id);
         $suggestion->delete();
