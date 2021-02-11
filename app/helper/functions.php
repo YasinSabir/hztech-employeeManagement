@@ -20,14 +20,12 @@ function get_role($id)
     return (!empty($data->title) ? $data->title : "Not Found!");
 }
 
-
 function custom_varDump_die($arr)
 {
     echo "<pre>";
     var_dump($arr);
     die;
 }
-
 
 function getUser_image($id)
 {
@@ -44,7 +42,6 @@ function get_user_meta($user_id, $key)
     return (!empty($data->meta_value) ? $data->meta_value : 'Not Found');
 
 }
-
 
 function custom_varDump($arr)
 {
@@ -329,7 +326,6 @@ function MonthTotalHours()
     $hours      = number_format($getdata->monthlyhours / 60,2);
     echo sprintf('%02d hours %02d mins', (int) $hours, fmod($hours, 1) * 60);
 }
-
 
 function MonthRemainingHours()
 {

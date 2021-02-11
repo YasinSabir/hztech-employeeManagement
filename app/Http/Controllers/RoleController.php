@@ -58,8 +58,7 @@ class RoleController extends Controller
     public function show()
     {
         $roles = Roles::all();
-        if(empty($roles))
-        {
+        if (empty($roles)) {
             return view('errors.error404');
         }
         return view('roles.show', compact('roles'));
@@ -73,12 +72,16 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = Roles::find(decrypt($id));
-        if(empty($role))
-        {
-            return view('errors.error404');
+        try {
+            $decrypted = decrypt($id);
+            $role = Roles::find($decrypted);
+            if (!empty($role)) {
+                return view('roles.Edit', compact('role'));
+            }
+        } catch (\Exception $e) {
+            // nothing
         }
-        return view('roles.Edit', compact('role'));
+        return view('errors.error404');
     }
 
     /**
@@ -93,7 +96,7 @@ class RoleController extends Controller
         $this->validate($request, [
             'role_description' => 'required|max:255',
         ]);
-        $getrole = Roles::select('title')->where('id',$id)->first();
+        $getrole = Roles::select('title')->where('id', $id)->first();
         $role = new Roles();
         $role = Roles::find($id);
         $role->title = $getrole->title;

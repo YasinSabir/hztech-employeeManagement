@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Suggestions;
 use App\User;
+use Egulias\EmailValidator\Exception\ExpectingAT;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -79,12 +80,18 @@ class SuggestionController extends Controller
 
     public function view($id)
     {
-        $data=Suggestions::find(decrypt($id));
-        if(empty($data))
+        try{
+            $data=Suggestions::find(decrypt($id));
+            if(!empty($data))
+            {
+                return view('suggestions.view',compact('data'));
+            }
+        }
+        catch (\Exception $e)
         {
             return view('errors.error404');
         }
-        return view('suggestions.view',compact('data'));
+
     }
     /**
      * Show the form for editing the specified resource.
@@ -94,12 +101,18 @@ class SuggestionController extends Controller
      */
     public function edit($id)
     {
-        $suggestion=Suggestions::find(decrypt($id));
-        if(empty($suggestion))
-        {
-            return view('errors.error404');
+        try{
+            $suggestion=Suggestions::find(decrypt($id));
+            if(empty($suggestion))
+            {
+                return view('suggestions.Edit',compact('suggestion'));
+            }
         }
-        return view('suggestions.Edit',compact('suggestion'));
+        catch (\Exception $e)
+        {
+            //
+        }
+        return view('errors.error404');
     }
 
     /**
@@ -128,12 +141,18 @@ class SuggestionController extends Controller
 
     public function editall($id)
     {
-        $suggestion=Suggestions::find(decrypt($id));
-        if(empty($suggestion))
-        {
-            return view('errors.error404');
+        try{
+            $suggestion=Suggestions::find(decrypt($id));
+            if(!empty($suggestion))
+            {
+                return view('suggestions.EditAll',compact('suggestion'));
+            }
         }
-        return view('suggestions.EditAll',compact('suggestion'));
+        catch (\Exception $e)
+        {
+            //
+        }
+        return view('errors.error404');
     }
 
     public function updateall(Request $request, $id)

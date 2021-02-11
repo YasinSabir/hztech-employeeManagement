@@ -141,6 +141,13 @@
                 $(this).bootstrapSwitch('state', $(this).prop('checked'));
             });
 
+            $(document).keypress(
+                function (event) {
+                    if (event.which == '13') {
+                        event.preventDefault();
+                    }
+                });
+
         })
     </script>
 

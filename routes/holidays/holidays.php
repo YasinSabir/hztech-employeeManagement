@@ -1,6 +1,5 @@
 <?php
 
-// Roles Section.... Child funtion called Users of Parent function Pages
 Route::group(['prefix' => 'Holidays', 'as' => 'holidays.', 'middleware' => ['auth:web']], function () {
 
 
@@ -9,15 +8,10 @@ Route::group(['prefix' => 'Holidays', 'as' => 'holidays.', 'middleware' => ['aut
 
     Route::get('show', 'HolidayController@show')->name('show')->middleware('permission:view holiday,view');
 
-//     Route::get('Edit', function () {
-//         return view('holidays.Edit');
-//     })->name('Edit');
+    Route::get('Edit/{id}', 'HolidayController@edit')->name('Edit')->middleware('permission:edit holiday,Edit');
+    Route::post('Edit/{id}', 'HolidayController@update')->name('Edit')->middleware('permission:edit holiday,Edit');
 
-     Route::get('Edit/{id}', 'HolidayController@edit')->name('Edit')->middleware('permission:edit holiday,Edit');
-     Route::post('Edit/{id}', 'HolidayController@update')->name('Edit')->middleware('permission:edit holiday,Edit');
-
-     Route::delete('delete/{id}', 'HolidayController@destroy')->name('delete')->middleware('permission:delete holiday,delete');;
-
+    Route::delete('delete/{id}', 'HolidayController@destroy')->name('delete')->middleware('permission:delete holiday,delete');;
 
 
 });

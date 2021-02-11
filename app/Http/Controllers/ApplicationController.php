@@ -70,12 +70,17 @@ class ApplicationController extends Controller
 
     public function view($id)
     {
-        $app=Applications::find(decrypt($id));
-        if(empty($app))
-        {
-            return view('errors.error404');
+        try{
+            $app=Applications::find(decrypt($id));
+            if(!empty($app))
+            {
+                return view('applications.view',compact('app'));
+            }
         }
-        return view('applications.view',compact('app'));
+        catch (\Exception $e){
+
+        }
+        return view('errors.error404');
     }
 
     public function viewall()

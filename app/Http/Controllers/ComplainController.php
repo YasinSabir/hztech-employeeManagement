@@ -31,7 +31,7 @@ class ComplainController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -40,11 +40,11 @@ class ComplainController extends Controller
             'complain_title' => 'required|max:50',
             'complain_description' => 'required|max:500',
         ]);
-        $complain= new Complains();
+        $complain = new Complains();
         $complain->title = $request->complain_title;
         $complain->description = $request->complain_description;
-        $complain->status= "Pending";
-        $complain->user_id =auth()->id();
+        $complain->status = "Pending";
+        $complain->user_id = auth()->id();
         $complain->save();
         $noti = array("message" => "Complain Added Successfully!", "alert-type" => "success");
         return redirect()->back()->with($noti);
@@ -53,60 +53,65 @@ class ComplainController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show()
     {
-        $data=Complains::where('user_id',auth()->id())->get();
-        if(empty($data))
-        {
+        $data = Complains::where('user_id', auth()->id())->get();
+        if (empty($data)) {
             return view('errors.error404');
         }
-        return view('complains.show',compact('data'));
+        return view('complains.show', compact('data'));
     }
 
     public function viewall()
     {
-        $data=Complains::all();
-        if(empty($data))
-        {
+        $data = Complains::all();
+        if (empty($data)) {
             return view('errors.error404');
         }
-        return view('complains.viewall',compact('data'));
+        return view('complains.viewall', compact('data'));
     }
 
     public function view($id)
     {
-        $app=Complains::find(decrypt($id));
-        if(empty($app))
-        {
-            return view('errors.error404');
+        try{
+            $app = Complains::find(decrypt($id));
+            if (empty($app)) {
+                return view('complains.view', compact('app'));
+            }
+        }catch (\Exception $e){
+
         }
-        return view('complains.view',compact('app'));
+        return view('errors.error404');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $complain=Complains::find(decrypt($id));
-        if(empty($complain))
-        {
-            return view('errors.error404');
+        try{
+            $complain = Complains::find(decrypt($id));
+            if (!empty($complain)) {
+                return view('complains.Edit', compact('complain'));
+            }
         }
-        return view('complains.Edit',compact('complain'));
+        catch (\Exception $e){
+
+        }
+        return view('errors.error404');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -115,11 +120,11 @@ class ComplainController extends Controller
             'complain_title' => 'required|max:50',
             'complain_description' => 'required|max:500',
         ]);
-        $complain= new Complains();
-        $complain=Complains::find($id);
+        $complain = new Complains();
+        $complain = Complains::find($id);
         $complain->title = $request->complain_title;
         $complain->description = $request->complain_description;
-        $complain->status= $request->complain_status;
+        $complain->status = $request->complain_status;
         $complain->user_id = auth()->id();
         $complain->update();
         $noti = array("message" => "Complain Updated Successfully!", "alert-type" => "success");
@@ -128,12 +133,16 @@ class ComplainController extends Controller
 
     public function editall($id)
     {
-        $complain=Complains::find(decrypt($id));
-        if(empty($complain))
-        {
-            return view('errors.error404');
+        try {
+            $complain = Complains::find(decrypt($id));
+            if (!empty($complain)) {
+                return view('complains.Editall', compact('complain'));
+            }
+
+        } catch (\Exception $e) {
+
         }
-        return view('complains.Editall',compact('complain'));
+        return view('errors.error404');
     }
 
     public function updateall(Request $request, $id)
@@ -142,25 +151,26 @@ class ComplainController extends Controller
             'complain_title' => 'required|max:50',
             'complain_description' => 'required|max:500',
         ]);
-        $complain= new Complains();
-        $complain=Complains::find($id);
+        $complain = new Complains();
+        $complain = Complains::find($id);
         $complain->title = $request->complain_title;
         $complain->description = $request->complain_description;
-        $complain->status= $request->complain_status;
+        $complain->status = $request->complain_status;
         $complain->user_id = auth()->id();
         $complain->update();
         $noti = array("message" => "Complain Updated Successfully!", "alert-type" => "success");
         return redirect()->route('complains.viewall')->with($noti);
     }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $complain=Complains::find($id);
+        $complain = Complains::find($id);
         $complain->delete();
         $noti = array("message" => "Complain Deleted Successfully!", "alert-type" => "success");
         return redirect()->back()->with($noti);
@@ -168,7 +178,7 @@ class ComplainController extends Controller
 
     public function destroyall($id)
     {
-        $complain=Complains::find($id);
+        $complain = Complains::find($id);
         $complain->delete();
         $noti = array("message" => "Complain Deleted Successfully!", "alert-type" => "success");
         return redirect()->back()->with($noti);

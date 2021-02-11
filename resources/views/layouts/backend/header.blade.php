@@ -5,12 +5,13 @@
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{route('dashboard.v1')}}" class="nav-link">Home</a>
+        <li class="nav-item d-none d-sm-inline-block ">
+            <a href="{{route('dashboard.v1')}}" class="nav-link text-info">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
+            <a class="nav-link text-info">Role: {{get_role(auth()->id())}}</a>
         </li>
+
     </ul>
 
 
