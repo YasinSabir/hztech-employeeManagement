@@ -27,7 +27,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                    <a href="#" class="nav-link active ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -45,9 +45,9 @@
                     </ul>
                 </li>
                 @if(count_role_previliges('user') > 0)
-                    <li class="nav-item has-treeview">
+                    <li class="nav-item has-treeview @if(\Request::is(app()->getLocale().'/users/*')) menu-open @endif">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-users"></i>
+                            <i class="nav-icon fas fa-users "></i>
                             <p>
                                 Users
                                 <i class="fas fa-angle-left right"></i>
@@ -55,11 +55,11 @@
                                 <span class="badge badge-info right">{{( !empty(users_count())) ? users_count() : '0'  }}</span>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
+                        <ul class="nav nav-treeview ">
                             <?php if(check_role_previliges('add', 'add user'))
                             { ?>
                             <li class="nav-item">
-                                <a href="{{route('users.add')}}" class="nav-link">
+                                <a href="{{route('users.add')}}" class="nav-link @if(\Request::is(app()->getLocale().'/User/add')) menu-open active @endif">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Add New</p>
                                 </a>
@@ -68,7 +68,7 @@
                             <?php if(check_role_previliges('view', 'view user'))
                             { ?>
                             <li class="nav-item">
-                                <a href="{{route('users.show')}}" class="nav-link">
+                                <a href="{{route('users.show')}}" class="nav-link @if(\Request::is(app()->getLocale().'/User/show')) menu-open active @endif">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>View All</p>
                                 </a>
@@ -144,7 +144,7 @@
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Mark Attendance</p>
                                 </a>
-                             </li>
+                            </li>
                         </ul><?php } ?>
                         <?php if(check_role_previliges('day-logs', 'day logs'))
                         { ?>
@@ -317,24 +317,24 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-<!--                        --><?php //if(check_role_previliges('add', 'add permission'))
-//                        { ?>
+                        <!--                        --><?php //if(check_role_previliges('add', 'add permission'))
+                        //                        { ?>
                         <li class="nav-item">
                             <a href="{{route('previliges.add')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add New</p>
                             </a>
                         </li>
-<!--                    --><?php //} ?>
-<!--                        --><?php //if(check_role_previliges('view', 'view permission'))
-//                        { ?>
+                        <!--                    --><?php //} ?>
+                    <!--                        --><?php //if(check_role_previliges('view', 'view permission'))
+                        //                        { ?>
                         <li class="nav-item">
                             <a href="{{route('previliges.show')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>View All</p>
                             </a>
                         </li>
-<!--                        --><?php //} ?>
+                        <!--                        --><?php //} ?>
                     </ul>
                 </li>
 

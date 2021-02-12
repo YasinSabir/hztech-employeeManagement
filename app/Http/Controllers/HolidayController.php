@@ -81,7 +81,7 @@ class HolidayController extends Controller
                 return view('holidays.Edit', compact('holiday'));
             }
         } catch (\Exception $e) {
-            //return view('errors.error404');
+            return view('errors.error404');
         }
         return view('errors.error404');
 

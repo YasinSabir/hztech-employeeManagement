@@ -80,6 +80,7 @@ class RoleController extends Controller
             }
         } catch (\Exception $e) {
             // nothing
+            return view('errors.error404');
         }
         return view('errors.error404');
     }

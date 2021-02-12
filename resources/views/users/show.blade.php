@@ -73,7 +73,7 @@
                                             {
                                             ?>
                                             <td>
-                                                <form action="{{route('users.Edit',$data->id)}}" method="get">
+                                                <form action="{{route('users.Edit',encrypt($data->id))}}" method="get">
                                                     @csrf
                                                     <button class="btn btn-success">
                                                         Edit

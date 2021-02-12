@@ -32,7 +32,7 @@ class ApplicationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -44,7 +44,7 @@ class ApplicationController extends Controller
         $this->validate($request, [
             'description' => 'required',
             'title' => 'required',
-        ],$messages);
+        ], $messages);
         $app = new Applications();
 
         $app->user_id = auth()->id();
@@ -59,43 +59,41 @@ class ApplicationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show()
     {
-        $app=Applications::where('user_id',auth()->id())->get();
-        return view('applications.show',compact('app'));
+        $app = Applications::where('user_id', auth()->id())->get();
+        return view('applications.show', compact('app'));
     }
 
     public function view($id)
     {
-        try{
-            $app=Applications::find(decrypt($id));
-            if(!empty($app))
-            {
-                return view('applications.view',compact('app'));
+        try {
+            $app = Applications::find(decrypt($id));
+            if (!empty($app)) {
+                return view('applications.view', compact('app'));
             }
-        }
-        catch (\Exception $e){
-
+        } catch (\Exception $e) {
+            return view('errors.error404');
         }
         return view('errors.error404');
     }
 
     public function viewall()
     {
-        $app=Applications::all();
-        if(empty($app))
-        {
+        $app = Applications::all();
+        if (empty($app)) {
             return view('errors.error404');
         }
-        return view('applications.viewall',compact('app'));
+        return view('applications.viewall', compact('app'));
     }
+
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -106,8 +104,8 @@ class ApplicationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -118,12 +116,12 @@ class ApplicationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $app=Applications::find($id);
+        $app = Applications::find($id);
         $app->delete();
         $noti = array("message" => "Application Deleted Successfully!", "alert-type" => "success");
         return redirect()->back()->with($noti);
@@ -131,7 +129,7 @@ class ApplicationController extends Controller
 
     public function destroyall($id)
     {
-        $app=Applications::find($id);
+        $app = Applications::find($id);
         $app->delete();
         $noti = array("message" => "Application Deleted Successfully!", "alert-type" => "success");
         return redirect()->back()->with($noti);

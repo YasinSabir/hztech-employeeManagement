@@ -8,32 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class ComplainController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('complains.add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -50,12 +34,6 @@ class ComplainController extends Controller
         return redirect()->back()->with($noti);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show()
     {
         $data = Complains::where('user_id', auth()->id())->get();
@@ -76,44 +54,30 @@ class ComplainController extends Controller
 
     public function view($id)
     {
-        try{
+        try {
             $app = Complains::find(decrypt($id));
-            if (empty($app)) {
+            if (!empty($app)) {
                 return view('complains.view', compact('app'));
             }
-        }catch (\Exception $e){
-
+        } catch (\Exception $e) {
+            return view('errors.error404');
         }
         return view('errors.error404');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        try{
+        try {
             $complain = Complains::find(decrypt($id));
             if (!empty($complain)) {
                 return view('complains.Edit', compact('complain'));
             }
-        }
-        catch (\Exception $e){
-
+        } catch (\Exception $e) {
+            return view('errors.error404');
         }
         return view('errors.error404');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -138,9 +102,8 @@ class ComplainController extends Controller
             if (!empty($complain)) {
                 return view('complains.Editall', compact('complain'));
             }
-
         } catch (\Exception $e) {
-
+            return view('errors.error404');
         }
         return view('errors.error404');
     }
@@ -162,12 +125,6 @@ class ComplainController extends Controller
         return redirect()->route('complains.viewall')->with($noti);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $complain = Complains::find($id);

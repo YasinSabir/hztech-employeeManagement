@@ -91,7 +91,7 @@ class SuggestionController extends Controller
         {
             return view('errors.error404');
         }
-
+        return view('errors.error404');
     }
     /**
      * Show the form for editing the specified resource.
@@ -103,14 +103,14 @@ class SuggestionController extends Controller
     {
         try{
             $suggestion=Suggestions::find(decrypt($id));
-            if(empty($suggestion))
+            if(!empty($suggestion))
             {
                 return view('suggestions.Edit',compact('suggestion'));
             }
         }
         catch (\Exception $e)
         {
-            //
+            return view('errors.error404');
         }
         return view('errors.error404');
     }
@@ -150,7 +150,7 @@ class SuggestionController extends Controller
         }
         catch (\Exception $e)
         {
-            //
+            return view('errors.error404');
         }
         return view('errors.error404');
     }

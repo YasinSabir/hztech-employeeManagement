@@ -103,13 +103,17 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $role = Roles::all();
-        $user = User::find($id);
-        if(empty($user))
-        {
+        try{
+            $role = Roles::all();
+            $user = User::find(decrypt($id));
+            if(!empty($user))
+            {
+                return view('users.Edit', compact('user', 'role'));
+            }
+        }catch (\Exception $e){
             return view('errors.error404');
         }
-        return view('users.Edit', compact('user', 'role'));
+        return view('errors.error404');
     }
 
     /**
