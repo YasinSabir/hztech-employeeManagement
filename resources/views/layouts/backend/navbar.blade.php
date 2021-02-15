@@ -26,7 +26,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview menu-open">
+                <li class="nav-item has-treeview ">
                     <a href="#" class="nav-link active ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
@@ -45,7 +45,7 @@
                     </ul>
                 </li>
                 @if(count_role_previliges('user') > 0)
-                    <li class="nav-item has-treeview @if(\Request::is(app()->getLocale().'/users/*')) menu-open @endif">
+                    <li class="nav-item has-treeview @if(\Request::is('/users/*')) menu-open @endif">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-users "></i>
                             <p>
@@ -59,7 +59,7 @@
                             <?php if(check_role_previliges('add', 'add user'))
                             { ?>
                             <li class="nav-item">
-                                <a href="{{route('users.add')}}" class="nav-link @if(\Request::is(app()->getLocale().'/User/add')) menu-open active @endif">
+                                <a href="{{route('users.add')}}" class="nav-link @if(\Request::is('/User/add')) menu-open active @endif">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Add New</p>
                                 </a>
@@ -68,7 +68,7 @@
                             <?php if(check_role_previliges('view', 'view user'))
                             { ?>
                             <li class="nav-item">
-                                <a href="{{route('users.show')}}" class="nav-link @if(\Request::is(app()->getLocale().'/User/show')) menu-open active @endif">
+                                <a href="{{route('users.show')}}" class="nav-link @if(\Request::is('/User/show')) menu-open active @endif">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>View All</p>
                                 </a>
@@ -312,7 +312,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-shield-alt"></i>
                         <p>
-                            Give Permissions
+                            Give Role Permissions
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -330,6 +330,36 @@
                         //                        { ?>
                         <li class="nav-item">
                             <a href="{{route('previliges.show')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>View All</p>
+                            </a>
+                        </li>
+                        <!--                        --><?php //} ?>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-shield-alt"></i>
+                        <p>
+                            Give Users Permissions
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <!--                        --><?php //if(check_role_previliges('add', 'add permission'))
+                        //                        { ?>
+                        <li class="nav-item">
+                            <a href="{{route('permissions.add')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add New</p>
+                            </a>
+                        </li>
+                        <!--                    --><?php //} ?>
+                    <!--                        --><?php //if(check_role_previliges('view', 'view permission'))
+                        //                        { ?>
+                        <li class="nav-item">
+                            <a href="{{route('permissions.show')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>View All</p>
                             </a>

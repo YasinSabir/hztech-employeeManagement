@@ -45,6 +45,7 @@ include_once('suggestions/suggestions.php');
 include_once('users/users.php');
 include_once('holidays/holidays.php');
 include_once('previliges/previliges.php');
+include_once('permissions/permissions.php');
 
 // Forms Section...
 

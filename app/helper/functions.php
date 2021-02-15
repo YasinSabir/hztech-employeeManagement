@@ -86,12 +86,37 @@ function checkprevilige($role_id,$previlige_id)
     }
 }
 
+function check_user_previlige($user_id,$previlige_id)
+{
+    $check=DB::table('privilege_user')
+        ->select('role_id','user_id','privillige_id')
+        ->where('user_id','=',$user_id)
+        ->where('privillige_id','=',$previlige_id)
+        ->get();
+
+    if(!empty($check[0]->user_id) && !empty($check[0]->privillige_id))
+    {
+        return true;
+    }else{
+        return false;
+    }
+}
+
 function get_priviliges($role_id)
 {
     $get_priv = DB::table('privilege_user')
         ->join('privileges', 'privilege_user.privillige_id', '=', 'privileges.id')
         ->select('privilege_user.privillige_id', 'privileges.title','privileges.guard_name','privilege_user.role_id')
         ->where('role_id','=',$role_id)->get();
+    return $get_priv;
+}
+
+function get_user_priviliges($user_id)
+{
+    $get_priv = DB::table('privilege_user')
+        ->join('privileges', 'privilege_user.privillige_id', '=', 'privileges.id')
+        ->select('privilege_user.privillige_id', 'privileges.title','privileges.guard_name','privilege_user.role_id','privilege_user.user_id')
+        ->where('user_id','=',$user_id)->get();
     return $get_priv;
 }
 
@@ -111,6 +136,23 @@ function check_role_previliges($guardname,$title)
     foreach($priv as $p)
     {
         if($p->role_id == $user->role_id)
+        {
+            if($p->title == $title && $p->guard_name == $guardname)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function check_user_previliges($guardname,$title)
+{
+    $user=User::where('id','=',auth()->id())->first();
+    $priv=get_user_priviliges($user->id);
+    foreach($priv as $p)
+    {
+        if($p->user_id == $user->id)
         {
             if($p->title == $title && $p->guard_name == $guardname)
             {

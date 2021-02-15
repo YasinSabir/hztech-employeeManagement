@@ -8,7 +8,7 @@ class PrevilligeUser extends Model
 {
     protected $table = "privilege_user";
     protected $fillable = [
-        'privillige_id','role_id','status',
+        'privillige_id','role_id','user_id','status',
     ];
 
     public function roles() {
