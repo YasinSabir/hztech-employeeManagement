@@ -35,10 +35,10 @@
                                     <th>Description</th>
                                     <th>Status</th>
                                     <th>Created At</th>
-                                    <?php if(check_role_previliges('Edit','edit role'))
+                                    <?php if(check_user_previliges('Edit','edit role'))
                                     { ?>
                                     <th>Edit</th><?php } ?>
-                                    <?php if(check_role_previliges('delete','delete role'))
+                                    <?php if(check_user_previliges('delete','delete role'))
                                     { ?>
                                     <th>Delete</th><?php } ?>
                                 </tr>
@@ -55,7 +55,7 @@
                                         <td>{{$role->description}}</td>
                                         <td>{{$role->status}}</td>
                                         <td>{{$role->created_at}}</td>
-                                        <?php if(check_role_previliges('Edit','edit role'))
+                                        <?php if(check_user_previliges('Edit','edit role'))
                                         { ?>
                                         <td>
                                             <form action="{{route('roles.Edit',encrypt($role->id))}}" method="get">
@@ -65,7 +65,7 @@
                                                 </button>
                                             </form>
                                         </td><?php } ?>
-                                        <?php if(check_role_previliges('delete','delete role'))
+                                        <?php if(check_user_previliges('delete','delete role'))
                                         { ?>
                                         <td>
                                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter_{{$role->id}}" >

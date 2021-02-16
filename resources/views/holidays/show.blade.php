@@ -38,10 +38,10 @@
                                     <th>Date</th>
                                     <th>Day</th>
                                     <th>Created At</th>
-                                    <?php if(check_role_previliges('Edit','edit holiday'))
+                                    <?php if(check_user_previliges('Edit','edit holiday'))
                                     { ?>
                                     <th>Edit</th><?php } ?>
-                                    <?php if(check_role_previliges('delete','delete holiday'))
+                                    <?php if(check_user_previliges('delete','delete holiday'))
                                     { ?>
                                     <th>Delete</th><?php } ?>
                                 </tr>
@@ -58,7 +58,7 @@
                                             <td>{{$d->date}}</td>
                                             <td>{{Carbon::parse($d->date)->englishDayOfWeek}}</td>
                                             <td>{{$d->created_at}}</td>
-                                            <?php if(check_role_previliges('Edit','edit holiday'))
+                                            <?php if(check_user_previliges('Edit','edit holiday'))
                                             { ?>
                                             <td>
                                                 <form action="{{route('holidays.Edit',encrypt($d->id))}}" method="get">
@@ -68,7 +68,7 @@
                                                     </button>
                                                 </form>
                                             </td><?php } ?>
-                                            <?php if(check_role_previliges('delete','delete holiday'))
+                                            <?php if(check_user_previliges('delete','delete holiday'))
                                             { ?>
                                             <td>
                                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter_{{$d->id}}" >

@@ -462,7 +462,7 @@
 
                                                     </div>
                                                 </div>
-                                                <?php if(check_role_previliges('Edit','edit profile'))
+                                                <?php if(check_user_previliges('Edit','edit profile'))
                                                 { ?>
                                                 <div class="row">
                                                     <div class="col-md-12">

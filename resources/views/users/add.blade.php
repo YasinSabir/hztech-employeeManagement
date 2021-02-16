@@ -109,11 +109,7 @@
                 </div>
             </div>
         </section>
-
     </div>
-
-
-
 @endsection
 
 @section('page-script')
@@ -189,7 +185,6 @@
         /*Ajax Employee Dropdown fill*/
 
         $(document).ready(function () {
-
             $("#role_title").change(function () {
                 var selectedRole = $(this).children("option:selected").text();
                 if(selectedRole == "employee") {
@@ -210,8 +205,9 @@
                                     for (var i = 0; i < len; i++) {
 
                                         var fullname = response['data'][i].fullname;
+                                        var title = response['data'][i].title;
 
-                                        var option = "<option value='"+response['data'][i].id+"'>" + fullname + "</option>";
+                                        var option = "<option value='"+response['data'][i].id+"'>" + fullname + ' ---- ' + title +"</option>";
 
                                         $("#sel_emp").append(option);
                                     }

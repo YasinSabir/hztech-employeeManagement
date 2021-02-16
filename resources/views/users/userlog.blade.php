@@ -104,7 +104,7 @@
                                     <button class="btn btn-app like" name="time_in" id="time_in" type="button">
                                         <i class="fas fa-clock"></i> Time In
                                     </button>
-                                    <?php if(check_role_previliges('manual-time','manual time'))
+                                    <?php if(check_user_previliges('manual-time','manual time'))
                                     { ?>
                                     <button class="btn btn-app like" data-toggle="modal" data-target="#modal-lg"
                                             name="manual_time" id="manual_time" type="button">
@@ -116,7 +116,7 @@
                         </div>
                     </div>
                 </div>
-                <?php if(check_role_previliges('manual-time','manual time'))
+                <?php if(check_user_previliges('manual-time','manual time'))
                 { ?>
                 <div class="modal fade" id="modal-lg">
                     <div class="modal-dialog modal-lg">

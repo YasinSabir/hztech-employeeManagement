@@ -37,13 +37,13 @@
                                     <th>View</th>
                                     <th>Date</th>
                                     <?php
-                                    if(check_role_previliges('Edit','edit suggestion'))
+                                    if(check_user_previliges('Edit','edit suggestion'))
                                     {
                                     ?>
                                     <th>Edit</th>
                                     <?php } ?>
                                     <?php
-                                    if(check_role_previliges('delete','delete suggestion'))
+                                    if(check_user_previliges('delete','delete suggestion'))
                                     {
                                     ?>
                                     <th>Delete</th>
@@ -71,7 +71,7 @@
                                                     <a href="{{route('suggestions.view',encrypt($data->id))}}" style="color:black;"><i class="far fa-eye"></i></a>
                                                 </form>
                                             </td>
-                                            <?php if(check_role_previliges('Edit','edit suggestion'))
+                                            <?php if(check_user_previliges('Edit','edit suggestion'))
                                             {
                                             ?>
                                                 <td>
@@ -82,7 +82,7 @@
                                                         </button>
                                                     </form>
                                                 </td><?php } ?>
-                                            <?php if(check_role_previliges('delete','delete suggestion'))
+                                            <?php if(check_user_previliges('delete','delete suggestion'))
                                             {
                                                 ?>
                                                 <td>

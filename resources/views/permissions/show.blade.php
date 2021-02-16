@@ -54,12 +54,58 @@
                                 <thead>
                                 <tr>
                                     <th>Previlige</th>
+                                    <?php if(check_role_previliges('Edit','edit permission'))
+                                    { ?>
+                                    <th>Edit</th><?php } ?>
+                                    <?php if(check_role_previliges('delete','delete permission'))
+                                    { ?>
+                                    <th>Delete</th><?php } ?>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     @forelse($previlige as $previliges)
                                         <tr>
                                             <td>{{$previliges->title}}</td>
+                                            <?php if(check_role_previliges('Edit','edit permission'))
+                                            { ?>
+                                            <td>
+                                                <form action="{{route('permissions.Edit',$previliges->pu_id)}}" method="get">
+                                                    @csrf
+                                                    <button class="btn btn-success">
+                                                        Edit
+                                                    </button>
+                                                </form>
+                                            </td><?php } ?>
+                                            <?php if(check_role_previliges('delete','delete permission'))
+                                            { ?>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter_{{$previliges->id}}" >
+                                                    Delete
+                                                </button>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModalCenter_{{$previliges->id}}"  role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Are you sure you want to delete.
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <form method="post" action="{{route('permissions.delete', ['id' => $previliges->pu_id])}}">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-info">Save changes</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td><?php } ?>
                                         </tr>
                                     @empty
                                         <tr>

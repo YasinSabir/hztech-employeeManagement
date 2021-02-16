@@ -7,10 +7,10 @@ Route::group(['prefix' => 'Permissions', 'as' => 'permissions.', 'middleware' =>
     Route::post('store', 'PermissionsController@store')->name('store');
     Route::get('show', 'PermissionsController@show')->name('show');
 //
-//    Route::get('Edit/{id}', 'PreviligesController@edit')->name('Edit');
-//    Route::post('Edit/{id}', 'PreviligesController@update')->name('Edit');
+    Route::get('Edit/{id}', 'PermissionsController@edit')->name('Edit');
+    Route::post('Edit/{id}', 'PermissionsController@update')->name('Edit');
 //
-//    Route::delete('delete/{id}', 'PreviligesController@destroy')->name('delete');
+    Route::delete('delete/{id}', 'PermissionsController@destroy')->name('delete');
 
 });
 

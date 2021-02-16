@@ -62,7 +62,7 @@
                                                     </option>
                                                 @empty
                                                     <option>
-                                                        No previliges Added yet.
+                                                        No Permission Added yet.
                                                     </option>
                                                 @endforelse
                                             </select>

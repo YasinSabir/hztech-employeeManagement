@@ -44,7 +44,7 @@
 
                     </ul>
                 </li>
-                @if(count_role_previliges('user') > 0)
+                @if(count_user_previliges('user') > 0)
                     <li class="nav-item has-treeview @if(\Request::is('/users/*')) menu-open @endif">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-users "></i>
@@ -56,7 +56,7 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview ">
-                            <?php if(check_role_previliges('add', 'add user'))
+                                <?php if(check_user_previliges('add', 'add user'))
                             { ?>
                             <li class="nav-item">
                                 <a href="{{route('users.add')}}" class="nav-link @if(\Request::is('/User/add')) menu-open active @endif">
@@ -65,7 +65,7 @@
                                 </a>
                             </li><?php
                             } ?>
-                            <?php if(check_role_previliges('view', 'view user'))
+                            <?php if(check_user_previliges('view', 'view user'))
                             { ?>
                             <li class="nav-item">
                                 <a href="{{route('users.show')}}" class="nav-link @if(\Request::is('/User/show')) menu-open active @endif">
@@ -77,7 +77,7 @@
                         </ul>
                     </li>
                 @endif
-                @if(count_role_previliges('holiday') > 0)
+                @if(count_user_previliges('holiday') > 0)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-globe-europe"></i>
@@ -87,7 +87,7 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <?php if(check_role_previliges('add', 'add holiday'))
+                            <?php if(check_user_previliges('add', 'add holiday'))
                             { ?>
                             <li class="nav-item">
                                 <a href="{{route('holidays.add')}}" class="nav-link">
@@ -95,7 +95,7 @@
                                     <p>Add New</p>
                                 </a>
                             </li><?php }?>
-                            <?php if(check_role_previliges('view', 'view holiday'))
+                            <?php if(check_user_previliges('view', 'view holiday') || check_user_previliges('delete', 'delete holiday') || check_user_previliges('Edit', 'edit holiday'))
                             { ?>
                             <li class="nav-item">
                                 <a href="{{route('holidays.show')}}" class="nav-link">
@@ -106,7 +106,7 @@
                         </ul>
                     </li>
                 @endif
-                @if(count_role_previliges('profile') > 0)
+                @if(count_user_previliges('profile') > 0)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-user-astronaut"></i>
@@ -116,7 +116,7 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <?php if(check_role_previliges('view', 'view profile') || check_role_previliges('Edit', 'edit profile'))
+                            <?php if(check_user_previliges('view', 'view profile') || check_user_previliges('delete', 'delete profile') || check_user_previliges('Edit', 'edit profile'))
                             { ?>
                             <li class="nav-item">
                                 <a href="{{route('users.profile')}}" class="nav-link">
@@ -127,7 +127,7 @@
                         </ul>
                     </li>
                 @endif
-                @if(count_role_previliges('logs') > 0)
+                @if(count_user_previliges('logs') > 0)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-user-clock"></i>
@@ -136,7 +136,7 @@
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        <?php if(check_role_previliges('attendance', 'mark attendance'))
+                        <?php if(check_user_previliges('attendance', 'mark attendance'))
                         { ?>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
@@ -146,7 +146,7 @@
                                 </a>
                             </li>
                         </ul><?php } ?>
-                        <?php if(check_role_previliges('day-logs', 'day logs'))
+                        <?php if(check_user_previliges('day-logs', 'day logs'))
                         { ?>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
@@ -156,7 +156,7 @@
                                 </a>
                             </li>
                         </ul><?php } ?>
-                        <?php if(check_role_previliges('month-logs', 'month logs'))
+                        <?php if(check_user_previliges('month-logs', 'month logs'))
                         { ?>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
@@ -168,7 +168,7 @@
                         </ul><?php } ?>
                     </li>
                 @endif
-                @if(count_role_previliges('role') > 0)
+                @if(count_user_previliges('role') > 0)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-user-tag"></i>
@@ -178,7 +178,7 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <?php if(check_role_previliges('add', 'add role'))
+                            <?php if(check_user_previliges('add', 'add role'))
                             { ?>
                             <li class="nav-item">
                                 <a href="{{route('roles.add')}}" class="nav-link">
@@ -186,7 +186,7 @@
                                     <p>Add New</p>
                                 </a>
                             </li><?php } ?>
-                            <?php if(check_role_previliges('view', 'view role'))
+                            <?php if(check_user_previliges('view', 'view role') || check_user_previliges('Edit', 'edit role') || check_user_previliges('delete', 'delete role'))
                             { ?>
                             <li class="nav-item">
                                 <a href="{{route('roles.show')}}" class="nav-link">
@@ -197,7 +197,7 @@
                         </ul>
                     </li>
                 @endif
-                @if(count_role_previliges('suggestion') > 0)
+                @if(count_user_previliges('suggestion') > 0)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
@@ -207,7 +207,7 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <?php if(check_role_previliges('add', 'add suggestion'))
+                            <?php if(check_user_previliges('add', 'add suggestion'))
                             { ?>
                             <li class="nav-item">
                                 <a href="{{route('suggestions.add')}}" class="nav-link">
@@ -216,7 +216,7 @@
                                 </a>
                             </li><?php } ?>
                             <li class="nav-item">
-                                <?php if(check_role_previliges('view', 'view suggestion'))
+                                <?php if(check_user_previliges('view', 'view suggestion'))
                                 { ?>
                                 <a href="{{route('suggestions.show')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -224,7 +224,7 @@
                                 </a>
                             </li><?php } ?>
                             <li class="nav-item">
-                                <?php if(check_role_previliges('view all', 'view all suggestion'))
+                                <?php if(check_user_previliges('view all', 'view all suggestion'))
                                 { ?>
                                 <a href="{{route('suggestions.viewall')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -234,7 +234,7 @@
                         </ul>
                     </li>
                 @endif
-                @if(count_role_previliges('application') > 0)
+                @if(count_user_previliges('application') > 0)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-newspaper"></i>
@@ -244,7 +244,7 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <?php if(check_role_previliges('add', 'add application'))
+                            <?php if(check_user_previliges('add', 'add application'))
                             { ?>
                             <li class="nav-item">
                                 <a href="{{route('applications.add')}}" class="nav-link">
@@ -252,7 +252,7 @@
                                     <p>Add New</p>
                                 </a>
                             </li><?php } ?>
-                            <?php if(check_role_previliges('view', 'view application'))
+                            <?php if(check_user_previliges('view', 'view application'))
                             { ?>
                             <li class="nav-item">
                                 <a href="{{route('applications.show')}}" class="nav-link">
@@ -260,7 +260,7 @@
                                     <p>Your Applications</p>
                                 </a>
                             </li><?php } ?>
-                            <?php if(check_role_previliges('view all', 'view all application'))
+                            <?php if(check_user_previliges('view all', 'view all application'))
                             { ?>
                             <li class="nav-item">
                                 <a href="{{route('applications.viewall')}}" class="nav-link">
@@ -271,7 +271,7 @@
                         </ul>
                     </li>
                 @endif
-                @if(count_role_previliges('complain') > 0)
+                @if(count_user_previliges('complain') > 0)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-angry"></i>
@@ -281,7 +281,7 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <?php if(check_role_previliges('add', 'add complain'))
+                            <?php if(check_user_previliges('add', 'add complain'))
                             { ?>
                             <li class="nav-item">
                                 <a href="{{route('complains.add')}}" class="nav-link">
@@ -289,7 +289,7 @@
                                     <p>Add New</p>
                                 </a>
                             </li><?php } ?>
-                            <?php if(check_role_previliges('view', 'view complain'))
+                            <?php if(check_user_previliges('view', 'view complain'))
                             { ?>
                             <li class="nav-item">
                                 <a href="{{route('complains.show')}}" class="nav-link">
@@ -297,7 +297,7 @@
                                     <p>Your Complains</p>
                                 </a>
                             </li><?php } ?>
-                            <?php if(check_role_previliges('view all', 'view all complain'))
+                            <?php if(check_user_previliges('view all', 'view all complain'))
                             { ?>
                             <li class="nav-item">
                                 <a href="{{route('complains.viewall')}}" class="nav-link">

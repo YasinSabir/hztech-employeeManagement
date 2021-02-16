@@ -36,10 +36,10 @@
                                     <th>Complain By</th>
                                     <th>Date</th>
                                     <th>View</th>
-                                    <?php if(check_role_previliges('Edit','edit complain'))
+                                    <?php if(check_user_previliges('Edit','edit complain'))
                                     { ?>
                                     <th>Edit</th><?php } ?>
-                                    <?php if(check_role_previliges('delete','delete complain'))
+                                    <?php if(check_user_previliges('delete','delete complain'))
                                     { ?>
                                     <th>Delete</th><?php } ?>
                                 </tr>
@@ -65,7 +65,7 @@
                                                     <a href="{{route('complains.view',encrypt($data->id))}}" style="color:black;"><i class="far fa-eye"></i></a>
                                                 </form>
                                             </td>
-                                            <?php if(check_role_previliges('Edit','edit complain'))
+                                            <?php if(check_user_previliges('Edit','edit complain'))
                                             { ?>
                                             <td>
                                                 <form action="{{route('complains.Edit',encrypt($data->id))}}" method="get">
@@ -75,7 +75,7 @@
                                                     </button>
                                                 </form>
                                             </td><?php } ?>
-                                            <?php if(check_role_previliges('delete','delete complain'))
+                                            <?php if(check_user_previliges('delete','delete complain'))
                                             { ?>
                                             <td>
                                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter_{{$data->id}}" >

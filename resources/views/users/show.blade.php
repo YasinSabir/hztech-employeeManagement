@@ -38,13 +38,13 @@
                                     <th>Password</th>
                                     <th>Created At</th>
                                     <?php
-                                    if(check_role_previliges('Edit','edit user'))
+                                    if(check_user_previliges('Edit','edit user'))
                                     {
                                     ?>
                                         <th>Edit</th>
                                     <?php } ?>
                                     <?php
-                                    if(check_role_previliges('delete','delete user'))
+                                    if(check_user_previliges('delete','delete user'))
                                     {
                                     ?>
                                         <th>Delete</th>
@@ -69,7 +69,7 @@
                                             <td>{{$data->string_password}}</td>
                                             <td>{{$data->created_at}}</td>
                                             <?php
-                                            if(check_role_previliges('Edit','edit user'))
+                                            if(check_user_previliges('Edit','edit user'))
                                             {
                                             ?>
                                             <td>
@@ -84,7 +84,7 @@
                                             }
                                             ?>
                                             <?php
-                                            if(check_role_previliges('delete','delete user'))
+                                            if(check_user_previliges('delete','delete user'))
                                             {
                                                 ?>
                                             <td>

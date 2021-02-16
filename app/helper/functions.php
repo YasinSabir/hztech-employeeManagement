@@ -148,11 +148,11 @@ function check_role_previliges($guardname,$title)
 
 function check_user_previliges($guardname,$title)
 {
-    $user=User::where('id','=',auth()->id())->first();
-    $priv=get_user_priviliges($user->id);
+    //$user=User::where('id','=',auth()->id())->first();
+    $priv=get_user_priviliges(auth()->id());
     foreach($priv as $p)
     {
-        if($p->user_id == $user->id)
+        if($p->user_id == auth()->id())
         {
             if($p->title == $title && $p->guard_name == $guardname)
             {
@@ -170,6 +170,17 @@ function count_role_previliges($type)
         ->join('privileges', 'privilege_user.privillige_id', '=', 'privileges.id')
         ->select('privilege_user.privillige_id', 'privileges.title','privileges.type','privileges.guard_name','privilege_user.role_id')
         ->where('privilege_user.role_id','=',$user->role_id)
+        ->where('privileges.type','=',$type)->count();
+    return $get_priv;
+}
+
+function count_user_previliges($type)
+{
+    //$user=User::where('id','=',auth()->id())->first();
+    $get_priv = DB::table('privilege_user')
+        ->join('privileges', 'privilege_user.privillige_id', '=', 'privileges.id')
+        ->select('privilege_user.privillige_id', 'privileges.title','privileges.type','privileges.guard_name','privilege_user.role_id')
+        ->where('privilege_user.user_id','=',auth()->id())
         ->where('privileges.type','=',$type)->count();
     return $get_priv;
 }

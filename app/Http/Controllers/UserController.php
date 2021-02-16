@@ -43,7 +43,7 @@ class UserController extends Controller
     {
         $empData['data'] = DB::table('users')
             ->join('roles', 'users.role_id', '=', 'roles.id')
-            ->select('users.fullname', 'users.id')
+            ->select('users.fullname', 'users.id','roles.title')
             ->where('roles.title', '=', 'lead')
             ->orWhere('roles.title', '=', 'hr')
             ->get();
