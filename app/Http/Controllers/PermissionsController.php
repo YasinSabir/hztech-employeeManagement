@@ -14,7 +14,7 @@ class PermissionsController extends Controller
 
     public function create()
     {
-        $users=User::all();
+        $users=User::where('status','Active')->get();
         $previlige=Previliges::orderBy('id', 'ASC')->get();
         return view('permissions.add',compact('users','previlige'));
     }
@@ -40,7 +40,7 @@ class PermissionsController extends Controller
 
     public function show(Request $request)
     {
-        $users=User::all();
+        $users=User::where('status','Active')->get();
         $previlige = DB::table('privilege_user')
         ->join('privileges', 'privilege_user.privillige_id', '=', 'privileges.id')
         ->select('privileges.title','privilege_user.user_id', 'privileges.status','privileges.id','privilege_user.id AS pu_id')
@@ -51,10 +51,11 @@ class PermissionsController extends Controller
 
     public function edit($id)
     {
-        $p=PrevilligeUser::find($id);
-        $users=User::all();
+        $user_previlige=PrevilligeUser::find($id);
+        //dd($user_previlige);
+        $users=User::where('status','Active')->get();
         $previlige=Previliges::orderBy('id', 'ASC')->get();
-        return view('permissions.Edit',compact('previlige','p','users'));
+        return view('permissions.Edit',compact('previlige','user_previlige','users'));
     }
 
     /**

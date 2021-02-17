@@ -32,14 +32,14 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form method="post" action="{{route('permissions.Edit',['id' => $p->id])}}">
+                            <form method="post" action="{{route('permissions.Edit',['id' => $user_previlige->id])}}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <select name="get_user" class="form-control select2">
                                                 @foreach($users as $user)
-                                                    <option value="{{ (!empty($user->id) ? $user->id : '' )}}">
+                                                    <option value="{{ (!empty($user->id) ? $user->id : '' )}}" {{($user->id == $user_previlige->user_id ) ? 'selected' : ''}}>
                                                         {{ (!empty($user->fullname) ? $user->fullname : 'No User Added Yet' )}}
                                                     </option>
                                                 @endforeach
@@ -52,7 +52,7 @@
                                         <div class="form-group">
                                             <select name="get_previlige" id="" class="form-control select2">
                                                 @forelse($previlige as $p)
-                                                    <option value="{{$p->id}}">
+                                                    <option value="{{($p->id )}}" {{($p->id ==$user_previlige->privillige_id ) ? 'selected' : ''}}>
                                                         {{$p->title}}
                                                     </option>
                                                 @empty

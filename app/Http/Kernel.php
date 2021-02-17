@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'userpermission' => \App\Http\Middleware\UserPermissionMiddleware::class,
         'maintain'  => \App\Http\Middleware\DownForMaintenance::class,
         'restrict'  => \App\Http\Middleware\RestrictIp::class,
+        'user_status'  => \App\Http\Middleware\UserStatusMiddleware::class,
     ];
 
     /**
