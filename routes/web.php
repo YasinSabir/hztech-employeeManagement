@@ -2,6 +2,8 @@
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\User;
+use App\Notifications\NewUserNotification;
+use Illuminate\Support\Facades\Notification;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +20,9 @@ Route::get('/', function () {
 });
 */
 Route::get('/home', function () {
-      return view('pages.index');
+    $data = User::orderBy('id','DESC')->get();
+    $notifications = new NewUserNotification($data);
+    return view('pages.index',compact('notifications'));
 })->name('dashboard.v1')->middleware('auth');
 
 Route::get('error', function () {

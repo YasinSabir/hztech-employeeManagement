@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Roles;
 use App\PrevilligeUser;
+//use Notifiable;
+use App\Notifications\NewUserNotification;
+use Illuminate\Support\Facades\Notification;
 
 use Carbon\Carbon;
 
@@ -69,6 +72,31 @@ function get_lead_hr_role($id)
         ->select('roles.title', 'roles.id')->where(['roles.title' => ['lead'], 'roles.title' => 'hr'])->first();
     return $data;
 }
+
+function get_unread_noti()
+{
+    $data = User::orderBy('id','DESC')->get();
+    $notifications = new NewUserNotification($data);
+    return $notifications->user;
+
+}
+
+function count_noti()
+{
+    $data = User::orderBy('id','DESC')->get();
+    $notification = Auth::user()->unreadNotifications;
+    $notifications = new NewUserNotification($data);
+    $total_noti = count($notifications->user);
+    return $total_noti;
+}
+
+//function unread_noti()
+//{
+//    $data = User::orderBy('id','DESC')->get();
+//    $notifications = new NewUserNotification($data);
+//    $notifications=DB::table('notifications')->where('read_at','')->get();
+//    return $notifications->data;
+//}
 
 function checkprevilige($role_id,$previlige_id)
 {

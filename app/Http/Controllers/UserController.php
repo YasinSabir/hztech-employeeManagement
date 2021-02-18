@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use DateTime;
 use Carbon\Carbon;
+use Notifiable;
+use App\Notifications\NewUserNotification;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -31,6 +34,9 @@ class UserController extends Controller
     public function index()
     {
         $data = User::all();
+//        $notification = auth()->user()->unreadNotifications;
+//        $notifications = new NewUserNotification($data);
+        //dd($notifications);
         return view('users.show', compact('data'));
     }
 
@@ -70,7 +76,7 @@ class UserController extends Controller
             'user_email' => 'required|email',
             'password' => 'required|min:6|max:40',
         ]);
-
+        $user = new User();
         User::create([
             'fullname' => $request->user_fullname,
             'email' => $request->user_email,
@@ -80,6 +86,9 @@ class UserController extends Controller
             'password' => Hash::make($request['password']),
             'string_password' => $request->password,
         ]);
+
+        $users=User::where('status','Active')->get();
+        Notification::send($users, new NewUserNotification($user));
         $noti = array("message" => "User Add Successfully!", "alert-type" => "success");
         return redirect()->back()->with($noti);
     }
@@ -355,6 +364,16 @@ class UserController extends Controller
             'status'  => $status,
             'records' => $records,
         ]);
+    }
+
+    public function mark_as_read(Request $request, $id)
+    {
+        if($request->data == "read")
+        {
+            $mark=DB::table('notifications')->where('notifiable_id',$id)->update(['read_at'=>Carbon::now()]);
+            return response()->json(array(['msg' => 'Marked as read', 'status' => 'done']), 200);
+        }
+        return response()->json(array(['msg' => 'Something went wrong !', 'status' => 'notdone']), 422);
     }
 
     public function TimeLog(Request $request)

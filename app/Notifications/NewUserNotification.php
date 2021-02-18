@@ -55,8 +55,10 @@ class NewUserNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'fullname' => $this->user->fullname,
-            'email' => $this->user->email,
+            'CreatedUser' => $this->user,
+            'user_noti' => $notifiable
+//            'fullname' => $this->user->fullname,
+//            'email' => $this->user->email,
         ];
     }
 }

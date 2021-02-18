@@ -21,6 +21,7 @@
         Route::post('profile','UserController@editprofile')->name('profile');
 
         Route::get('/getEmployees', 'UserController@getEmployees')->name('getEmployees');
+        Route::post('/read_notification/{id}', 'UserController@mark_as_read')->name('read_notification');
 
         Route::get('/UserLog', 'UserController@UserLogView')->name('UserLog')->middleware('userpermission:mark attendance,attendance');
         Route::post('/TimeLog', 'UserController@TimeLog')->name('time_log')->middleware('userpermission:mark attendance,attendance');

@@ -99,3 +99,40 @@
 <script src="{{asset('theme-assets/plugins/ekko-lightbox/ekko-lightbox.min.js')}}"></script>
 <!-- Filterizr-->
 <script src="{{asset('theme-assets/plugins/filterizr/jquery.filterizr.min.js')}}"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+
+<script src="{{asset('js/custom.js')}}"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+            // var status = "read";
+            {{--$.ajax({--}}
+            {{--    url: '{{route('users.read_notification')}}',--}}
+            {{--    type: 'post',--}}
+            {{--    // headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},--}}
+            {{--    data: {--}}
+            {{--        "_token": "{{ csrf_token() }}",--}}
+            {{--        "data": status,--}}
+            {{--        "id": 1,--}}
+            {{--    },--}}
+            {{--    success: function (res) {--}}
+            {{--        if(res.status == 'notdone')--}}
+            {{--        {--}}
+            {{--            console.log(res);--}}
+            {{--            toastr.error("error.", "Unread");--}}
+            {{--        }--}}
+            {{--        else--}}
+            {{--        {--}}
+            {{--            console.log(res);--}}
+            {{--            toastr.success("Marked as read !.", "Read");--}}
+            {{--        }--}}
+
+            {{--    }--}}
+            {{--});--}}
+
+    });
+
+
+</script>
