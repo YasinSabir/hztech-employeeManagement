@@ -15,18 +15,23 @@
     </ul>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Left Side Of Navbar -->
+
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">
+
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="far fa-bell"></i>
                     <span class="badge badge-warning navbar-badge"
-                          style="font-size: 11px;font-weight: 700;"> {{count_noti()}} </span>
+                          style="font-size: 11px;font-weight: 700;"> {{count_unread_noti()}} </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
                      style="max-height: 300px;max-width: 390px !important;overflow-y: auto;">
-                    <span class="dropdown-item dropdown-header"><i class="far fa-bell"></i> {{count_noti()}} Notifications</span>
+                    <span class="dropdown-item dropdown-header">
+                        <i class="far fa-bell"></i> Total {{count_total_noti()}} Notifications </br>
+                        <i class="far fa-bell"></i> {{count_unread_noti()}} Unread Notifications
+                    </span>
                     @forelse(get_unread_noti() as $notification)
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
@@ -40,17 +45,14 @@
                                 <span id="read_at"
                                       notification="{{$notification->id}}"
                                       notificationroute="{{route('users.read_notification',$notification->id)}}"
-
                                       style="font-size: 12px;border: none;margin-left: 20px;">Mark as read</span>
-
                         </a>
-                        {{--                        User {{ $notification->fullname }} </br> ({{ $notification->email }}) has just registered.--}}
                     @empty
                         There are no new notifications
                     @endforelse
 
-
                 </div>
+
             </li>
             <!-- Authentication Links -->
             @auth

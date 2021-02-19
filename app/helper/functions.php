@@ -77,26 +77,34 @@ function get_unread_noti()
 {
     $data = User::orderBy('id','DESC')->get();
     $notifications = new NewUserNotification($data);
+    //$notifications=DB::table('notifications')->where('read_at',NULL)->get();
+   //dd($mark);
     return $notifications->user;
 
 }
 
-function count_noti()
+function count_unread_noti()
 {
     $data = User::orderBy('id','DESC')->get();
-    $notification = Auth::user()->unreadNotifications;
+    $notifications = Auth::user()->unreadNotifications;
+    $total_noti = count($notifications);
+    return $total_noti;
+}
+
+function count_total_noti()
+{
+    $data = User::orderBy('id','DESC')->get();
     $notifications = new NewUserNotification($data);
     $total_noti = count($notifications->user);
     return $total_noti;
 }
 
-//function unread_noti()
-//{
-//    $data = User::orderBy('id','DESC')->get();
-//    $notifications = new NewUserNotification($data);
-//    $notifications=DB::table('notifications')->where('read_at','')->get();
-//    return $notifications->data;
-//}
+function check_read_noti()
+{
+    $notifications = Auth::user()->unreadNotifications;
+    return $notifications;
+}
+
 
 function checkprevilige($role_id,$previlige_id)
 {
