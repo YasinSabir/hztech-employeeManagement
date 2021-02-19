@@ -1,5 +1,6 @@
 <?php
 
+use App\Previliges;
 use App\UserLogsTime;
 use App\UserTime;
 use Illuminate\Support\Facades\Auth;
@@ -76,11 +77,10 @@ function get_lead_hr_role($id)
 function get_unread_noti()
 {
     $data = User::orderBy('id','DESC')->get();
-    $notifications = new NewUserNotification($data);
-    //$notifications=DB::table('notifications')->where('read_at',NULL)->get();
-   //dd($mark);
-    return $notifications->user;
-
+    //$notifications = new NewUserNotification($data);
+    $notifications = Auth::user()->unreadNotifications;
+//    custom_varDump_die($notifications[0]['data']['user_noti']['id']);
+    return $notifications;
 }
 
 function count_unread_noti()
@@ -101,10 +101,10 @@ function count_total_noti()
 
 function check_read_noti()
 {
+    //this function isn't used yet !
     $notifications = Auth::user()->unreadNotifications;
     return $notifications;
 }
-
 
 function checkprevilige($role_id,$previlige_id)
 {
@@ -163,6 +163,21 @@ function count_priviliges_role($role_id)
         ->select('privilege_user.privillige_id', 'privileges.title','privileges.guard_name','privilege_user.role_id')
         ->where('role_id','=',$role_id)->count();
     return $get_priv;
+}
+
+function count_priviliges_user()
+{
+    $get_priv = DB::table('privilege_user')
+        ->join('privileges', 'privilege_user.privillige_id', '=', 'privileges.id')
+        ->select('privilege_user.privillige_id', 'privileges.title','privileges.guard_name','privilege_user.role_id')
+        ->where('user_id','=',auth()->id())->count();
+    return $get_priv;
+}
+
+function get_total_previliges()
+{
+    $get=Previliges::count();
+    return $get;
 }
 
 function check_role_previliges($guardname,$title)

@@ -24,7 +24,7 @@ class PermissionsController extends Controller
         if(!check_user_previlige($request->get_user,$request->get_previlige))
         {
             $previlige=new PrevilligeUser();
-            $previlige->role_id=auth()->role_id();
+            //$previlige->role_id=auth()->role_id();
             $previlige->user_id=$request->get_user;
             $previlige->privillige_id=$request->get_previlige;
             $previlige->status=1;
@@ -71,7 +71,7 @@ class PermissionsController extends Controller
         {
             $previlige=new PrevilligeUser();
             $previlige=PrevilligeUser::find($id);
-            $previlige->role_id=auth()->role_id();
+            //$previlige->role_id=auth()->role_id();
             $previlige->user_id=$request->get_user;
             $previlige->privillige_id=$request->get_previlige;
             $previlige->status=1;

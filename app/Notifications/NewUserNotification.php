@@ -56,9 +56,9 @@ class NewUserNotification extends Notification
     {
         return [
             'CreatedUser' => $this->user,
-            'user_noti' => $notifiable
-//            'fullname' => $this->user->fullname,
-//            'email' => $this->user->email,
+            'user_noti' => $notifiable,
+            //'user_id' => $this->user->id,
+
         ];
     }
 }

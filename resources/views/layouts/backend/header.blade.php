@@ -8,17 +8,13 @@
         <li class="nav-item d-none d-sm-inline-block ">
             <a href="{{route('dashboard.v1')}}" class="nav-link text-info">Home</a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a class="nav-link text-info">Role: {{get_role(auth()->id())}}</a>
-        </li>
-
     </ul>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Left Side Of Navbar -->
 
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">
-
+{{--{{json_decode(get_unread_noti())}}--}}
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
@@ -29,26 +25,28 @@
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
                      style="max-height: 300px;max-width: 390px !important;overflow-y: auto;">
                     <span class="dropdown-item dropdown-header">
-                        <i class="far fa-bell"></i> Total {{count_total_noti()}} Notifications </br>
+{{--                        <i class="far fa-bell"></i> Total {{count_total_noti()}} Notifications </br>--}}
                         <i class="far fa-bell"></i> {{count_unread_noti()}} Unread Notifications
                     </span>
                     @forelse(get_unread_noti() as $notification)
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
                             <i class="fas fa-users mr-2"></i> <span
-                                    style="font-size: 13px;font-weight: 600"> {{ $notification->fullname }}</span> <span
+                                    style="font-size: 13px;font-weight: 600"> {{ $notification['data']['CreatedUser']['fullname'] }}</span> <span
                                     class="float-right text-muted text-sm"
                                     style="font-size: 10px !important;margin-top: 6px;">{{\Carbon\Carbon::parse($notification->created_at)->diffForHumans() }}</span>
-                            </br> <span style="font-size: 13px;"> {{ $notification->email }}</span>
+                            </br> <span style="font-size: 13px;"> {{ $notification['data']['CreatedUser']['email'] }}</span>
                             <span style="font-size: 12px;text-transform: capitalize;font-style: italic;">
                             </span>
                                 <span id="read_at"
-                                      notification="{{$notification->id}}"
-                                      notificationroute="{{route('users.read_notification',$notification->id)}}"
+                                      notification="{{$notification['data']['user_noti']['id']}}"
+                                      notificationroute="{{route('users.read_notification',$notification['data']['user_noti']['id'])}}"
                                       style="font-size: 12px;border: none;margin-left: 20px;">Mark as read</span>
                         </a>
                     @empty
-                        There are no new notifications
+{{--                        <span class="dropdown-item dropdown-header">--}}
+{{--                        <i class="far fa-bell"></i>  No New Notifications--}}
+{{--                    </span>--}}
                     @endforelse
 
                 </div>

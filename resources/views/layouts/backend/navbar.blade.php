@@ -308,36 +308,30 @@
                         </ul>
                     </li>
                 @endif
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-shield-alt"></i>
-                        <p>
-                            Give Role Permissions
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <!--                        --><?php //if(check_role_previliges('add', 'add permission'))
-                        //                        { ?>
-                        <li class="nav-item">
-                            <a href="{{route('previliges.add')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Add New</p>
-                            </a>
-                        </li>
-                        <!--                    --><?php //} ?>
-                    <!--                        --><?php //if(check_role_previliges('view', 'view permission'))
-                        //                        { ?>
-                        <li class="nav-item">
-                            <a href="{{route('previliges.show')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>View All</p>
-                            </a>
-                        </li>
-                        <!--                        --><?php //} ?>
-                    </ul>
-                </li>
-
+{{--                <li class="nav-item has-treeview">--}}
+{{--                    <a href="#" class="nav-link">--}}
+{{--                        <i class="nav-icon fas fa-shield-alt"></i>--}}
+{{--                        <p>--}}
+{{--                            Give Role Permissions--}}
+{{--                            <i class="right fas fa-angle-left"></i>--}}
+{{--                        </p>--}}
+{{--                    </a>--}}
+{{--                    <ul class="nav nav-treeview">--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a href="{{route('previliges.add')}}" class="nav-link">--}}
+{{--                                <i class="far fa-circle nav-icon"></i>--}}
+{{--                                <p>Add New</p>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a href="{{route('previliges.show')}}" class="nav-link">--}}
+{{--                                <i class="far fa-circle nav-icon"></i>--}}
+{{--                                <p>View All</p>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+                @if(count_user_previliges('permission') > 0)
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-shield-alt"></i>
@@ -347,27 +341,26 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <!--                        --><?php //if(check_role_previliges('add', 'add permission'))
-                        //                        { ?>
+                        <?php if(check_user_previliges('add', 'add permission'))
+                        { ?>
                         <li class="nav-item">
                             <a href="{{route('permissions.add')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Add New</p>
                             </a>
-                        </li>
-                        <!--                    --><?php //} ?>
-                    <!--                        --><?php //if(check_role_previliges('view', 'view permission'))
-                        //                        { ?>
+                        </li><?php } ?>
+
+                            <?php if(check_user_previliges('show', 'show permission'))
+                            { ?>
                         <li class="nav-item">
                             <a href="{{route('permissions.show')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>View All</p>
                             </a>
-                        </li>
-                        <!--                        --><?php //} ?>
+                        </li><?php } ?>
                     </ul>
                 </li>
-
+                @endif
                 <li class="nav-header">MISCELLANEOUS</li>
                 <li class="nav-item">
                     <a href="https://adminlte.io/docs/3.0" class="nav-link">

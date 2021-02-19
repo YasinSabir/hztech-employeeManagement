@@ -27,14 +27,8 @@ $(document).ready(function(){
                     console.log(res);
                     toastr.success("Marked as read !.", "Read");
                 }
-
             }
         });
-
-
-
     });
-
-
 });
 

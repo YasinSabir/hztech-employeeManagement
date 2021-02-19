@@ -35,7 +35,7 @@
                                     <th>Application By</th>
                                     <th>Date</th>
                                     <th>view</th>
-                                    <?php if(check_user_previliges('delete','delete application'))
+                                    <?php if(check_user_previliges('delete all','delete all application'))
                                     { ?>
                                     <th>delete</th><?php } ?>
                                 </tr>
@@ -60,7 +60,7 @@
                                                     <a href="{{route('applications.view',encrypt($data->id))}}" style="color:black;"><i class="far fa-eye"></i></a>
                                                 </form>
                                             </td>
-                                            <?php if(check_user_previliges('delete','delete application'))
+                                            <?php if(check_user_previliges('delete all','delete all application'))
                                             { ?>
                                             <td>
                                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter_{{$data->id}}" >

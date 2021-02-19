@@ -1,5 +1,5 @@
 <?php
-
+/*
 Route::group(['prefix' => 'Previliges', 'as' => 'previliges.', 'middleware' => ['auth:web']], function () {
 
 
@@ -14,3 +14,4 @@ Route::group(['prefix' => 'Previliges', 'as' => 'previliges.', 'middleware' => [
 
 });
 
+*/

@@ -77,16 +77,23 @@ class UserController extends Controller
             'password' => 'required|min:6|max:40',
         ]);
         $user = new User();
-        User::create([
-            'fullname' => $request->user_fullname,
-            'email' => $request->user_email,
-            'role_id' => $request->role_title,
-            'employee_id' => $request->sel_emp,
-            'status' => $request->user_status,
-            'password' => Hash::make($request['password']),
-            'string_password' => $request->password,
-        ]);
-
+//        User::create([
+//            'fullname' => $request->user_fullname,
+//            'email' => $request->user_email,
+//            'role_id' => $request->role_title,
+//            'employee_id' => $request->sel_emp,
+//            'status' => $request->user_status,
+//            'password' => Hash::make($request['password']),
+//            'string_password' => $request->password,
+//        ]);
+            $user->fullname = $request->user_fullname;
+            $user->email = $request->user_email;
+            $user->role_id = $request->role_title;
+            $user->employee_id = $request->sel_emp;
+            $user->status = $request->user_status;
+            $user->password = Hash::make($request['password']);
+            $user->string_password = $request->password;
+            $user->save();
         $users=User::where('status','Active')->get();
         Notification::send($users, new NewUserNotification($user));
         $noti = array("message" => "User Add Successfully!", "alert-type" => "success");

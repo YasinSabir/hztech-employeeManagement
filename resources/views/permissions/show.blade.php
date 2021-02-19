@@ -54,10 +54,10 @@
                                 <thead>
                                 <tr>
                                     <th>Previlige</th>
-                                    <?php if(check_role_previliges('Edit','edit permission'))
+                                    <?php if(check_user_previliges('Edit','edit permission'))
                                     { ?>
                                     <th>Edit</th><?php } ?>
-                                    <?php if(check_role_previliges('delete','delete permission'))
+                                    <?php if(check_user_previliges('delete','delete permission'))
                                     { ?>
                                     <th>Delete</th><?php } ?>
                                 </tr>
@@ -66,7 +66,7 @@
                                     @forelse($previlige as $previliges)
                                         <tr>
                                             <td>{{$previliges->title}}</td>
-                                            <?php if(check_role_previliges('Edit','edit permission'))
+                                            <?php if(check_user_previliges('Edit','edit permission'))
                                             { ?>
                                             <td>
                                                 <form action="{{route('permissions.Edit',$previliges->pu_id)}}" method="get">
@@ -76,7 +76,7 @@
                                                     </button>
                                                 </form>
                                             </td><?php } ?>
-                                            <?php if(check_role_previliges('delete','delete permission'))
+                                            <?php if(check_user_previliges('delete','delete permission'))
                                             { ?>
                                             <td>
                                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter_{{$previliges->id}}" >

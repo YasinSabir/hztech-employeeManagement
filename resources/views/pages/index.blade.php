@@ -13,8 +13,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
+                            <li class="breadcrumb-item"><a href="{{route('dashboard.v1')}}" >Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -38,9 +38,8 @@
                                 <p>Total Users</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-bag"></i>
+                                <i class="ion ion-person-add"></i>
                             </div>
-
                         </div>
                     </div>
                     <!-- ./col -->
@@ -48,9 +47,8 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>{{(!empty(count_priviliges_role(Auth::role_id())) ? count_priviliges_role(Auth::role_id()) : '0')}}</h3>
-
-                                <p>Total Permissions</p>
+                                <h3>{{(!empty(count_priviliges_user()) ? count_priviliges_user() : '0')}}</h3>
+                                <p>Assigned Permissions</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
@@ -63,14 +61,12 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>44</h3>
-
-                                <p>User Registrations</p>
+                                <h3 style="color: #ffffff;">{{(!empty(get_total_previliges()) ? get_total_previliges() : '0')}}</h3>
+                                <p style="color: #ffffff;">Total Permissions</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-person-add"></i>
+                                <i class="ion ion ion-bag"></i>
                             </div>
-
                         </div>
                     </div>
                     <!-- ./col -->
@@ -78,14 +74,12 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>65</h3>
-
-                                <p>Unique Visitors</p>
+                                <h3>{{get_role(auth()->id())}}</h3>
+                                <p>Role</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-pie-graph"></i>
                             </div>
-
                         </div>
                     </div>
                     <!-- ./col -->
